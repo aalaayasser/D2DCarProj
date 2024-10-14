@@ -24,6 +24,11 @@ namespace PLProj
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            #region Dbcontext
+            //COMMENT TEST
+            #endregion
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
