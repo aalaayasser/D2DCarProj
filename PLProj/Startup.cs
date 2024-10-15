@@ -1,6 +1,8 @@
+using DALProject;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,17 +27,12 @@ namespace PLProj
         {
             services.AddControllersWithViews();
             #region Dbcontext
-            //COMMENT TEST
-            //comment test 2
-            //comment test 3
-            //comment test 4
-            //comment test 5
-            //comment test 6
-            //aa
-            //tetet
-            //피피피피
-           //llll
-           //10101010
+            services.AddDbContext<CarAppDbContext>(optionsBuilder =>
+            {
+                
+                optionsBuilder.UseSqlServer(Configuration.GetConnectionString("CS"));
+            });
+
             #endregion
 
 
