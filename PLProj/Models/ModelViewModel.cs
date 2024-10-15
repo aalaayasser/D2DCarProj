@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DALProject.Models
 {
-    public class ModelViewModel : ModelBase
+    public class ModelViewModel 
     {
-        //public int Id { get; set; }
+        public int Id { get; set; }
         
 
         

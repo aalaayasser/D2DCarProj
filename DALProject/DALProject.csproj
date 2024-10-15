@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Migartions\" />
+    <Compile Remove="Data\Migartions\**" />
+    <EmbeddedResource Remove="Data\Migartions\**" />
+    <None Remove="Data\Migartions\**" />
   </ItemGroup>
 
   <ItemGroup>

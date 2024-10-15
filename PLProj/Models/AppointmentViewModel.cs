@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DALProject.Models
 {
-    public class AppointmentViewModel: 
+    public class AppointmentViewModel
     {
         public int Id { get; set; }
 
