@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace DALProject.Models
 {
-    public class Appointment
+    public class Appointment : ModelClass
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
 
 
         [Display(Name = "Partial Report")]
@@ -22,9 +22,9 @@ namespace DALProject.Models
         [Display(Name = "End Date & Time")]
         [Required]
         public DateTime EndtDateTime { get; set; }
-        public int? TechnicalId { get; set; }
-        public int? DriverId { get; set; }
-        public int? TicketId { get; set; }
+        public int TechnicalId { get; set; }
+        public int DriverId { get; set; }
+        public int TicketId { get; set; }
 
         [InverseProperty(nameof(Technician.Appointments))]
         public virtual Technician Technicians { get; set; } = null!;

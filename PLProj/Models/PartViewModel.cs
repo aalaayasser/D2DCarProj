@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PLProj.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace DALProject.Models
 {
-    public class Part : ModelClass
+    public class PartViewModel 
     {
        
-        //public int Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [Display(Name = "Part Name")]

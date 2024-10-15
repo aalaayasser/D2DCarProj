@@ -14,7 +14,7 @@ namespace DALProject.Data.Configartions
     {
         public void Configure(EntityTypeBuilder<Brand> builder)
         {
-            builder.Property(b => b.BrandName)
+            builder.Property(b => b.Name)
             .IsRequired()
             .HasColumnType("text"); 
         }

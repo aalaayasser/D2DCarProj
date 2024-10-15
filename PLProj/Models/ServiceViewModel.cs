@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PLProj.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace DALProject.Models
 {
-    public class Service : ModelClass
+    public class ServiceViewModel 
     {
-        //public int Id { get; set; }
+        public int Id { get; set; }
         [Required]
-        [Display(Name ="Service Name")]
         public string Name { get; set; }
 
         [DataType(DataType.Currency)]
@@ -21,7 +21,7 @@ namespace DALProject.Models
         public string? Description{ get; set; }
 
         public virtual Category Category { get; set; } = null!;
-        public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
+        public virtual ICollection<TicketViewModel> Tickets { get; set; } = new HashSet<TicketViewModel>();
     }
 
 

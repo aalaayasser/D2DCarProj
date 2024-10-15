@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PLProj.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace DALProject.Models
 {
-    public class Ticket : ModelClass
+    public class TicketViewModel 
     {
-        //public int Id { get; set; }
+        public int Id { get; set; }
         [Required]
         [Display(Name = "Current Kilometres")]
         public long  CurrentKilometres { get; set; }

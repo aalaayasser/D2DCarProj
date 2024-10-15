@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DALProject.Models
 {
-    public class  Driver : Employee
+    public class  DriverViewModel : EmployeeViewModel
     {
-        [Required]
+       
         public string License  { get; set; }
 
         [Display(Name = "License Date")]

@@ -13,9 +13,7 @@ namespace DALProject.Data.Configartions
         public void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Part> builder)
         {
             
-            builder.Property(p => p.Id)
-                .IsRequired(); 
-
+            
             
             builder.Property(p => p.PartName)
                 .IsRequired() 

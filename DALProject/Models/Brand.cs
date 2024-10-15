@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace DALProject.Models
 {
-    public class Brand
+    public class Brand : ModelClass
     {
-        public int Id { get; set; }
+        //public int Id { get; set; }
         [Required]
-        [Display(Name = "Brand Name")]
-        public string BrandName { get; set; }
+        [Display(Name ="Brand Name")]
+        public string Name { get; set; }
 
         public virtual ICollection<Model> Models { get; set; } = new HashSet<Model>();
     }

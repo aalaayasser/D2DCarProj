@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PLProj.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace DALProject.Models
 {
-    public class Car : ModelClass
+    public class CarViewModel 
     {
-        //public int Id { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "Model ID")]
         
-        public int ModelId { get; set; }
+        public int? ModelId { get; set; }
 
         [Display(Name = "Customer ID")]
         
-        public int CustomerId { get; set; }
+        public int? CustomerId { get; set; }
 
         [Display(Name = "Color ID")]
-        public int ColorId { get; set; }
+        public int? ColorId { get; set; }
         [Required]
 
         [Display(Name = "Kilometres")]
@@ -34,11 +35,11 @@ namespace DALProject.Models
 
         
 
-        public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
+        public virtual ICollection<TicketViewModel> Tickets { get; set; } = new HashSet<TicketViewModel>();
 
-        public virtual Customer Customer { get; set; } = null!;
-        public virtual Color Color { get; set; } = null!;
-        public virtual Model Model { get; set; } = null!;
+        public virtual CustomerViewModel Customer { get; set; } = null!;
+        public virtual ColorViewModel Color { get; set; } = null!;
+        public virtual ModelViewModel Model { get; set; } = null!;
 
     }
 }

@@ -36,6 +36,11 @@ namespace DALProject.Data.Configurations
             builder.Property(e => e.ContactNumber)
                 .HasColumnType("bigint")
                 .IsRequired();
+
+            builder.Property(e => e.PrefCommunication)
+               .IsRequired()
+               .HasColumnType("varchar")
+               .HasMaxLength(100);
         }
     }
 }
