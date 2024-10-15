@@ -1,3 +1,5 @@
+using BLLProject.Interfaces;
+using BLLProject.Repositories;
 using DALProject;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,7 +38,7 @@ namespace PLProj
             });
 
             #endregion
-
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         }
 
