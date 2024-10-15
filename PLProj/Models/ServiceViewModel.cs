@@ -11,6 +11,7 @@ namespace DALProject.Models
     public class ServiceViewModel 
     {
         public int Id { get; set; }
+        public int CategoryId { get; set; }
         [Required]
         public string Name { get; set; }
 
@@ -21,7 +22,7 @@ namespace DALProject.Models
         public string? Description{ get; set; }
 
         public virtual Category Category { get; set; } = null!;
-        public virtual ICollection<TicketViewModel> Tickets { get; set; } = new HashSet<TicketViewModel>();
+        public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
     }
 
 

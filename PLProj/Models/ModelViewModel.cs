@@ -20,16 +20,12 @@ namespace DALProject.Models
         [Display(Name = "Brand ID")]
         public int BrandId { get; set; }
 
-        [Display(Name = "Created Date")]
-        public DateTime CreatedDate { get; set; }
-
-        [Display(Name = "Updated Date")]
-        public DateTime UpdatedDate { get; set; }
+      
 
         public virtual ICollection<Car> Cars { get; set; } = new HashSet<Car>();
         public virtual Brand Brand { get; set; } = null!;
        
-        public virtual ICollection<PartViewModel> Parts { get; set; } = new HashSet<PartViewModel>();
+        public virtual ICollection<Part> Parts { get; set; } = new HashSet<Part>();
 
         #region Mapping
 
@@ -40,17 +36,11 @@ namespace DALProject.Models
                 Id = model.Id,
                 Name = model.Name,
                 Brand = model.Brand,
-                CreatedDate = model.CreatedDate,
-                UpdatedDate = model.UpdatedDate,
+                
                 BrandId = model.BrandId,
                 Cars = model.Cars,
-                Parts = model.Parts.Select(part => new PartViewModel
-                {
-                    Id = part.Id,
-                    PartName = part.PartName,
-                    Price = part.Price,
-                    PartKilometresToChange = part.PartKilometresToChange
-                }).ToList()
+                Parts = model.Parts
+                
             };
         }
 
@@ -60,18 +50,8 @@ namespace DALProject.Models
             {
                 Id = viewModel.Id,
                 Name = viewModel.Name,
-                Brand = viewModel.Brand,
-                CreatedDate = viewModel.CreatedDate,
-                UpdatedDate = viewModel.UpdatedDate,
-                BrandId = viewModel.BrandId,
-                Cars = viewModel.Cars,
-                Parts = viewModel.Parts.Select(partViewModel => new Part
-                {
-                    Id = partViewModel.Id,
-                    PartName = partViewModel.PartName,
-                    Price = partViewModel.Price,
-                    PartKilometresToChange = partViewModel.PartKilometresToChange
-                }).ToList()
+                 BrandId = viewModel.BrandId,
+               
             };
         }
 

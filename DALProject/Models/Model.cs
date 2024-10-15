@@ -17,10 +17,7 @@ namespace DALProject.Models
         public int BrandId { get; set; }
 
         
-        public DateTime CreatedDate { get; set; }
-
         
-        public DateTime UpdatedDate { get; set; }
 
         public virtual ICollection<Car> Cars { get; set; } = new HashSet<Car>();
         public virtual Brand Brand { get; set; } = null!;

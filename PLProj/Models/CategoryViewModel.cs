@@ -14,8 +14,8 @@ namespace DALProject.Models
         [Required]
         public string Name { get; set; }
 
-        public virtual ICollection<TechnicianViewModel> Technician { get; set; } = new HashSet<TechnicianViewModel>();
-        public virtual ICollection<ServiceViewModel> Services { get; set; } = new HashSet<ServiceViewModel>();
+        public virtual ICollection<Technician> Technician { get; set; } = new HashSet<Technician>();
+        public virtual ICollection<Service> Services { get; set; } = new HashSet<Service>();
 
     }
 }

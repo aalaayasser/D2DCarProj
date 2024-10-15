@@ -50,6 +50,55 @@ namespace DALProject.Models
         public virtual Car Cars { get; set; }
 
         public virtual Service Service { get; set; }
+
+
+        #region Mapping
+
+        public static explicit operator TicketViewModel(Ticket model)
+        {
+            return new TicketViewModel
+            {
+                Id = model.Id,
+                CurrentKilometres = model.CurrentKilometres,
+                StartDateTime = model.StartDateTime,
+                Location = model.Location,
+                State = model.State,
+                FinalReport = model.FinalReport,
+                EndDateTime = model.EndDateTime,
+                ActiveDatePfPart = model.ActiveDatePfPart,
+                CarId = model.CarId,
+                ServiceId = model.ServiceId,
+                Feedback = model.Feedback,
+                IsPayed = model.IsPayed,
+                Cars = model.Cars,
+                Service = model.Service,
+                Appointments = model.Appointments
+            };
+        }
+
+        public static explicit operator Ticket(TicketViewModel viewModel)
+        {
+            return new Ticket
+            {
+                Id = viewModel.Id,
+                CurrentKilometres = viewModel.CurrentKilometres,
+                StartDateTime = viewModel.StartDateTime,
+                Location = viewModel.Location,
+                State = viewModel.State,
+                FinalReport = viewModel.FinalReport,
+                EndDateTime = viewModel.EndDateTime,
+                ActiveDatePfPart = viewModel.ActiveDatePfPart,
+                CarId = viewModel.CarId,
+                ServiceId = viewModel.ServiceId,
+                Feedback = viewModel.Feedback,
+                IsPayed = viewModel.IsPayed,
+                
+            };
+        }
+
+        #endregion
+
+
     }
 
 }

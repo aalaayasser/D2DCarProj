@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace DALProject.Models
 {
-    public class CarViewModel 
+    public class CarViewModel
     {
         public int Id { get; set; }
 
         [Display(Name = "Model ID")]
-        
-        public int? ModelId { get; set; }
+
+        public int ModelId { get; set; }
 
         [Display(Name = "Customer ID")]
-        
-        public int? CustomerId { get; set; }
+
+        public int CustomerId { get; set; }
 
         [Display(Name = "Color ID")]
-        public int? ColorId { get; set; }
+        public int ColorId { get; set; }
         [Required]
 
         [Display(Name = "Kilometres")]
@@ -33,13 +33,51 @@ namespace DALProject.Models
         [Display(Name = "Description")]
         public string? Description { get; set; }
 
-        
 
-        public virtual ICollection<TicketViewModel> Tickets { get; set; } = new HashSet<TicketViewModel>();
 
-        public virtual CustomerViewModel Customer { get; set; } = null!;
-        public virtual ColorViewModel Color { get; set; } = null!;
-        public virtual ModelViewModel Model { get; set; } = null!;
+        public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
+
+        public virtual Customer Customer { get; set; } = null!;
+        public virtual Color Color { get; set; } = null!;
+        public virtual Model Model { get; set; } = null!;
+
+
+        #region Mapping
+
+        public static explicit operator CarViewModel(Car model)
+        {
+            return new CarViewModel
+            {
+                Id = model.Id,
+                ModelId = model.ModelId,
+                CustomerId = model.CustomerId,
+                ColorId = model.ColorId,
+                KiloMetres = model.KiloMetres,
+                Year = model.Year,
+                Description = model.Description,
+                Tickets =model.Tickets,
+                Customer = model.Customer,
+                Color = model.Color,
+                Model = model.Model
+            };
+        }
+
+        public static explicit operator Car(CarViewModel viewModel)
+        {
+            return new Car
+            {
+                Id = viewModel.Id,
+                ModelId = viewModel.ModelId,
+                CustomerId = viewModel.CustomerId,
+                ColorId = viewModel.ColorId,
+                KiloMetres = viewModel.KiloMetres,
+                Year = viewModel.Year,
+                Description = viewModel.Description,
+               
+            };
+        }
+
+        #endregion
 
     }
 }

@@ -15,7 +15,7 @@ namespace DALProject.Models
         [Display(Name = "Brand Name")]
         public string BrandName { get; set; }
 
-        public virtual ICollection<ModelViewModel> Models { get; set; } = new HashSet<ModelViewModel>();
+        public virtual ICollection<Model> Models { get; set; } = new HashSet<Model>();
     }
 }
 
