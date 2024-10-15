@@ -12,16 +12,14 @@ namespace DALProject.Models
        
         //public int Id { get; set; }
 
-        [Required]
-        [Display(Name = "Part Name")]
+        
         public string PartName { get; set; }
 
-        [Required(ErrorMessage = "Part Price is required.")]
+        
         
         public int Price { get; set; }
 
-        [Required(ErrorMessage = "Part Kilometres to Change is required.")]
-        [Display(Name = "Kilometres to Change Part")]
+        
         public long PartKilometresToChange { get; set; }
         public virtual ICollection<Model> Models { get; set; } = new HashSet<Model>();
     }

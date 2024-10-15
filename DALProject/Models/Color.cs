@@ -9,9 +9,7 @@ namespace DALProject.Models
 {
     public class Color : ModelClass
     {
-        //public int Id { get; set; }
-        [Display(Name = "Color")]
-        [StringLength(50, ErrorMessage = "The Color Name must not exceed 50 characters.")]
+        
         public string Name { get; set; }
 
         public virtual ICollection<Car> Car { get; set; } = new HashSet<Car>();

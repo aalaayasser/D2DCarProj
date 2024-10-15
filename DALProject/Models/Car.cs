@@ -9,27 +9,23 @@ namespace DALProject.Models
 {
     public class Car : ModelClass
     {
-        //public int Id { get; set; }
-
-        [Display(Name = "Model ID")]
+        
         
         public int ModelId { get; set; }
 
-        [Display(Name = "Customer ID")]
+        
         
         public int CustomerId { get; set; }
 
-        [Display(Name = "Color ID")]
+        
         public int ColorId { get; set; }
-        [Required]
-
-        [Display(Name = "Kilometres")]
+        
         public long KiloMetres { get; set; }
 
-        [Display(Name = "Year of Manufacture")]
+        
         public DateTime Year { get; set; }
 
-        [Display(Name = "Description")]
+       
         public string? Description { get; set; }
 
         

@@ -10,12 +10,10 @@ namespace DALProject.Models
     public class Service : ModelClass
     {
         //public int Id { get; set; }
-        [Required]
-        [Display(Name ="Service Name")]
+        
         public string Name { get; set; }
 
-        [DataType(DataType.Currency)]
-        [Required]
+       
         public decimal Price{ get; set; }
         public DataType EstimatedTime{ get; set; }
         public string? Description{ get; set; }

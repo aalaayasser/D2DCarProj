@@ -10,18 +10,16 @@ namespace DALProject.Models
     public class Model : ModelClass
     {
         //public int Id { get; set; }
-        [Required]
-
-        [Display(Name = "Model Name")]
+        
         public string Name { get; set; }
 
-        [Display(Name = "Brand ID")]
+       
         public int BrandId { get; set; }
 
-        [Display(Name = "Created Date")]
+        
         public DateTime CreatedDate { get; set; }
 
-        [Display(Name = "Updated Date")]
+        
         public DateTime UpdatedDate { get; set; }
 
         public virtual ICollection<Car> Cars { get; set; } = new HashSet<Car>();
