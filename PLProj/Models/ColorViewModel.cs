@@ -17,5 +17,28 @@ namespace DALProject.Models
 
         public virtual ICollection<Car> Car { get; set; } = new HashSet<Car>();
 
+        #region Mapping
+
+        public static explicit operator ColorViewModel(Color model)
+        {
+            return new ColorViewModel
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Car = model.Car
+            };
+        }
+
+        public static explicit operator Color(ColorViewModel ViewModel)
+        {
+            return new Color
+            {
+                Id = ViewModel.Id,
+                Name = ViewModel.Name,
+            };
+        }
+
+        #endregion
+
     }
 }

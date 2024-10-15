@@ -19,6 +19,41 @@ namespace DALProject.Models
         public string PrefCommunication { get; set; }
 
         public virtual ICollection<Car> Cars { get; set; } = new HashSet<Car>();
+
+        #region Mapping
+
+        public static explicit operator CustomerViewModel(Customer model)
+        {
+            return new CustomerViewModel
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Cars = model.Cars,
+                Street = model.Street,
+                ContactNumber = model.ContactNumber,
+                City = model.City,
+                Email = model.Email,
+                PrefCommunication = model.PrefCommunication
+            };
+        }
+
+        public static explicit operator Customer(CustomerViewModel ViewModel)
+        {
+            return new Customer
+            {
+                Id = ViewModel.Id,
+                Name = ViewModel.Name,
+                Street = ViewModel.Street,
+                ContactNumber = ViewModel.ContactNumber,
+                City = ViewModel.City,
+                Email = ViewModel.Email,
+                PrefCommunication = ViewModel.PrefCommunication
+            };
+        }
+
+        #endregion
+
+
     }
    
 
