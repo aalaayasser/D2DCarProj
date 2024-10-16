@@ -33,7 +33,7 @@ namespace DALProject.Models
         public int CarId { get; set; }
         public int ServiceId { get; set; }
 
-        public string? Feedback { get; set; }
+        public string Feedback { get; set; }
 
         
         public string IsPayed { get; set; }

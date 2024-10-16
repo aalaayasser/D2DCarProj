@@ -36,7 +36,6 @@ namespace DALProject.Models
                 Id = model.Id,
                 Name = model.Name,
                 Brand = model.Brand,
-                
                 BrandId = model.BrandId,
                 Cars = model.Cars,
                 Parts = model.Parts
@@ -50,8 +49,7 @@ namespace DALProject.Models
             {
                 Id = viewModel.Id,
                 Name = viewModel.Name,
-                 BrandId = viewModel.BrandId,
-               
+                BrandId = viewModel.BrandId,
             };
         }
 

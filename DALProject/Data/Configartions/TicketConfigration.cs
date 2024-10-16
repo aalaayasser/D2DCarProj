@@ -34,7 +34,6 @@ namespace DALProject.Data.Configartions
                .HasColumnType("text");
 
              builder.Property(e => e.Feedback)
-               .IsRequired()
                .HasColumnType("text");
 
             builder.Property(e => e.IsPayed)

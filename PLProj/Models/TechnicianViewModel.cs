@@ -11,9 +11,9 @@ namespace DALProject.Models
         public string Name { get; set; }
 
         [EmailAddress]
-        public string? Email { get; set; }
-        public string? City { get; set; }
-        public string? Street { get; set; }
+        public string Email { get; set; }
+        public string City { get; set; }
+        public string Street { get; set; }
 
         [Display(Name = "Contact Number")]
         public long ContactNumber { get; set; }
@@ -39,10 +39,6 @@ namespace DALProject.Models
                 BirthDate = Model.BirthDate,
                 Category = Model.Category,
                 Appointments = Model.Appointments
-
-
-
-
             };
 
         }
@@ -60,11 +56,6 @@ namespace DALProject.Models
                 Availability = ViewModel.Availability,
                 BirthDate = ViewModel.BirthDate,
                 Category = ViewModel.Category,
-
-
-
-
-
             };
 
         } 
