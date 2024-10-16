@@ -1,4 +1,5 @@
 ﻿using BLLProject.Interfaces;
+using BLLProject.Specifications;
 using DALProject;
 using DALProject.Models;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,12 @@ namespace BLLProject.Repositories
             dbContect.Remove(entity);
             return dbContect.SaveChanges();
         }
+        public int Update(T entity)
+        {
+            dbContect.Set<T>().Update(entity);
+            return dbContect.SaveChanges();
+        }
+
 
         public T Get(int Id)
         {
@@ -40,13 +47,10 @@ namespace BLLProject.Repositories
             return dbContect.Set<T>().AsNoTracking().ToList();
         }
 
-        public int Update(T entity)
-        {
-            dbContect.Set<T>().Update(entity);
-            return dbContect.SaveChanges();
-        }
+        public T GetEntityWithSpec(ISpecification<T> spec) =>
+             SpecificationEvalutor<T>.GetQuery(dbContect.Set<T>(), spec).FirstOrDefault();
 
-
-
+        public IEnumerable<T> GetAllWithSpec(ISpecification<T> spec) =>
+             SpecificationEvalutor<T>.GetQuery(dbContect.Set<T>(), spec).AsNoTracking().ToList();
     }
 }
