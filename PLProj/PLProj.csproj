@@ -10,28 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\css\bootstrap.min.css" />
-    <None Include="wwwroot\css\style.css" />
-    <None Include="wwwroot\img\about.jpg" />
-    <None Include="wwwroot\img\carousel-1.png" />
-    <None Include="wwwroot\img\carousel-2.png" />
-    <None Include="wwwroot\img\carousel-bg-1.jpg" />
-    <None Include="wwwroot\img\carousel-bg-2.jpg" />
-    <None Include="wwwroot\img\service-1.jpg" />
-    <None Include="wwwroot\img\service-2.jpg" />
-    <None Include="wwwroot\img\service-3.jpg" />
-    <None Include="wwwroot\img\service-4.jpg" />
-    <None Include="wwwroot\img\team-1.jpg" />
-    <None Include="wwwroot\img\team-2.jpg" />
-    <None Include="wwwroot\img\team-3.jpg" />
-    <None Include="wwwroot\img\team-4.jpg" />
-    <None Include="wwwroot\img\testimonial-1.jpg" />
-    <None Include="wwwroot\img\testimonial-2.jpg" />
-    <None Include="wwwroot\img\testimonial-3.jpg" />
-    <None Include="wwwroot\img\testimonial-4.jpg" />
-    <None Include="wwwroot\js\main.js" />
-    <None Include="wwwroot\lib\animate\animate.css" />
-    <None Include="wwwroot\lib\animate\animate.min.css" />
     <None Include="wwwroot\lib\counterup\counterup.min.js" />
     <None Include="wwwroot\lib\easing\easing.js" />
     <None Include="wwwroot\lib\easing\easing.min.js" />
