@@ -16,6 +16,32 @@ namespace DALProject.Models
         public string BrandName { get; set; }
 
         public virtual ICollection<Model> Models { get; set; } = new HashSet<Model>();
+
+
+        #region Mapping
+        public static explicit operator BrandViewModel(Brand model)
+        {
+            return new BrandViewModel
+            {
+                Id = model.Id,
+                BrandName = model.Name,
+                Models = model.Models
+            };
+        }
+
+        public static explicit operator Brand(BrandViewModel viewModel)
+        {
+            return new Brand
+            {
+                Id = viewModel.Id,
+                Name = viewModel.BrandName,
+                
+            };
+        }
+        #endregion
     }
 }
+
+
+
 

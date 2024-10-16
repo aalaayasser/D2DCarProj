@@ -25,5 +25,32 @@ namespace DALProject.Models
         [Display(Name = "Kilometres to Change Part")]
         public long PartKilometresToChange { get; set; }
         public virtual ICollection<Model> Models { get; set; } = new HashSet<Model>();
+
+
+        #region Mapping
+        public static explicit operator PartViewModel(Part model)
+        {
+            return new PartViewModel
+            {
+                Id = model.Id,
+                PartName = model.PartName,
+                Price = model.Price,
+                PartKilometresToChange = model.PartKilometresToChange,
+                Models = model.Models
+            };
+        }
+
+        public static explicit operator Part(PartViewModel viewModel)
+        {
+            return new Part
+            {
+                Id = viewModel.Id,
+                PartName = viewModel.PartName,
+                Price = viewModel.Price,
+                PartKilometresToChange = viewModel.PartKilometresToChange,
+                
+            };
+        }
+        #endregion
     }
 }

@@ -17,5 +17,30 @@ namespace DALProject.Models
         public virtual ICollection<Technician> Technician { get; set; } = new HashSet<Technician>();
         public virtual ICollection<Service> Services { get; set; } = new HashSet<Service>();
 
+
+        #region Mapping
+        public static explicit operator CategoryViewModel(Category model)
+        {
+            return new CategoryViewModel
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Technician = model.Technician,
+                Services = model.Services
+            };
+        }
+
+        public static explicit operator Category(CategoryViewModel viewModel)
+        {
+            return new Category
+            {
+                Id = viewModel.Id,
+                Name = viewModel.Name,
+               
+            };
+        }
+        #endregion
     }
+
 }
+

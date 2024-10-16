@@ -23,11 +23,44 @@ namespace DALProject.Models
 
         public virtual Category Category { get; set; } = null!;
         public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
+
+
+        #region Mapping
+        public static explicit operator ServiceViewModel(Service model)
+        {
+            return new ServiceViewModel
+            {
+                Id = model.Id,
+                CategoryId = model.CategoryId,
+                Name = model.Name,
+                Price = model.Price,
+                EstimatedTime = model.EstimatedTime,
+                Description = model.Description,
+                Category = model.Category,
+                Tickets = model.Tickets
+            };
+        }
+
+        public static explicit operator Service(ServiceViewModel viewModel)
+        {
+            return new Service
+            {
+                Id = viewModel.Id,
+                CategoryId = viewModel.CategoryId,
+                Name = viewModel.Name,
+                Price = viewModel.Price,
+                EstimatedTime = viewModel.EstimatedTime,
+                Description = viewModel.Description,
+                
+            };
+        }
+        #endregion
     }
-
-
-
-
-
 }
+
+
+
+
+
+
 
