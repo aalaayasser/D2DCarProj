@@ -1,4 +1,5 @@
-﻿using DALProject.Models;
+﻿using BLLProject.Specifications;
+using DALProject.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,5 +23,9 @@ namespace BLLProject.Interfaces
 
 
         public int Update(T entity);
+        public T GetEntityWithSpec(ISpecification<T> spec);
+
+        public IEnumerable<T> GetAllWithSpec(ISpecification<T> spec);
+
     }
 }
