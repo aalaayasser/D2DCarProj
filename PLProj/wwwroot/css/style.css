@@ -8,16 +8,16 @@
  box-sizing: border-box;
  scroll-behavior: smooth;
 }
-header{
-background: radial-gradient(circle, rgba(4,109,172,1) 0%, rgba(6,6,45,1) 100%, rgba(1,49,78,1) 100%);
-/* background-color: #b4b4b4; */
- width: 100%;
- position: fixed;
- z-index: 999;
- display: flex;
- justify-content: space-between;
- align-items: center;
- padding: 10px 200px;
+header {
+    background: rgb(4,5,5);
+    background: linear-gradient(90deg, rgba(4,5,5,1) 20%, rgba(62,74,74,1) 50%, rgba(0,0,0,1) 80%);
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 200px;
 }
 .logo {
  text-decoration: none;
@@ -44,18 +44,10 @@ section{
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: url(/imgs/electric.jpg) no-repeat;
+    background: url(/imgs/Img1.jpg) no-repeat;
     background-size: cover;
     background-position: center;
-    background-attachment: fixed
-    /*width: 100%;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    background: url(/imgs/electric.jpg) no-repeat;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;*/
+    background-attachment: fixed;
 }
 .main h2 {
         color: #fff;
@@ -75,7 +67,7 @@ section{
 }*/
  .main h3 {
      color: #fff;
-     font-size: 2em;
+     font-size: 4em;
      font-weight: 700;
      letter-spacing: 1px;
      margin: 30px 0; /* تعديل الفجوة بين النصوص */
@@ -100,7 +92,7 @@ section{
     }
 .main-btn {
     color: #fff;
-    background-color: #3a6cf4;
+    background: linear-gradient(90deg, rgba(4,5,5,1) 20%, rgba(62,74,74,1) 50%, rgba(0,0,0,1) 80%);
     text-decoration: none;
     font-size: 1.1em;
     font-weight: 600;
@@ -113,11 +105,11 @@ section{
     margin-left: 130px;
 }
 
+    .main-btn:hover {
+        background: linear-gradient(90deg, rgba(100,100,100,1) 20%, rgba(150,150,150,1) 50%, rgba(130,130,130,1) 80%);
+        transform: scale(1.1);
+    }
 
-.main-btn:hover{
-    background-color: #0a49f6;
-    transform: scale(1.1);
-}
 .social-icons a {
     color: #fff;
     font-size: 1.7em;
