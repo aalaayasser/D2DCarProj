@@ -1,4 +1,4 @@
-
+﻿
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
   
 *{
@@ -44,16 +44,29 @@ section{
     min-height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background: url(/imgs/electric.jpg) no-repeat;
     background-size: cover;
     background-position: center;
-    background-attachment: fixed;
+    background-attachment: fixed
+    /*width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: url(/imgs/electric.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;*/
 }
-.main h2{
-  color: #fff;
+.main h2 {
+        color: #fff;
+        font-size: 1.4em;
+        font-weight: 500;
+        margin-bottom: 10px;
+        /*color: #fff;
   font-size: 1.4em;
-  font-weight: 500;  
-}
+  font-weight: 500; */
+    }
 .main h2 span{
     display: inline-block;
     margin-top: 10px;
@@ -61,14 +74,34 @@ section{
     font-size: 3em;
     font-weight: 600;
 }
-.main h3 {
-    color: #fff;
-    font-size: 2em;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-top: 30px;
-    margin-bottom: 30px;
+ .main h3 {
+     color: #fff;
+     font-size: 2em;
+     font-weight: 700;
+     letter-spacing: 1px;
+     margin: 30px 0; /* تعديل الفجوة بين النصوص */
+     /*color: #fff;
+ font-size: 2em;
+ font-weight: 700;
+ letter-spacing: 1px;
+ margin-top: 30px;
+ margin-bottom: 30px;*/
+ }
+    /*//New*/
+.text-container {
+    width: 40%; /* عرض النص ليكون في مساحة معقولة */
+    z-index: 1;
+    color: #ffffff;
+    padding-left: 80px;
+    /* إضافة مسافة من اليسار */
+    /* يمكنك إضافة المزيد من التنسيقات هنا إذا لزم الأمر */
 }
+/*new*/
+    .text-container p {
+        line-height: 1.5; /* زيادة ارتفاع السطر لتحسين القراءة */
+        margin-bottom: 15px;
+        text-align: justify; /* إضافة مسافة بين الفقرات */
+    }
 .main-btn {
     color: #fff;
     background-color: #3a6cf4;
@@ -80,19 +113,29 @@ section{
     letter-spacing: 1px;
     border-radius: 15px;
     margin-bottom: 40px;
-    transition:  0.7s ease;
+    transition: 0.7s ease;
+    margin-left: 130px;
 }
 .main-btn:hover{
     background-color: #0a49f6;
     transform: scale(1.1);
 }
- .social-icons a{
-    color:#fff;
+.social-icons a {
+    color: #fff;
     font-size: 1.7em;
     padding-right: 30px;
+    
 }
 .social-icons a:hover{
     color: #0a49f6;
+}
+/*New*/
+.social-icons {
+    margin-top: 0; /* إضافة مسافة أعلى الأيقونات */
+    display: flex;
+    justify-content: flex-start; /* محاذاة الأيقونات إلى اليسار */
+     /* محاذاة الأيقونات إلى اليسار */
+    margin-left: 130px; /* إضافة مسافة إضافية من اليسار إذا لزم الأمر */ /* إضافة مسافة إضافية من اليسار إذا لزم الأمر */
 }
 .title{
     display: flex;
