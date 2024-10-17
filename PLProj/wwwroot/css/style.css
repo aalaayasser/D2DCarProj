@@ -10,7 +10,7 @@
 }
 header{
 background: radial-gradient(circle, rgba(4,109,172,1) 0%, rgba(6,6,45,1) 100%, rgba(1,49,78,1) 100%);
- background-color: #b4b4b4; 
+/* background-color: #b4b4b4; */
  width: 100%;
  position: fixed;
  z-index: 999;
@@ -21,13 +21,13 @@ background: radial-gradient(circle, rgba(4,109,172,1) 0%, rgba(6,6,45,1) 100%, r
 }
 .logo {
  text-decoration: none;
- color: #3a6cf4;
+ color: #fff;
  text-transform: uppercase;
  font-weight:700;
  font-size: 1.8em;
 }
 .navigation a{
-color: #3a6cf4;
+color: #fff;
 text-decoration: none;
 font-size: 1.4em;
 font-weight: 500;
@@ -44,7 +44,6 @@ section{
     min-height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     background: url(/imgs/electric.jpg) no-repeat;
     background-size: cover;
     background-position: center;
@@ -67,32 +66,29 @@ section{
   font-size: 1.4em;
   font-weight: 500; */
     }
-.main h2 span{
-    display: inline-block;
-    margin-top: 10px;
-    color:#4e9eff;
-    font-size: 3em;
+/*.main h3 span{
+    display: inline-block;*/
+    /*margin-top: 10px;*/
+    /*color:#4e9eff;
+    font-size: 1em;
     font-weight: 600;
-}
+}*/
  .main h3 {
      color: #fff;
      font-size: 2em;
      font-weight: 700;
      letter-spacing: 1px;
      margin: 30px 0; /* تعديل الفجوة بين النصوص */
-     /*color: #fff;
- font-size: 2em;
- font-weight: 700;
- letter-spacing: 1px;
- margin-top: 30px;
- margin-bottom: 30px;*/
+     color: #fff;
+/* margin-top: 500px;*/
+ margin-bottom: 300px;
  }
     /*//New*/
 .text-container {
     width: 40%; /* عرض النص ليكون في مساحة معقولة */
     z-index: 1;
     color: #ffffff;
-    padding-left: 80px;
+    /*padding-left: 80px;*/
     /* إضافة مسافة من اليسار */
     /* يمكنك إضافة المزيد من التنسيقات هنا إذا لزم الأمر */
 }
@@ -116,6 +112,8 @@ section{
     transition: 0.7s ease;
     margin-left: 130px;
 }
+
+
 .main-btn:hover{
     background-color: #0a49f6;
     transform: scale(1.1);
@@ -140,7 +138,7 @@ section{
 .title{
     display: flex;
     justify-content: center;
-    color: #3a6cf4;
+    color: #fff;
     font-size: 2.2em;
     font-weight: 800;
     margin-bottom: 30px;
