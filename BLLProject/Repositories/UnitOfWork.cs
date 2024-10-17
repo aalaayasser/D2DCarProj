@@ -37,22 +37,18 @@ namespace BLLProject.Repositories
             return _repository[key] as IGenericRepository<T>;
         }
 
-        public int Compelete ()
-        {
-            return dbContext.SaveChanges();
+        
 
-        }
-
-        public int Complete()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public void Dispose()
         {
             dbContext.Dispose();
         }
 
-        
-    }
+		public int Complete()
+		{
+			return dbContext.SaveChanges();
+		}
+	}
 }

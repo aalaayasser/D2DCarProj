@@ -19,21 +19,21 @@ namespace BLLProject.Repositories
         {
             this.dbContect = dbContect;
         }
-        public int Add(T entity)
+        public void Add(T entity)
         {
             dbContect.Add(entity);
-            return dbContect.SaveChanges();
+            
         }
 
-        public int Delete(T entity)
+        public void Delete(T entity)
         {
             dbContect.Remove(entity);
-            return dbContect.SaveChanges();
+            
         }
-        public int Update(T entity)
+        public void Update(T entity)
         {
             dbContect.Set<T>().Update(entity);
-            return dbContect.SaveChanges();
+            
         }
 
 

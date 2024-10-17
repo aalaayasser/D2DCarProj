@@ -35,6 +35,8 @@ namespace PLProj
             {
                 
                 optionsBuilder.UseSqlServer(Configuration.GetConnectionString("CS"));
+                optionsBuilder.UseLazyLoadingProxies(true);
+                
             });
 
             #endregion

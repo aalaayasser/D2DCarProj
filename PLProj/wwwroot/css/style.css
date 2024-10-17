@@ -100,9 +100,13 @@ section{
     padding: 0.9375em 2.1875em;
     letter-spacing: 1px;
     border-radius: 15px;
-    margin-bottom: 40px;
+    margin-top: -300px;
     transition: 0.7s ease;
     margin-left: 130px;
+    position: relative;
+    top: -150px;
+
+    
 }
 
     .main-btn:hover {
@@ -121,7 +125,7 @@ section{
 }
 /*New*/
 .social-icons {
-    margin-top: 0; /* إضافة مسافة أعلى الأيقونات */
+    margin-top: -130px; /* إضافة مسافة أعلى الأيقونات */
     display: flex;
     justify-content: flex-start; /* محاذاة الأيقونات إلى اليسار */
      /* محاذاة الأيقونات إلى اليسار */

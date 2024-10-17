@@ -10,10 +10,10 @@ namespace BLLProject.Interfaces
 {
     public interface IGenericRepository<T> where T : ModelClass
     {
-        public int Add(T entity);
+        public void Add(T entity);
 
 
-        public int Delete(T entity);
+        public void Delete(T entity);
 
 
         public T Get(int Id);
@@ -22,7 +22,7 @@ namespace BLLProject.Interfaces
         public IEnumerable<T> GetAll();
 
 
-        public int Update(T entity);
+        public void Update(T entity);
         public T GetEntityWithSpec(ISpecification<T> spec);
 
         public IEnumerable<T> GetAllWithSpec(ISpecification<T> spec);

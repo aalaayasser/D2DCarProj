@@ -1,6 +1,27 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<br />
+<br/>
+<br/>
+
+@if (TempData["Message"] is not null)
+{
+    <div id="successMessage" class="alert alert-success mt-4">
+        <h3>@TempData["Message"]</h3>
+    </div>
+
+    <script>
+
+        setTimeout(function () {
+
+            var successMessage = document.getElementById("successMessage");
+            if (successMessage) {
+                successMessage.style.display = 'none';
+            }
+        }, 3000);
+    </script>
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,13 +35,13 @@
     <section class="main">
         <div class="text-container">
             <h3><br> DoorToDoor Service @* D2D Auto *@</h3>
-            <h3>@* CARS REPAIR SERVICES *@</h3>
-            <p>
-                @* Welcome to Our Website! We specialize in providing top-notch car maintenance and repair services to ensure your vehicles perform at their best. Our team of experienced professionals is ready to offer a wide range of services, including comprehensive inspections, oil changes, brake maintenance, and air conditioning system repairs. *@
+            
+          @*   <p>
+                 Welcome to Our Website! We specialize in providing top-notch car maintenance and repair services to ensure your vehicles perform at their best. Our team of experienced professionals is ready to offer a wide range of services, including comprehensive inspections, oil changes, brake maintenance, and air conditioning system repairs. 
             </p>
-            <p>
+            <p> *@
                 @* We are committed to delivering high-quality service and exceptional customer care. Please explore our site to discover more about our services and how we can assist you! *@
-            </p>
+           @*  </p>   *@
             <br />
             <a href="#Cars" class="main-btn">Our Services</a>
             <div class="social-icons">
