@@ -108,7 +108,15 @@ namespace PLProj.Controllers
             }
             return View( car);
         }
-
+		[HttpGet]
+        public IActionResult GetBrandsByModel(int modelId)
+        {
+           var spec = new BaseSpecification<Brand>( e=>e.Models.Any(m => m.Id ==modelId) );
+			var brands = unitOfWork.Repository<Brand>().GetAllWithSpec(spec)
+				.Select(b =>(BrandViewModel)b ).ToList();
+           
+            return Json(brands);
+        }
 
         public IActionResult Book()
 		{

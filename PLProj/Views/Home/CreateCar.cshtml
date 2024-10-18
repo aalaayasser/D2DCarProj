@@ -24,6 +24,26 @@
             <option value="@null"> --Select Model-- </option></select>
             <span asp-validation-for="Id" class="text-danger"> </span>
         </div>
+        <div class="form-group">
+            <label asp-for="Model.Brand" class="form-label">Brand</label>
+            <select class="form-control" asp-for="Model.BrandId" asp-items="Brands" required>
+                <option value="">--Select Brand--</option>
+            </select>
+            <span asp-validation-for="Model.BrandId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Color"> </label>
+            <input class="form-control" asp-for="Color.Name" required>
+            <span asp-asp-validation-for="Contact" class="text-danger"> </span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="KiloMetres"> </label>
+            <input class="form-control" asp-for="KiloMetres" required>
+            <span asp-asp-validation-for="Contact" class="text-danger"> </span>
+        </div>
+
 
         <div class="form-group">
             <label asp-for="Description"> </label>
@@ -36,25 +56,44 @@
             <input class="form-control" asp-for="Year" required>
             <span asp-asp-validation-for="Street" class="text-danger"> </span>
         </div>
-
-        <div class="form-group">
-            <label asp-for="Color"> </label>
-            <input class="form-control" asp-for="Color.Name" required>
-            <span asp-asp-validation-for="Contact" class="text-danger"> </span>
-        </div>
+@* 
+        @section Scripts {
+            <script>
+                $(document).ready(function () {
+                    $('#modelSelect').change(function () {
+                        var modelId = $(this).val();
+                        if (modelId) {
+                            $.ajax({
+                                url: '@Url.Action("GetBrandsByModel", "Home")',
+                                type: 'GET',
+                                data: { modelId: modelId },
+                                success: function (data) {
+                                    $('#brandSelect').empty();
+                                    $('#brandSelect').append('<option value="">--Select Brand--</option>');
+                                    $.each(data, function (i, brand) {
+                                        $('#brandSelect').append('<option value="' + brand.id + '">' + brand.name + '</option>');
+                                    });
+                                }
+                            });
+                        } else {
+                            $('#brandSelect').empty();
+                            $('#brandSelect').append('<option value="">--Select Brand--</option>');
+                        }
+                    });
+                });
+            </script>
+        } *@
+       
          
-           <div class="form-group">
-            <label asp-for="KiloMetres"> </label>
-            <input class="form-control" asp-for="KiloMetres" required>
-            <span asp-asp-validation-for="Contact" class="text-danger"> </span>
-        </div>
+           
 
 
 
         <br />
         <br />
 
-        <input type="submit" class="btn btn-primary btn-block" value="Sign Up" />
+        <input type="submit" style="margin-left: 5px; margin-top: 110px;" class="main-btn" value="Sign Up" />
+
         @* <a asp-controller="Home" asp-action="Index"  class="btn btn-success">Sign Up</a> *@
     </form>
 </div>
