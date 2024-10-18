@@ -43,7 +43,7 @@ namespace PLProj.Controllers
 				if (count > 0)
 				{
 					TempData["message"] = "Sign Up Successfully";
-					return RedirectToAction(nameof(Index));
+					return RedirectToAction(nameof(CreateCar));
 				}
 			}
 
@@ -60,30 +60,58 @@ namespace PLProj.Controllers
 		//	.Select(m => (ModelViewModel)m).ToList();
 		//	return View(models);
 		//}
-
+		//public ActionResult SelectModel(int modelId)
+		//{
+		//	var parts = _partService.GetPartsByModel(modelId); 
+		//	return View(parts);
+		//}
 		public ActionResult Car()
 		{
 			var spec = new BaseSpecification<Car>();
 			spec.Includes.Add(e => e.Model);
+			spec.Includes.Add(e => e.Model.Brand);
 			spec.Includes.Add(e => e.KiloMetres);
 			spec.Includes.Add(e => e.Color);
 
-			//var spec2 = new BaseSpecification<Model>();
-			//spec2.Includes.Add(e => e.Brand);
+			ViewData["Models"] = unitOfWork.Repository<Model>().GetAll();
+			ViewData["Brands"] = unitOfWork.Repository<Brand>().GetAll();
+
 
 			var models = unitOfWork.Repository<Car>().GetAllWithSpec(spec)
 			.Select(m => (CarViewModel)m).ToList();
 			return View(models);
 		}
 
-		[HttpPost]
-		//public ActionResult SelectModel(int modelId)
-		//{
-		//	var parts = _partService.GetPartsByModel(modelId); 
-		//	return View(parts);
-		//}
+		public IActionResult CreateCar()
+        {
+            ViewData["Models"] = unitOfWork.Repository<Model>().GetAll();
+            ViewData["Brands"] = unitOfWork.Repository<Brand>().GetAll(); 
+			ViewData["Colors"] = unitOfWork.Repository<Color>().GetAll();
+			ViewData["Kilometres"] = unitOfWork.Repository<KiloMetres>().GetAll();
 
-		public IActionResult Book()
+
+            return View();
+        }
+		[HttpPost]
+		public IActionResult CreateCar( CarViewModel car)
+        {
+
+            if (ModelState.IsValid)
+            {
+                //var model = mapper.Map<EmployeeViewModel, Employee>(Emp);
+                unitOfWork.Repository<Car>().Add((Car)car);
+                var count = unitOfWork.Complete();
+				if (count > 0)
+				{
+					TempData["message"] = "vehicle has been Added Successfully";
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return View( car);
+        }
+
+
+        public IActionResult Book()
 		{
 			return View();
 		}

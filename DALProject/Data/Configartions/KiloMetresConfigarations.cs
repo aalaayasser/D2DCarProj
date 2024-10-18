@@ -13,7 +13,7 @@ namespace DALProject.Data.Configartions
 	{
 		public void Configure(EntityTypeBuilder<KiloMetres> builder)
 		{
-			builder.HasKey(x => new {x.Id,x.kiloMetres});
+			//builder.HasKey(x => new {x.Id,x.kiloMetres});
 
 			builder.Property(c => c.kiloMetres)
 			.IsRequired()

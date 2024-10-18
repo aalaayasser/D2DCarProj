@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DALProject.Migrations
+namespace DALProject.Data.Migartions
 {
     [DbContext(typeof(CarAppDbContext))]
     partial class CarAppDbContextModelSnapshot : ModelSnapshot
@@ -235,15 +235,17 @@ namespace DALProject.Migrations
             modelBuilder.Entity("DALProject.Models.KiloMetres", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CarId")
                         .HasColumnType("int");
 
                     b.Property<long>("kiloMetres")
                         .HasColumnType("bigint");
 
-                    b.Property<int?>("CarId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id", "kiloMetres");
+                    b.HasKey("Id");
 
                     b.HasIndex("CarId");
 
@@ -493,7 +495,9 @@ namespace DALProject.Migrations
                 {
                     b.HasOne("DALProject.Models.Car", "Car")
                         .WithMany("KiloMetres")
-                        .HasForeignKey("CarId");
+                        .HasForeignKey("CarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Car");
                 });

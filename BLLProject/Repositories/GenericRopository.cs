@@ -47,6 +47,7 @@ namespace BLLProject.Repositories
             return dbContect.Set<T>().AsNoTracking().ToList();
         }
 
+       
         public T GetEntityWithSpec(ISpecification<T> spec) =>
              SpecificationEvalutor<T>.GetQuery(dbContect.Set<T>(), spec).FirstOrDefault();
 

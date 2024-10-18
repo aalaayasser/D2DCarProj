@@ -9,7 +9,9 @@ namespace DALProject.Models
 {
 	public class KiloMetres : ModelClass
 	{
+		
 		public long kiloMetres { get; set; }
+		public int CarId { get; set; }
 		public virtual Car Car { get; set; } = null!;
 	}
 }

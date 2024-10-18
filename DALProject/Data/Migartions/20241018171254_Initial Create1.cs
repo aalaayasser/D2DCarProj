@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DALProject.Migrations
+namespace DALProject.Data.Migartions
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialCreate1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -233,19 +233,20 @@ namespace DALProject.Migrations
                 name: "KiloMetres",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     kiloMetres = table.Column<long>(type: "bigint", nullable: false),
-                    CarId = table.Column<int>(type: "int", nullable: true)
+                    CarId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_KiloMetres", x => new { x.Id, x.kiloMetres });
+                    table.PrimaryKey("PK_KiloMetres", x => x.Id);
                     table.ForeignKey(
                         name: "FK_KiloMetres_Cars_CarId",
                         column: x => x.CarId,
                         principalTable: "Cars",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

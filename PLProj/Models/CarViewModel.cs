@@ -24,8 +24,7 @@ namespace DALProject.Models
         public int ColorId { get; set; }
         [Required]
 
-        [Display(Name = "Kilometres")]
-        public long KiloMetres { get; set; }
+       
 
         [Display(Name = "Year of Manufacture")]
         public DateTime Year { get; set; }
@@ -37,14 +36,20 @@ namespace DALProject.Models
 
         public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
 
-        public virtual Customer Customer { get; set; } = null!;
+		public virtual ICollection<KiloMetres> KiloMetres { get; set; } = new HashSet<KiloMetres>();
+
+
+		public virtual Customer Customer { get; set; } = null!;
         public virtual Color Color { get; set; } = null!;
         public virtual Model Model { get; set; } = null!;
+		
 
 
-        #region Mapping
 
-        public static explicit operator CarViewModel(Car model)
+
+		#region Mapping
+
+		public static explicit operator CarViewModel(Car model)
         {
             return new CarViewModel
             {
@@ -57,7 +62,8 @@ namespace DALProject.Models
                 Tickets =model.Tickets,
                 Customer = model.Customer,
                 Color = model.Color,
-                Model = model.Model
+                Model = model.Model,
+                KiloMetres = model.KiloMetres,
             };
         }
 
