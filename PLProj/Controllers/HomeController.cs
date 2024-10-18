@@ -98,7 +98,6 @@ namespace PLProj.Controllers
 
             if (ModelState.IsValid)
             {
-                //var model = mapper.Map<EmployeeViewModel, Employee>(Emp);
                 unitOfWork.Repository<Car>().Add((Car)car);
                 var count = unitOfWork.Complete();
 				if (count > 0)
