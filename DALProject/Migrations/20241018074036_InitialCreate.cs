@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DALProject.Data.Migrations
+namespace DALProject.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -108,9 +108,7 @@ namespace DALProject.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "text", nullable: false),
-                    BrandId = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    BrandId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -130,10 +128,10 @@ namespace DALProject.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "varchar", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
                     EstimatedTime = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    CategoryId = table.Column<int>(type: "int", nullable: true)
+                    Description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -143,7 +141,7 @@ namespace DALProject.Data.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categroies",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -152,7 +150,7 @@ namespace DALProject.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CategoryId = table.Column<int>(type: "int", nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     City = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
@@ -169,7 +167,7 @@ namespace DALProject.Data.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categroies",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -181,7 +179,6 @@ namespace DALProject.Data.Migrations
                     ModelId = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false),
                     ColorId = table.Column<int>(type: "int", nullable: false),
-                    KiloMetres = table.Column<long>(type: "bigint", nullable: false),
                     Year = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true)
                 },
@@ -233,6 +230,25 @@ namespace DALProject.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "KiloMetres",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    kiloMetres = table.Column<long>(type: "bigint", nullable: false),
+                    CarId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_KiloMetres", x => new { x.Id, x.kiloMetres });
+                    table.ForeignKey(
+                        name: "FK_KiloMetres_Cars_CarId",
+                        column: x => x.CarId,
+                        principalTable: "Cars",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Tickets",
                 columns: table => new
                 {
@@ -247,7 +263,7 @@ namespace DALProject.Data.Migrations
                     ActiveDatePfPart = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CarId = table.Column<int>(type: "int", nullable: false),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
-                    Feedback = table.Column<string>(type: "text", nullable: false),
+                    Feedback = table.Column<string>(type: "text", nullable: true),
                     IsPayed = table.Column<string>(type: "varchar", nullable: false)
                 },
                 constraints: table =>
@@ -335,6 +351,11 @@ namespace DALProject.Data.Migrations
                 column: "ModelId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_KiloMetres_CarId",
+                table: "KiloMetres",
+                column: "CarId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ModelPart_PartsId",
                 table: "ModelPart",
                 column: "PartsId");
@@ -369,6 +390,9 @@ namespace DALProject.Data.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Appointments");
+
+            migrationBuilder.DropTable(
+                name: "KiloMetres");
 
             migrationBuilder.DropTable(
                 name: "ModelPart");

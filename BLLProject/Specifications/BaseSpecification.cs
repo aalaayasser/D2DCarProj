@@ -9,9 +9,9 @@ namespace BLLProject.Specifications
     {
         public Expression<Func<T, bool>> Criteria { get; set; }
         public List<Expression<Func<T, object>>> Includes { get; set ; } = new
-            List<Expression<Func<T, object>>>(); 
-
-        public BaseSpecification()
+            List<Expression<Func<T, object>>>();
+		public List<string> ThenIncludes { get; set; } = new List<string>();
+		public BaseSpecification()
         {
            
         }

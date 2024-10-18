@@ -13,6 +13,7 @@ namespace BLLProject.Specifications
     {
         public Expression<Func<T, bool>> Criteria { get; set; } 
         public List<Expression<Func<T, object >>> Includes { get; set; }
-    }
+		public List<string> ThenIncludes { get; set; }
+	}
 
 }

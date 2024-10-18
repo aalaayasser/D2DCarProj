@@ -12,10 +12,7 @@ namespace DALProject.Data.Configartions
     internal class CarConfigration : IEntityTypeConfiguration<Car>
     {
         public void Configure(EntityTypeBuilder<Car> builder)
-        {
-            builder.Property(c => c.KiloMetres)
-             .IsRequired()
-             .HasColumnType("bigint"); 
+        { 
 
             builder.Property(c => c.Description)
             .HasColumnType("text"); 

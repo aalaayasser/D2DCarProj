@@ -4,16 +4,14 @@ using DALProject;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DALProject.Data.Migrations
+namespace DALProject.Migrations
 {
     [DbContext(typeof(CarAppDbContext))]
-    [Migration("20241015133620_Initial Migration")]
-    partial class InitialMigration
+    partial class CarAppDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,9 +90,6 @@ namespace DALProject.Data.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("text");
-
-                    b.Property<long>("KiloMetres")
-                        .HasColumnType("bigint");
 
                     b.Property<int>("ModelId")
                         .HasColumnType("int");
@@ -237,6 +232,24 @@ namespace DALProject.Data.Migrations
                     b.ToTable("Drivers");
                 });
 
+            modelBuilder.Entity("DALProject.Models.KiloMetres", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<long>("kiloMetres")
+                        .HasColumnType("bigint");
+
+                    b.Property<int?>("CarId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id", "kiloMetres");
+
+                    b.HasIndex("CarId");
+
+                    b.ToTable("KiloMetres");
+                });
+
             modelBuilder.Entity("DALProject.Models.Model", b =>
                 {
                     b.Property<int>("Id")
@@ -247,15 +260,9 @@ namespace DALProject.Data.Migrations
                     b.Property<int>("BrandId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -293,7 +300,7 @@ namespace DALProject.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -331,7 +338,7 @@ namespace DALProject.Data.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("City")
@@ -382,7 +389,6 @@ namespace DALProject.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Feedback")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("FinalReport")
@@ -483,6 +489,15 @@ namespace DALProject.Data.Migrations
                     b.Navigation("Model");
                 });
 
+            modelBuilder.Entity("DALProject.Models.KiloMetres", b =>
+                {
+                    b.HasOne("DALProject.Models.Car", "Car")
+                        .WithMany("KiloMetres")
+                        .HasForeignKey("CarId");
+
+                    b.Navigation("Car");
+                });
+
             modelBuilder.Entity("DALProject.Models.Model", b =>
                 {
                     b.HasOne("DALProject.Models.Brand", "Brand")
@@ -498,7 +513,9 @@ namespace DALProject.Data.Migrations
                 {
                     b.HasOne("DALProject.Models.Category", "Category")
                         .WithMany("Services")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
                 });
@@ -507,7 +524,9 @@ namespace DALProject.Data.Migrations
                 {
                     b.HasOne("DALProject.Models.Category", "Category")
                         .WithMany("Technician")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Category");
                 });
@@ -553,6 +572,8 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.Models.Car", b =>
                 {
+                    b.Navigation("KiloMetres");
+
                     b.Navigation("Tickets");
                 });
 

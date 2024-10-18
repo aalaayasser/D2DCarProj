@@ -52,7 +52,6 @@ namespace DALProject.Models
                 ModelId = model.ModelId,
                 CustomerId = model.CustomerId,
                 ColorId = model.ColorId,
-                KiloMetres = model.KiloMetres,
                 Year = model.Year,
                 Description = model.Description,
                 Tickets =model.Tickets,
@@ -70,7 +69,6 @@ namespace DALProject.Models
                 ModelId = viewModel.ModelId,
                 CustomerId = viewModel.CustomerId,
                 ColorId = viewModel.ColorId,
-                KiloMetres = viewModel.KiloMetres,
                 Year = viewModel.Year,
                 Description = viewModel.Description,
                

@@ -20,7 +20,6 @@ namespace DALProject.Models
         
         public int ColorId { get; set; }
         
-        public long KiloMetres { get; set; }
 
         
         public DateTime Year { get; set; }
@@ -31,6 +30,7 @@ namespace DALProject.Models
         
 
         public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
+        public virtual ICollection<KiloMetres> KiloMetres { get; set; } = new HashSet<KiloMetres>();
 
         public virtual Customer Customer { get; set; } = null!;
         public virtual Color Color { get; set; } = null!;
