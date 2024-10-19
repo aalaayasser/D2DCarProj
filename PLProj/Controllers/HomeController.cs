@@ -83,42 +83,43 @@ namespace PLProj.Controllers
 		}
 
 		public IActionResult CreateCar()
-        {
-            ViewData["Models"] = unitOfWork.Repository<Model>().GetAll();
-            ViewData["Brands"] = unitOfWork.Repository<Brand>().GetAll(); 
+		{
+			ViewData["Models"] = unitOfWork.Repository<Model>().GetAll();
+			ViewData["Brands"] = unitOfWork.Repository<Brand>().GetAll();
 			ViewData["Colors"] = unitOfWork.Repository<Color>().GetAll();
 			ViewData["Kilometres"] = unitOfWork.Repository<KiloMetres>().GetAll();
 
 
-            return View();
-        }
-		[HttpPost]
-		public IActionResult CreateCar( CarViewModel car)
-        {
 
-            if (ModelState.IsValid)
-            {
-                unitOfWork.Repository<Car>().Add((Car)car);
-                var count = unitOfWork.Complete();
+			return View();
+		}
+		[HttpPost]
+		public IActionResult CreateCar(CarViewModel car)
+		{
+
+			if (ModelState.IsValid)
+			{
+				unitOfWork.Repository<Car>().Add((Car)car);
+				var count = unitOfWork.Complete();
 				if (count > 0)
 				{
 					TempData["message"] = "vehicle has been Added Successfully";
-                    return RedirectToAction(nameof(Index));
-                }
-            }
-            return View( car);
-        }
+					return RedirectToAction(nameof(Index));
+				}
+			}
+			return View(car);
+		}
 		[HttpGet]
-        public IActionResult GetBrandsByModel(int modelId)
-        {
-           var spec = new BaseSpecification<Brand>( e=>e.Models.Any(m => m.Id ==modelId) );
-			var brands = unitOfWork.Repository<Brand>().GetAllWithSpec(spec)
-				.Select(b =>(BrandViewModel)b ).ToList();
-           
-            return Json(brands);
-        }
+		//public IActionResult GetBrandsByModel(int modelId)
+		//{
+		//	var spec = new BaseSpecification<Brand>(e => e.Models.Any(m => m.Id == modelId));
+		//	var brands = unitOfWork.Repository<Brand>().GetAllWithSpec(spec)
+		//		.Select(b => (BrandViewModel)b).ToList();
 
-        public IActionResult Book()
+		//	return View("CreateCar", brands);
+		//}
+
+		public IActionResult Book()
 		{
 			return View();
 		}

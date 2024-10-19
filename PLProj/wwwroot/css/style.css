@@ -108,11 +108,13 @@ section{
 
     
 }
-
-    .main-btn:hover {
-        background: linear-gradient(90deg, rgba(100,100,100,1) 20%, rgba(150,150,150,1) 50%, rgba(130,130,130,1) 80%);
-        transform: scale(1.1);
-    }
+main-btn button {
+    background: linear-gradient(90deg, rgba(4,5,5,1) 20%, rgba(62,74,74,1) 50%, rgba(0,0,0,1) 80%);
+}
+.main-btn:hover {
+    background: linear-gradient(90deg, rgba(100,100,100,1) 20%, rgba(150,150,150,1) 50%, rgba(130,130,130,1) 80%);
+    transform: scale(1.1);
+}
 
 .social-icons a {
     color: #fff;

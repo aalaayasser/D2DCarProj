@@ -44,7 +44,7 @@ namespace BLLProject.Repositories
 
         public IEnumerable<T> GetAll()
         {
-            return dbContect.Set<T>().AsNoTracking().ToList();
+            return dbContect.Set<T>().ToList();
         }
 
        
