@@ -1,103 +1,80 @@
 ﻿@using BLLProject.Interfaces
 @using DALProject.Models
 @model CarViewModel
-@inject IUnitOfWork unitOfWork 
+@inject IUnitOfWork unitOfWork
 @{
-    var Colors = new SelectList(unitOfWork.Repository<Color>().GetAll(), "Id", "Name");
-    var Kilometres = new SelectList(unitOfWork.Repository<KiloMetres>().GetAll(), "Id", "kiloMetres");
-    var Models = new SelectList(unitOfWork.Repository<Model>().GetAll(), "Id", "Name");
-    var Brands = new SelectList(unitOfWork.Repository<Brand>().GetAll(), "Id", "Name");
-
-
-
+	var Colors = new SelectList(unitOfWork.Repository<Color>().GetAll(), "Id", "Name");
+	var Brands = new SelectList(unitOfWork.Repository<Brand>().GetAll(), "Id", "Name");
 }
+
 @{
-    ViewData["Title"] = "CreateCar";
+	ViewData["Title"] = "CreateCar";
 }
 <h1>CreateCar</h1>
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Add Car</h2>
-    <form asp-controller="Home" asp-action="CreateCar" method="post">
-        <div class="form-group">
-            <label asp-for="Model" class="form-label"> </label>
-            <select  class="form-control" asp-for="Id" asp-items="Models"  required>
-            <option value="@null"> --Select Model-- </option></select>
-            <span asp-validation-for="Id" class="text-danger"> </span>
-        </div>
-        <div class="form-group">
-            <label asp-for="Model.Brand" class="form-label">Brand</label>
-            <select class="form-control" asp-for="Model.BrandId" asp-items="Brands" required>
-                <option value="">--Select Brand--</option>
-            </select>
-            <span asp-validation-for="Model.BrandId" class="text-danger"></span>
-        </div>
+	<h2 class="text-center mb-4">Add Car</h2>
+	<form asp-controller="Home" asp-action="CreateCar" method="post">
 
-        <div class="form-group">
-            <label asp-for="Color"> </label>
-            <input class="form-control" asp-for="Color.Name" required>
-            <span asp-asp-validation-for="Contact" class="text-danger"> </span>
-        </div>
+		<div class="form-group">
+			<label class="form-label">Brand</label>
+			<select class="form-control" id="DrpBrand" asp-items="Brands" required>
+				<option value="">--Select Brand--</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label asp-for="ModelId" class="form-label"> </label>
+			<select class="form-control" asp-for="ModelId" id="DrpModel" required>
+				<option value="@null"> --Select Model-- </option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label asp-for="ColorId" class="form-label"> </label>
+			<select class="form-control" asp-for="ColorId" asp-items="Colors" required>
+				<option value="@null"> --Select Color-- </option>
+			</select>
+			<span asp-validation-for="ColorId" class="text-danger"> </span>
+		</div>
 
-        <div class="form-group">
-            <label asp-for="KiloMetres"> </label>
-            <input class="form-control" asp-for="KiloMetres" required>
-            <span asp-asp-validation-for="Contact" class="text-danger"> </span>
-        </div>
+		<div class="form-group">
+			<label asp-for="Description"> </label>
+			<input class="form-control" asp-for="Description" required>
+			<span asp-asp-validation-for="Description" class="text-danger"> </span>
+		</div>
 
+		<div class="form-group">
+			<label asp-for="Year"> </label>
+			<input class="form-control" asp-for="Year" required>
+			<span asp-asp-validation-for="Year" class="text-danger"> </span>
+		</div>
+		<br />
+		<br />
+		<br />
 
-        <div class="form-group">
-            <label asp-for="Description"> </label>
-            <input class="form-control" asp-for="Description" required>
-            <span asp-asp-validation-for="City" class="text-danger"> </span>
-        </div>
+		<input type="submit" style="margin-left: 5px; margin-top: 110px;" class="main-btn" value="Sign Up" />
 
-        <div class="form-group">
-            <label asp-for="Year"> </label>
-            <input class="form-control" asp-for="Year" required>
-            <span asp-asp-validation-for="Street" class="text-danger"> </span>
-        </div>
-@* 
-        @section Scripts {
-            <script>
-                $(document).ready(function () {
-                    $('#modelSelect').change(function () {
-                        var modelId = $(this).val();
-                        if (modelId) {
-                            $.ajax({
-                                url: '@Url.Action("GetBrandsByModel", "Home")',
-                                type: 'GET',
-                                data: { modelId: modelId },
-                                success: function (data) {
-                                    $('#brandSelect').empty();
-                                    $('#brandSelect').append('<option value="">--Select Brand--</option>');
-                                    $.each(data, function (i, brand) {
-                                        $('#brandSelect').append('<option value="' + brand.id + '">' + brand.name + '</option>');
-                                    });
-                                }
-                            });
-                        } else {
-                            $('#brandSelect').empty();
-                            $('#brandSelect').append('<option value="">--Select Brand--</option>');
-                        }
-                    });
-                });
-            </script>
-        } *@
-       
-         
-           
-
-
-
-        <br />
-        <br />
-
-        <input type="submit" style="margin-left: 5px; margin-top: 110px;" class="main-btn" value="Sign Up" />
-
-        @* <a asp-controller="Home" asp-action="Index"  class="btn btn-success">Sign Up</a> *@
-    </form>
+		@* <a asp-controller="Home" asp-action="Index"  class="btn btn-success">Sign Up</a> *@
+	</form>
 </div>
-
+@section Script
+{
+	<script>
+		$("#DrpBrand").change(function () {
+			var BrandId = $(this).val();
+			$.ajax({
+				url: '@Url.Action("GetModelByBrands")',
+				type: "GET",
+				data: { BrandId: BrandId },
+				success: function (data) {
+					let DrpModel = $("#DrpModel");
+					DrpModel.empty().append("<option value=''> Select Model </option>");
+					for (let i = 0; i < data.length; i++) {
+						DrpModel.append(`<option value="${data[i].id}">${data[i].name}</option>`);
+					}
+				}
+			});
+		});
+	</script>
+}
 
 
 

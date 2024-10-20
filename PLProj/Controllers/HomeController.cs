@@ -2,6 +2,7 @@
 using BLLProject.Specifications;
 using DALProject.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Logging;
 using PLProj.Models;
 using System;
@@ -51,20 +52,6 @@ namespace PLProj.Controllers
 			return View(customer);
 		}
 
-		//public ActionResult SelectModel()
-		//{
-		//	var spec = new BaseSpecification<Model>();
-		//	spec.Includes.Add(e => e.Brand);
-
-		//	var models = unitOfWork.Repository<Model>().GetAllWithSpec(spec)
-		//	.Select(m => (ModelViewModel)m).ToList();
-		//	return View(models);
-		//}
-		//public ActionResult SelectModel(int modelId)
-		//{
-		//	var parts = _partService.GetPartsByModel(modelId); 
-		//	return View(parts);
-		//}
 		public ActionResult Car()
 		{
 			var spec = new BaseSpecification<Car>();
@@ -84,13 +71,6 @@ namespace PLProj.Controllers
 
 		public IActionResult CreateCar()
 		{
-			ViewData["Models"] = unitOfWork.Repository<Model>().GetAll();
-			ViewData["Brands"] = unitOfWork.Repository<Brand>().GetAll();
-			ViewData["Colors"] = unitOfWork.Repository<Color>().GetAll();
-			ViewData["Kilometres"] = unitOfWork.Repository<KiloMetres>().GetAll();
-
-
-
 			return View();
 		}
 		[HttpPost]
@@ -109,17 +89,18 @@ namespace PLProj.Controllers
 			}
 			return View(car);
 		}
+
 		[HttpGet]
-		//public IActionResult GetBrandsByModel(int modelId)
-		//{
-		//	var spec = new BaseSpecification<Brand>(e => e.Models.Any(m => m.Id == modelId));
-		//	var brands = unitOfWork.Repository<Brand>().GetAllWithSpec(spec)
-		//		.Select(b => (BrandViewModel)b).ToList();
+		public IActionResult GetModelByBrands(int BrandId)
+		{
+			var spec = new BaseSpecification<Model>(e => e.BrandId == BrandId);
+			var Models = unitOfWork.Repository<Model>().GetAllWithSpec(spec)
+				.Select(e=>new { Id = e.Id, Name = e.Name }).ToList();
 
-		//	return View("CreateCar", brands);
-		//}
+			return new JsonResult(Models);
+		}
 
-		public IActionResult Book()
+        public IActionResult Book()
 		{
 			return View();
 		}

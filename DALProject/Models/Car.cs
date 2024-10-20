@@ -15,16 +15,16 @@ namespace DALProject.Models
 
         
         
-        public int CustomerId { get; set; }
+        public int? CustomerId { get; set; }
 
         
         public int ColorId { get; set; }
-        
 
-        
-        public DateTime Year { get; set; }
 
-       
+
+        public int Year { get; set; }
+
+
         public string? Description { get; set; }
 
         

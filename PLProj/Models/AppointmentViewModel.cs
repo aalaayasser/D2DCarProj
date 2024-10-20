@@ -27,15 +27,6 @@ namespace DALProject.Models
         public int DriverId { get; set; }
         public int TicketId { get; set; }
 
-        [InverseProperty(nameof(Technician.Appointments))]
-        public virtual Technician Technicians { get; set; } = null!;
-
-        [InverseProperty(nameof(Driver.Appointments))]
-        public virtual Driver Drivers { get; set; } = null!;
-
-        [InverseProperty(nameof(Ticket.Appointments))]
-        public virtual Ticket Tickets { get; set; } = null!;
-
         #region Mapping
         public static explicit operator AppointmentViewModel(Appointment model)
         {
@@ -48,9 +39,6 @@ namespace DALProject.Models
                 TechnicalId = model.TechnicalId,
                 DriverId = model.DriverId,
                 TicketId = model.TicketId,
-                Technicians = model.Technicians, 
-                Drivers = model.Drivers,             
-                Tickets = model.Tickets              
             };
         }
 
@@ -65,7 +53,6 @@ namespace DALProject.Models
                 TechnicalId = viewModel.TechnicalId , 
                 DriverId = viewModel.DriverId ,
                 TicketId = viewModel.TicketId
-                            
             };
         }
         #endregion
