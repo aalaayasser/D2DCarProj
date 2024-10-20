@@ -6,7 +6,6 @@ namespace PLProj.Models
     {
         public int Id { get; set; }
         public long kiloMetres { get; set; }
-        public virtual Car Car { get; set; } = null!;
 
 
         public static explicit operator KilometresViewModel(KiloMetres Model)
@@ -15,7 +14,6 @@ namespace PLProj.Models
             {
                 Id = Model.Id,
                 kiloMetres = Model.kiloMetres,
-                Car = Model.Car
             };
         }
         public static explicit operator KiloMetres(KilometresViewModel viewModel)

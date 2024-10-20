@@ -15,8 +15,6 @@ namespace DALProject.Models
         [StringLength(50, ErrorMessage = "The Color Name must not exceed 50 characters.")]
         public string Name { get; set; }
 
-        public virtual ICollection<Car> Car { get; set; } = new HashSet<Car>();
-
         #region Mapping
 
         public static explicit operator ColorViewModel(Color model)
@@ -25,7 +23,6 @@ namespace DALProject.Models
             {
                 Id = model.Id,
                 Name = model.Name,
-                Car = model.Car
             };
         }
 

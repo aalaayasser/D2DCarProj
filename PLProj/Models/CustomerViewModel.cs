@@ -18,8 +18,6 @@ namespace DALProject.Models
         [Display(Name = "Preferred Communication")]
         public string PrefCommunication { get; set; }
 
-        public virtual ICollection<Car> Cars { get; set; } = new HashSet<Car>();
-
         #region Mapping
 
         public static explicit operator CustomerViewModel(Customer model)
@@ -28,7 +26,6 @@ namespace DALProject.Models
             {
                 Id = model.Id,
                 Name = model.Name,
-                Cars = model.Cars,
                 Street = model.Street,
                 ContactNumber = model.ContactNumber,
                 City = model.City,

@@ -18,10 +18,7 @@ namespace DALProject.Models
         [Display(Name = "Contact Number")]
         public long ContactNumber { get; set; }
         public string Availability { get; set; }
-
         public DateTime BirthDate { get; set; } // .net 5 not support date only
-        public virtual Category Category { get; set; } = null!;
-        public virtual ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
 
         #region Mapping
         public static explicit operator TechnicianViewModel(Technician Model)
@@ -37,8 +34,6 @@ namespace DALProject.Models
                 ContactNumber = Model.ContactNumber,
                 Availability = Model.Availability,
                 BirthDate = Model.BirthDate,
-                Category = Model.Category,
-                Appointments = Model.Appointments
             };
 
         }
@@ -55,7 +50,6 @@ namespace DALProject.Models
                 ContactNumber = ViewModel.ContactNumber,
                 Availability = ViewModel.Availability,
                 BirthDate = ViewModel.BirthDate,
-                Category = ViewModel.Category,
             };
 
         } 

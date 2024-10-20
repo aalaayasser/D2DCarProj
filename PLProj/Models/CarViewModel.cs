@@ -12,36 +12,21 @@ namespace DALProject.Models
 	{
 		public int Id { get; set; }
 
-		[Display(Name = "Model ID")]
-
+		[Display(Name = "Model")]
 		public int ModelId { get; set; }
 
-		[Display(Name = "Customer ID")]
-
+		[Display(Name = "Customer")]
 		public int? CustomerId { get; set; }
 
-		[Display(Name = "Color ID")]
+		[Display(Name = "Color")]
 		public int ColorId { get; set; }
 		[Required]
-
-
 
 		[Display(Name = "Year of Manufacture")]
 		public int Year { get; set; }
 
 		[Display(Name = "Description")]
 		public string? Description { get; set; }
-
-
-
-		//		public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
-		//		public virtual ICollection<KiloMetres> KiloMetres { get; set; } = new HashSet<KiloMetres>();
-		//		public virtual Customer Customer { get; set; } = null!;
-		//      public virtual Color Color { get; set; } = null!;
-		//      public virtual Model Model { get; set; } = null!;
-
-
-
 
 
 		#region Mapping
@@ -56,11 +41,6 @@ namespace DALProject.Models
 				ColorId = model.ColorId,
 				Year = model.Year,
 				Description = model.Description,
-				//Tickets =model.Tickets,
-				//Customer = model.Customer,
-				//Color = model.Color,
-				//Model = model.Model,
-				//KiloMetres = model.KiloMetres,
 			};
 		}
 

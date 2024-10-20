@@ -21,9 +21,6 @@ namespace DALProject.Models
         public DataType EstimatedTime{ get; set; }
         public string Description{ get; set; }
 
-        public virtual Category Category { get; set; } = null!;
-        public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
-
 
         #region Mapping
         public static explicit operator ServiceViewModel(Service model)
@@ -36,8 +33,6 @@ namespace DALProject.Models
                 Price = model.Price,
                 EstimatedTime = model.EstimatedTime,
                 Description = model.Description,
-                Category = model.Category,
-                Tickets = model.Tickets
             };
         }
 

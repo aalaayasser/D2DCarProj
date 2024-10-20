@@ -15,10 +15,6 @@ namespace DALProject.Models
         [Display(Name = "Brand Name")]
         public string BrandName { get; set; }
 
-        // سيبني دي لاننا محتاجين نلود لستة من المودل
-        public virtual ICollection<Model> Models { get; set; } = new HashSet<Model>();
-
-
         #region Mapping
         public static explicit operator BrandViewModel(Brand model)
         {
@@ -26,7 +22,6 @@ namespace DALProject.Models
             {
                 Id = model.Id,
                 BrandName = model.Name,
-                Models = model.Models
             };
         }
 

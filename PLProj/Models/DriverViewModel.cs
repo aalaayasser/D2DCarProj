@@ -28,7 +28,6 @@ namespace DALProject.Models
 
         [Display(Name = "License Expiry Date")]
         public DateTime LicenseExpDate { get; set; }
-        public virtual ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
 
         #region Mapping
 
@@ -47,7 +46,6 @@ namespace DALProject.Models
                 License = model.License,
                 LicenseDate = model.LicenseDate,
                 LicenseExpDate = model.LicenseExpDate,
-                Appointments = model.Appointments
             };
         }
 

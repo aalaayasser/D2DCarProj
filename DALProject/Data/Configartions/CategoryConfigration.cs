@@ -14,7 +14,7 @@ namespace DALProject.Data.Configartions
         public void Configure(EntityTypeBuilder<Category> builder)
         {
             builder.Property(c => c.Name)
-                .HasColumnType("varchar")
+                .HasColumnType("varchar(100)")
                 .IsRequired();
         }
     }

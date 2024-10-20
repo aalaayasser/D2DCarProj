@@ -5,22 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migartions\**" />
-    <EmbeddedResource Remove="Data\Migartions\**" />
-    <None Remove="Data\Migartions\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="Data\Migartions\20241018171254_Initial Create1.cs" />
-    <Compile Include="Data\Migartions\20241018171254_Initial Create1.Designer.cs" />
-    <Compile Include="Data\Migartions\20241020135605_CreateCustomerIdAllowNullinCarModel.cs" />
-    <Compile Include="Data\Migartions\20241020135605_CreateCustomerIdAllowNullinCarModel.Designer.cs" />
-    <Compile Include="Data\Migartions\20241020135819_ConvertYearinCarModel.cs" />
-    <Compile Include="Data\Migartions\20241020135819_ConvertYearinCarModel.Designer.cs" />
-    <Compile Include="Data\Migartions\CarAppDbContextModelSnapshot.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.16" />
   </ItemGroup>
 

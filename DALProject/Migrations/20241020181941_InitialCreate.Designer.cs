@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace DALProject.Data.Migartions
+namespace DALProject.Migrations
 {
     [DbContext(typeof(CarAppDbContext))]
-    [Migration("20241018171254_Initial Create1")]
-    partial class InitialCreate1
+    [Migration("20241020181941_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -87,7 +87,7 @@ namespace DALProject.Data.Migartions
                     b.Property<int>("ColorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -96,8 +96,8 @@ namespace DALProject.Data.Migartions
                     b.Property<int>("ModelId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Year")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -119,7 +119,7 @@ namespace DALProject.Data.Migartions
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 
@@ -476,9 +476,7 @@ namespace DALProject.Data.Migartions
 
                     b.HasOne("DALProject.Models.Customer", "Customer")
                         .WithMany("Cars")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("DALProject.Models.Model", "Model")
                         .WithMany("Cars")

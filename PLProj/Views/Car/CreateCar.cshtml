@@ -1,5 +1,4 @@
-﻿@using BLLProject.Interfaces
-@using DALProject.Models
+﻿
 @model CarViewModel
 @inject IUnitOfWork unitOfWork
 @{
@@ -13,7 +12,7 @@
 <h1>CreateCar</h1>
 <div class="container mt-5">
 	<h2 class="text-center mb-4">Add Car</h2>
-	<form asp-controller="Home" asp-action="CreateCar" method="post">
+	<form asp-controller="Car" asp-action="CreateCar" method="post">
 
 		<div class="form-group">
 			<label class="form-label">Brand</label>
@@ -51,8 +50,6 @@
 		<br />
 
 		<input type="submit" style="margin-left: 5px; margin-top: 110px;" class="main-btn" value="Sign Up" />
-
-		@* <a asp-controller="Home" asp-action="Index"  class="btn btn-success">Sign Up</a> *@
 	</form>
 </div>
 @section Script
@@ -61,7 +58,7 @@
 		$("#DrpBrand").change(function () {
 			var BrandId = $(this).val();
 			$.ajax({
-				url: '@Url.Action("GetModelByBrands")',
+				url: '@Url.Action("GetModelByBrands","Car")',
 				type: "GET",
 				data: { BrandId: BrandId },
 				success: function (data) {

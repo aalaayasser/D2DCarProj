@@ -43,15 +43,6 @@ namespace DALProject.Models
         [Required]
         public string IsPayed { get; set; }
 
-        [InverseProperty(nameof(Appointment.Tickets))]
-        public virtual ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
-
-        [InverseProperty(nameof(Car.Tickets))]
-        public virtual Car Cars { get; set; }
-
-        public virtual Service Service { get; set; }
-
-
         #region Mapping
 
         public static explicit operator TicketViewModel(Ticket model)
@@ -70,9 +61,6 @@ namespace DALProject.Models
                 ServiceId = model.ServiceId,
                 Feedback = model.Feedback,
                 IsPayed = model.IsPayed,
-                Cars = model.Cars,
-                Service = model.Service,
-                Appointments = model.Appointments
             };
         }
 
@@ -97,8 +85,6 @@ namespace DALProject.Models
         }
 
         #endregion
-
-
     }
 
 }

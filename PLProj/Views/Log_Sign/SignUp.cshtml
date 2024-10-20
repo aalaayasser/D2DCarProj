@@ -18,7 +18,7 @@
 
     <div class="container mt-5">
         <h2 class="text-center mb-4">Sign Up</h2>
-        <form asp-controller="Home"  asp-action="SignUp" method="post">
+        <form asp-controller="Log_Sign" asp-action="SignUp" method="post">
             <div class="form-group">
                 <label asp-for="Name"> </label>
                 <input class="form-control" asp-for="Name" required>
@@ -61,14 +61,12 @@
             <br />
             <br />
             <br />
-             <br />
-             <br />
-             <br />
-             <br />
-
-
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <input type="submit" style="margin-left: 5px;" class="main-btn" value="Sign Up" />
-            @* <a asp-controller="Home" asp-action="Index"  class="btn btn-success">Sign Up</a> *@
         </form>
     </div>
 

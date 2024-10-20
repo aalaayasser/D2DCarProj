@@ -12,7 +12,6 @@ namespace DALProject.Models
     {
        
         public int Id { get; set; }
-
         [Required]
         [Display(Name = "Part Name")]
         public string PartName { get; set; }
@@ -24,8 +23,6 @@ namespace DALProject.Models
         [Required(ErrorMessage = "Part Kilometres to Change is required.")]
         [Display(Name = "Kilometres to Change Part")]
         public long PartKilometresToChange { get; set; }
-        public virtual ICollection<Model> Models { get; set; } = new HashSet<Model>();
-
 
         #region Mapping
         public static explicit operator PartViewModel(Part model)
@@ -36,7 +33,6 @@ namespace DALProject.Models
                 PartName = model.PartName,
                 Price = model.Price,
                 PartKilometresToChange = model.PartKilometresToChange,
-                Models = model.Models
             };
         }
 
