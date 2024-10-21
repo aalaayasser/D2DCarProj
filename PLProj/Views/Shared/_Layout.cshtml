@@ -2,29 +2,30 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - PLProj</title>
-	<link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewData["Title"] - PLProj</title>	
 	<link rel="stylesheet" href="~/css/style.css?v=1.1">
+	<link rel="icon" href="imgs/Logo.png" type="image/x-icon">
+    <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
 	<header>
-		<a href="#" class="logo">D2D Auto</a>
+		  <a href="#" class="logo">D2D Auto</a> 
 		<nav class="navigation">
 			<a asp-action="Index" asp-controller="Home"> Home </a>
-			@* <a asp-action="Book" asp-controller="Home"> Appointment </a> *@
+
 			<a asp-action="CreateCar" asp-controller="Home"> Add Car </a>
-			@* <a href="#contact"> Contact </a> *@
-            <a asp-action="SignUp" asp-controller="Home"> Sign Up</a>
 			<a asp-action="GetServices" asp-controller="Services"> Services</a>
-		</nav>
-	</header>
-	<div class="container">
-		<main role="main" class="pb-3">
+            <a asp-action="SignUp" asp-controller="Home"> Sign Up</a>
+			<a href="#contact"> Contact </a>
+		</nav> 
+	</header> 
+
+
+	<div >
 			@RenderBody()
-		</main>
 	</div>
+
 	<script src="~/lib/jquery/jquery.min.js"></script>
 	<script src="~/lib/jquery/jqueryui/jquery-ui.min.js"></script>
 	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
