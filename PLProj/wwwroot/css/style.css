@@ -17,31 +17,33 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 200px;
+    padding: 10px 100px;
+    border-bottom: 8px solid black;
 }
 .logo {
- text-decoration: none;
- color: #fff;
- text-transform: uppercase;
- font-weight:700;
- font-size: 1.8em;
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 2em;
+    padding-left: 80px;
 }
 .navigation a{
 color: #fff;
 text-decoration: none;
 font-size: 1.4em;
 font-weight: 500;
-padding-left: 50px;
+padding-left: 40px;
 }
-.navigation a:hover{
-    color: purple;
-}
+    .navigation a:hover {
+        color: dimgray;
+    }
 section{
     padding: 100px 200px ;
 }
 .main {
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     background: url(/imgs/Img1.jpg) no-repeat;
@@ -53,18 +55,9 @@ section{
         color: #fff;
         font-size: 1.4em;
         font-weight: 500;
-        margin-bottom: 10px;
-        /*color: #fff;
-  font-size: 1.4em;
-  font-weight: 500; */
+        margin-bottom: 10px
     }
-/*.main h3 span{
-    display: inline-block;*/
-    /*margin-top: 10px;*/
-    /*color:#4e9eff;
-    font-size: 1em;
-    font-weight: 600;
-}*/
+
  .main h3 {
      color: #fff;
      font-size: 4em;
@@ -72,15 +65,14 @@ section{
      letter-spacing: 1px;
      margin: 30px 0; /* تعديل الفجوة بين النصوص */
      color: #fff;
-/* margin-top: 500px;*/
- margin-bottom: 300px;
+     margin-bottom: 200px;
  }
     /*//New*/
 .text-container {
     width: 40%; /* عرض النص ليكون في مساحة معقولة */
     z-index: 1;
     color: #ffffff;
-    /*padding-left: 80px;*/
+    padding-left: 10px;
     /* إضافة مسافة من اليسار */
     /* يمكنك إضافة المزيد من التنسيقات هنا إذا لزم الأمر */
 }
@@ -102,7 +94,7 @@ section{
     border-radius: 15px;
     margin-top: -300px;
     transition: 0.7s ease;
-    margin-left: 130px;
+    margin-left: 10px;
     position: relative;
     top: -150px;
 
@@ -112,7 +104,7 @@ main-btn button {
     background: linear-gradient(90deg, rgba(4,5,5,1) 20%, rgba(62,74,74,1) 50%, rgba(0,0,0,1) 80%);
 }
 .main-btn:hover {
-    background: linear-gradient(90deg, rgba(100,100,100,1) 20%, rgba(150,150,150,1) 50%, rgba(130,130,130,1) 80%);
+    background: gray;
     transform: scale(1.1);
 }
 
@@ -122,16 +114,17 @@ main-btn button {
     padding-right: 30px;
     
 }
-.social-icons a:hover{
-    color: #0a49f6;
-}
+    .social-icons a:hover {
+        color: dimgray;
+    }
 /*New*/
 .social-icons {
     margin-top: -130px; /* إضافة مسافة أعلى الأيقونات */
     display: flex;
     justify-content: flex-start; /* محاذاة الأيقونات إلى اليسار */
-     /* محاذاة الأيقونات إلى اليسار */
-    margin-left: 130px; /* إضافة مسافة إضافية من اليسار إذا لزم الأمر */ /* إضافة مسافة إضافية من اليسار إذا لزم الأمر */
+    /* محاذاة الأيقونات إلى اليسار */
+    margin-left: 30px;
+    /* إضافة مسافة إضافية من اليسار إذا لزم الأمر */ /* إضافة مسافة إضافية من اليسار إذا لزم الأمر */
 }
 .title{
     display: flex;
@@ -148,7 +141,7 @@ main-btn button {
     flex-wrap: wrap;
 }
 .card{
-    background-color: #fff;
+    background-color: lightgray;
     width: 21.25em;
     box-shadow: 0 5px 25px rgba(1 1 1 / 15%);
     border-radius: 10px;
@@ -163,8 +156,8 @@ main-btn button {
 text-align: center;
 }
 .info h3{
-    color: #3a6cf4;
-    font-size: 1.2em;
+    color: black;
+    font-size: 2em;
     font-weight: 700;
     margin: 10px;
 }
@@ -287,45 +280,102 @@ text-align: center;
       margin-top: 30px;
       margin-bottom: 30px;
   }
-  .footer{
-    /* background: radial-gradient(circle, rgba(4,109,172,1) 0%, rgba(6,6,45,1) 100%, rgba(1,49,78,1) 100%); */
-    background-color: #000016;
-    color: #fff;
-    padding: 2em;
+footer {
+    background-color: #111;
+}
+
+.footerContainer {
+    width: 100%;
+    padding: 70px 30px 20px;
+}
+
+.socialIcons {
     display: flex;
-    justify-content: space-between;
-  }
-  .footer-title {
-    font-size: 1.3em;
-    font-weight: 600;
-  }
-  .footer-title span {
-    color: #3a6cf4;
-  }
-  @media(max-width: 1023px){
-    header {
-        padding: 12px 20px; 
+    justify-content: center;
+}
+
+    .socialIcons a {
+        text-decoration: none;
+        padding: 10px;
+        background-color: white;
+        margin: 10px;
+        border-radius: 50%;
     }
-    .navigation a{
-        padding-left: 10px;
+
+        .socialIcons a i {
+            font-size: 2em;
+            color: black;
+            opacity: 0,9;
+        }
+        /* Hover affect on social media icon */
+        .socialIcons a:hover {
+            background-color: #111;
+            transition: 0.5s;
+        }
+
+            .socialIcons a:hover i {
+                color: white;
+                transition: 0.5s;
+            }
+
+.footerNav {
+    margin: 30px 0;
+}
+
+    .footerNav ul {
+        display: flex;
+        justify-content: center;
+        list-style-type: none;
     }
-    .title{
-        font-size: 1.8em;
+
+        .footerNav ul li a {
+            color: white;
+            margin: 20px;
+            text-decoration: none;
+            font-size: 1.3em;
+            opacity: 0.7;
+            transition: 0.5s;
+        }
+
+            .footerNav ul li a:hover {
+                opacity: 1;
+            }
+
+.footerBottom {
+    background-color: #000;
+    padding: 20px;
+    text-align: center;
+}
+
+    .footerBottom p {
+        color: white;
     }
-    section {
-        padding: 80px 20px ;
-    }
-    .main-content h2{
-        font: size 1em; ;
-    }
-    .main-content h3 {
-        font-size: 1.6em;
-    }
-    .content{
+
+.designer {
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 400;
+    margin: 0px 5px;
+}
+
+@media (max-width: 700px) {
+    .footerNav ul {
         flex-direction: column;
-        align-items: center;
-      }
-  }
+    }
+
+        .footerNav ul li {
+            width: 100%;
+            text-align: center;
+            margin: 10px;
+        }
+
+    .socialIcons a {
+        padding: 8px;
+        margin: 4px;
+    }
+}
+
   
 
 
