@@ -1,4 +1,6 @@
 ﻿using DALProject.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DALProject
 {
-    public class CarAppDbContext : DbContext
+    public class CarAppDbContext : IdentityDbContext<AppUser>
     {
         public CarAppDbContext(DbContextOptions<CarAppDbContext> options) : base(options)
         {
@@ -18,8 +20,13 @@ namespace DALProject
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            
+            
+
         }
+
 
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<Brand> Brands { get; set; }

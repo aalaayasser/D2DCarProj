@@ -27,11 +27,11 @@ namespace DALProject.Models
             {
                 Id = Model.Id,
                 CategoryId = Model.CategoryId,
-                Name = Model.Name,
-                Email = Model.Email,
-                City = Model.City,
-                Street = Model.Street,
-                ContactNumber = Model.ContactNumber,
+                //Name = Model.Name,
+                //Email = Model.Email,
+                //City = Model.City,
+                //Street = Model.Street,
+                //ContactNumber = Model.ContactNumber,
                 Availability = Model.Availability,
                 BirthDate = Model.BirthDate,
             };
@@ -43,11 +43,11 @@ namespace DALProject.Models
             {
                 Id = ViewModel.Id,
                 CategoryId = ViewModel.CategoryId,
-                Name = ViewModel.Name,
-                Email = ViewModel.Email,
-                City = ViewModel.City,
-                Street = ViewModel.Street,
-                ContactNumber = ViewModel.ContactNumber,
+                //Name = ViewModel.Name,
+                //Email = ViewModel.Email,
+                //City = ViewModel.City,
+                //Street = ViewModel.Street,
+                //ContactNumber = ViewModel.ContactNumber,
                 Availability = ViewModel.Availability,
                 BirthDate = ViewModel.BirthDate,
             };

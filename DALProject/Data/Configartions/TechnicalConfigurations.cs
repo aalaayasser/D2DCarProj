@@ -13,24 +13,24 @@ namespace DALProject.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Technician> builder)
         {
-            builder.Property(e => e.Name)
-             .IsRequired()
-             .HasColumnType("varchar")
-             .HasMaxLength(100);
+            //builder.Property(e => e.Name)
+            // .IsRequired()
+            // .HasColumnType("varchar")
+            // .HasMaxLength(100);
 
-            builder.Property(e => e.City)
-                .IsRequired()
-                .HasColumnType("varchar")
-                .HasMaxLength(100);
+            //builder.Property(e => e.City)
+            //    .IsRequired()
+            //    .HasColumnType("varchar")
+            //    .HasMaxLength(100);
 
-            builder.Property(e => e.Email)
-                .IsRequired()
-                .HasColumnType("varchar")
-                .HasMaxLength(100);
+            //builder.Property(e => e.Email)
+            //    .IsRequired()
+            //    .HasColumnType("varchar")
+            //    .HasMaxLength(100);
 
-            builder.Property(e => e.ContactNumber)
-                .HasColumnType("bigint")
-                .IsRequired();
+            //builder.Property(e => e.ContactNumber)
+            //    .HasColumnType("bigint")
+            //    .IsRequired();
 
 
             builder.Property(e => e.Availability)
@@ -41,7 +41,8 @@ namespace DALProject.Data.Configurations
             builder.Property(e => e.BirthDate)
                .IsRequired();
 
-           
+            builder.HasOne<AppUser>().WithOne().HasForeignKey<Technician>(e => e.AppUserId);
+
         }
     }
 }

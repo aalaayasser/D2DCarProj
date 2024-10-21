@@ -35,12 +35,12 @@ namespace DALProject.Models
         {
             return new DriverViewModel
             {
-                Id = model.Id,
-                Name = model.Name,
-                Street = model.Street,
-                ContactNumber = model.ContactNumber,
-                City = model.City,
-                Email = model.Email,
+                //Id = model.Id,
+                //Name = model.Name,
+                //Street = model.Street,
+                //ContactNumber = model.ContactNumber,
+                //City = model.City,
+                //Email = model.Email,
                 Availability = model.Availability,
                 BirthDate = model.BirthDate,
                 License = model.License,
@@ -54,11 +54,11 @@ namespace DALProject.Models
             return new Driver
             {
                 Id = ViewModel.Id,
-                Name = ViewModel.Name,
-                Street = ViewModel.Street,
-                ContactNumber = ViewModel.ContactNumber,
-                City = ViewModel.City,
-                Email = ViewModel.Email,
+                //Name = ViewModel.Name,
+                //Street = ViewModel.Street,
+                //ContactNumber = ViewModel.ContactNumber,
+                //City = ViewModel.City,
+                //Email = ViewModel.Email,
                 Availability = ViewModel.Availability,
                 BirthDate = ViewModel.BirthDate,
                 License = ViewModel.License,

@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DALProject.Models
 {
-    public class CustomerViewModel 
+    public class CustomerViewModel: IdentityUser
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -24,12 +25,12 @@ namespace DALProject.Models
         {
             return new CustomerViewModel
             {
-                Id = model.Id,
-                Name = model.Name,
-                Street = model.Street,
-                ContactNumber = model.ContactNumber,
-                City = model.City,
-                Email = model.Email,
+            //    Id = model.Id,
+            //    Name = model.Name,
+            //    Street = model.Street,
+            //    ContactNumber = model.ContactNumber,
+            //    City = model.City,
+            //    Email = model.Email,
                 PrefCommunication = model.PrefCommunication
             };
         }
@@ -38,12 +39,12 @@ namespace DALProject.Models
         {
             return new Customer
             {
-                Id = ViewModel.Id,
-                Name = ViewModel.Name,
-                Street = ViewModel.Street,
-                ContactNumber = ViewModel.ContactNumber,
-                City = ViewModel.City,
-                Email = ViewModel.Email,
+            //    Id = ViewModel.Id,
+            //    Name = ViewModel.Name,
+            //    Street = ViewModel.Street,
+            //    ContactNumber = ViewModel.ContactNumber,
+            //    City = ViewModel.City,
+            //    Email = ViewModel.Email,
                 PrefCommunication = ViewModel.PrefCommunication
             };
         }

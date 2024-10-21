@@ -1,21 +1,25 @@
 ﻿using BLLProject.Interfaces;
 using BLLProject.Specifications;
 using DALProject.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using PLProj.Models;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PLProj.Controllers
 {
 	public class CarController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly ILogger<HomeController> _logger;
 		private readonly IUnitOfWork unitOfWork;
-		public CarController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
+		public CarController(UserManager<AppUser> userManager, ILogger<HomeController> logger, IUnitOfWork unitOfWork)
 		{
-			_logger = logger;
+            _userManager = userManager;
+            _logger = logger;
 			this.unitOfWork = unitOfWork;
 		}
 		public IActionResult Car()
@@ -38,10 +42,19 @@ namespace PLProj.Controllers
 			return View();
 		}
 		[HttpPost]
-		public IActionResult CreateCar(CarViewModel car)
+		public async Task<IActionResult> CreateCar(CarViewModel car)
 		{
 
-			if (ModelState.IsValid)
+			var _user = await _userManager.GetUserAsync(User);
+			var spec = new BaseSpecification<Customer>(c => c.AppUserId == _user.Id);
+			var customer = unitOfWork.Repository<Customer>().GetEntityWithSpec(spec);
+			car.CustomerId = customer.Id;
+
+
+		
+
+			
+            if (ModelState.IsValid)
 			{
 				unitOfWork.Repository<Car>().Add((Car)car);
 				var count = unitOfWork.Complete();

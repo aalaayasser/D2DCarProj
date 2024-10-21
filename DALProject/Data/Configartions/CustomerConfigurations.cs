@@ -13,34 +13,36 @@ namespace DALProject.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
-            builder.Property(e => e.Name)
-                .IsRequired()
-                .HasColumnType("varchar")
-                .HasMaxLength(100);
+            //builder.Property(e => e.Name)
+            //    .IsRequired()
+            //    .HasColumnType("varchar")
+            //    .HasMaxLength(100);
 
-            builder.Property(e => e.City)
-                .IsRequired()
-                .HasColumnType("varchar")
-                .HasMaxLength(100);
+            //builder.Property(e => e.City)
+            //    .IsRequired()
+            //    .HasColumnType("varchar")
+            //    .HasMaxLength(100);
 
 
-            builder.Property(e => e.Street)
-                .HasColumnType("varchar")
-                .HasMaxLength(100);
+            //builder.Property(e => e.Street)
+            //    .HasColumnType("varchar")
+            //    .HasMaxLength(100);
 
-            builder.Property(e => e.Email)
-                .IsRequired()
-                .HasColumnType("varchar")
-                .HasMaxLength(100);
+            //builder.Property(e => e.Email)
+            //    .IsRequired()
+            //    .HasColumnType("varchar")
+            //    .HasMaxLength(100);
 
-            builder.Property(e => e.ContactNumber)
-                .HasColumnType("bigint")
-                .IsRequired();
+            //builder.Property(e => e.ContactNumber)
+            //    .HasColumnType("bigint")
+            //    .IsRequired();
 
             builder.Property(e => e.PrefCommunication)
                .IsRequired()
                .HasColumnType("varchar")
                .HasMaxLength(100);
+
+            builder.HasOne<AppUser>().WithOne().HasForeignKey<Customer>(e => e.AppUserId);
         }
     }
 }

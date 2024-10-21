@@ -14,10 +14,21 @@
 		<nav class="navigation">
 			<a asp-action="Index" asp-controller="Home"> Home </a>
 			@* <a asp-action="Book" asp-controller="Home"> Appointment </a> *@
-			<a asp-action="GetServices" asp-controller="Services"> Services</a>
-			<a asp-action="CreateCar" asp-controller="Car"> Add Car </a>
-			@* <a href="#contact"> Contact </a> *@
-            <a asp-action="SignUp" asp-controller="Log_Sign"> Sign Up</a>
+			@if (User.Identity.IsAuthenticated)
+			{
+				@* <a asp-action="Book" asp-controller="Home"> Appointment </a> *@
+				<a asp-action="GetServices" asp-controller="Services"> Services</a>
+				<a asp-action="CreateCar" asp-controller="Car"> Add Car </a>
+				<a id="Logout" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
+				@* <a href="#contact"> Contact </a> *@
+			}
+			else
+			{
+
+				<a  id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+
+				<a  id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+			}
 		</nav>
 	</header>
 	<div class="container">

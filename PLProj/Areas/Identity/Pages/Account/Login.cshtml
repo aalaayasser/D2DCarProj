@@ -1,0 +1,86 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+<h1>@ViewData["Title"]</h1>
+<div class="row" style="margin-top: 130px;">
+    <!-- Adjust this value to control how far down the box appears -->
+    <div class="col-md-6 offset-md-3">
+        <div class="hive-box" style="border: 1px solid #dee2e6; border-radius: 5px; padding: 20px; background-color: #f8f9fa;">
+            <h4 class="text-center">Log in to your account</h4>
+            <hr />
+            <form id="account" method="post">
+                <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                <div class="form-group">
+                    <label asp-for="Input.Email" class="font-weight-bold"></label>
+                    <input asp-for="Input.Email" class="form-control" placeholder="Enter your email" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.Password" class="font-weight-bold"></label>
+                    <input asp-for="Input.Password" class="form-control" placeholder="Enter your password" type="password" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group form-check">
+                    <input asp-for="Input.RememberMe" class="form-check-input" type="checkbox" />
+                    <label asp-for="Input.RememberMe" class="form-check-label"></label>
+                </div>
+
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-dark btn-block">Log in</button>
+                </div>
+
+                <div class="form-group text-center">
+                    <p>
+                        <a id="forgot-password" asp-page="./ForgotPassword" style="color: black;">Forgot your password?</a>
+                    </p>
+                    <p>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" style="color: black;">Register as a new user</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+   @*  <div class="col-md-6 offset-md-3 mt-4">
+        <section>
+            <h4 class="text-center">Or use another service to log in</h4>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div class="text-center">
+                        <p>
+                            No external authentication services configured.
+                            See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a> for details.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal text-center">
+                        <p>
+                            @foreach (var provider in Model.ExternalLogins)
+                            {
+                                <button type="submit" class="btn btn-outline-primary mx-1" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                            }
+                        </p>
+                    </form>
+                }
+            }
+        </section>
+    </div>
+</div> *@
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
