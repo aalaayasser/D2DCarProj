@@ -22,8 +22,20 @@ namespace DALProject
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            var admin = new IdentityRole("admin");
+            admin.NormalizedName = "admin";
+
+            var customer = new IdentityRole("csutomer");
+            customer.NormalizedName = "csutomer";
+
+            var technincian = new IdentityRole("technincian");
+            customer.NormalizedName = "technincian";
+
+            modelBuilder.Entity<IdentityRole>().HasData(admin,technincian, customer);
+
             
-            
+
+
 
         }
 

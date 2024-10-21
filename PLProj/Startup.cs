@@ -1,4 +1,4 @@
-using BLLProject.Interfaces;
+﻿using BLLProject.Interfaces;
 using BLLProject.Repositories;
 using DALProject;
 using DALProject.Models;
@@ -47,7 +47,12 @@ namespace PLProj
             
             #endregion
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddRazorPages();
+            services.AddRazorPages(options =>
+            {
+                options.Conventions.AuthorizeAreaPage("Identity", "/Account/Register");
+                options.Conventions.AuthorizeAreaPage("Identity", "/Account/RegisterTechnician");
+                
+            });
 
 
         }
@@ -79,6 +84,9 @@ namespace PLProj
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapControllerRoute(
+                   name: "Technician",
+                pattern: "{controller=Tec}/{action=Register}/{id?}");
             });
             
         }

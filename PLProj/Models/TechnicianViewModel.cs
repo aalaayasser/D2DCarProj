@@ -12,6 +12,12 @@ namespace DALProject.Models
 
         [EmailAddress]
         public string Email { get; set; }
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        
         public string City { get; set; }
         public string Street { get; set; }
 
@@ -19,6 +25,8 @@ namespace DALProject.Models
         public long ContactNumber { get; set; }
         public string Availability { get; set; }
         public DateTime BirthDate { get; set; } // .net 5 not support date only
+        
+        
 
         #region Mapping
         public static explicit operator TechnicianViewModel(Technician Model)
