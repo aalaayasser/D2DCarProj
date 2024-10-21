@@ -1,0 +1,48 @@
+﻿@model TechnicianViewModel
+@inject IUnitOfWork unitOfwork
+@{
+    var Categories = new SelectList(unitOfwork.Repository<Category>().GetAll(), "Id", "Name");
+}
+@{
+    ViewData["Title"] = "DeleteDetailsTechniciansPartial";
+}
+
+<div class="mb-3">
+    <label asp-for="Name" class="form-label"></label>
+    <input class="form-control" asp-for="Name" readonly />
+</div>
+
+<div class="mb-3">
+    <label asp-for="CategoryId" class="form-label"></label>
+    <input class="form-control" asp-for="CategoryId" readonly />
+</div>
+
+<div class="mb-3">
+    <label asp-for="City" class="form-label"></label>
+    <input class="form-control" asp-for="City" readonly />
+</div>
+
+<div class="mb-3">
+    <label asp-for="Street" class="form-label"></label>
+    <input class="form-control" asp-for="Street" readonly />
+</div>
+
+<div class="mb-3">
+    <label asp-for="ContactNumber" class="form-label"></label>
+    <input class="form-control" asp-for="ContactNumber" readonly />
+</div>
+
+<div class="mb-3">
+    <label asp-for="Availability" class="form-label"></label>
+    <input class="form-control" asp-for="Availability" readonly />
+</div>
+
+<div class="mb-3">
+    <label asp-for="Email" class="form-label"></label>
+    <input class="form-control" asp-for="Email" readonly />
+</div>
+
+<div class="mb-3">
+    <label asp-for="BirthDate" class="form-label"></label>
+    <input class="form-control" asp-for="BirthDate" readonly />
+</div>

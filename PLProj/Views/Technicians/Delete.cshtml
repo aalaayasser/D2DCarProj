@@ -1,0 +1,24 @@
+﻿@model TechnicianViewModel
+@inject IUnitOfWork unitOfwork
+@{
+    var Categories = new SelectList(unitOfwork.Repository<Category>().GetAll(), "Id", "Name");
+}
+@{
+    ViewData["Title"] = "Delete";
+}
+<br />
+
+<h1>Are you sure To Delete this Service </h1>
+<br />
+<br />
+
+<form asp-controller="Technicians" asp-action="Delete" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <partial name="partialviews/DeleteDetailsTechniciansPartial" />
+
+    <input type="submit" class="btn btn-danger" value="Delete" />
+    <a asp-controller="Technicians" asp-action="GetTechnical" class="btn btn-dark">Cancel</a>
+</form>
+
+

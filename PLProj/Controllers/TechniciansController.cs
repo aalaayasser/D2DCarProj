@@ -10,70 +10,79 @@ using System.Linq;
 
 namespace PLProj.Controllers
 {
-    public class ServicesController : Controller
+    public class TechniciansController : Controller
     {
-        private readonly ILogger<ServicesController> logger;
+        private readonly ILogger<HomeController> _logger;
         private readonly IUnitOfWork unitOfWork;
-        private readonly IWebHostEnvironment env;
-
-        public ServicesController(ILogger<ServicesController> logger, IUnitOfWork unitOfWork, IWebHostEnvironment env)
+		private readonly IWebHostEnvironment env;
+		public TechniciansController(ILogger<HomeController> logger, IUnitOfWork unitOfWork, IWebHostEnvironment env)
         {
-            this.logger = logger;
+            _logger = logger;
             this.unitOfWork = unitOfWork;
-            this.env = env;
-        }
+			this.env = env;
+		}
 
-        #region Get
-        public IActionResult GetServices()
+        public IActionResult GetTechnical()
         {
-            var Services = unitOfWork.Repository<Service>().GetAll().Select(s => (ServiceViewModel)s).ToList();
-            return View(Services);
+            var technician = unitOfWork.Repository<Technician>().GetAll().Select(s => (TechnicianViewModel)s).ToList();
+            return View(technician);
         }
 
-		#endregion
-
-		#region CreateServic
-		public IActionResult Create()
-        {
-
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Create(ServiceViewModel serv)
+        public IActionResult addTechnical(TechnicianViewModel technical)
         {
             if (ModelState.IsValid)
             {
-                unitOfWork.Repository<Service>().Add((Service)serv);
+                unitOfWork.Repository<Technician>().Add((Technician)technical);
                 var count = unitOfWork.Complete();
                 if (count > 0)
                 {
                     TempData["Message"] = "Service has been Added Successfully";
-                    return RedirectToAction(nameof(GetServices));
+                    return RedirectToAction(nameof(GetTechnical));
                 }
 
             }
 
-            return View(serv);
+            return View(technical);
         }
 
-		#endregion
+		public IActionResult add()
+		{
+			return View();
+		}
+		[HttpPost]
+		public IActionResult add(TechnicianViewModel technical)
+		{
+			if (ModelState.IsValid)
+			{
+				unitOfWork.Repository<Technician>().Add((Technician)technical);
+				var count = unitOfWork.Complete();
+				if (count > 0)
+				{
+					TempData["Message"] = "Service has been Added Successfully";
+					return RedirectToAction(nameof(GetTechnical));
+				}
+
+			}
+			return View(technical);
+		}
+
 
 		#region Details
 
-		public IActionResult Details(int? Id , string viewName = "Details")
+		public IActionResult Details(int? Id, string viewName = "Details")
 		{
 			if (!Id.HasValue)
 				return BadRequest();
-									
-			var spec = new BaseSpecification<Service>
+
+			var spec = new BaseSpecification<Technician>
 			(e => e.Id == Id.Value);
 			spec.Includes.Add(e => e.Category);
-			var service = unitOfWork.Repository<Service>().GetEntityWithSpec(spec);
+			var service = unitOfWork.Repository<Technician>().GetEntityWithSpec(spec);
 
 			if (service is null)
-				return NotFound(); 
-								   
-			return View(viewName, (ServiceViewModel) service);
+				return NotFound();
+
+			return View(viewName, (TechnicianViewModel)service);
 		}
 
 		#endregion
@@ -85,18 +94,18 @@ namespace PLProj.Controllers
 			return Details(Id, nameof(Edit));
 		}
 
-        [HttpPost]
-        public IActionResult Edit(ServiceViewModel emp)
+		[HttpPost]
+		public IActionResult Edit(TechnicianViewModel emp)
 		{
 			if (!ModelState.IsValid)
 				return View(emp);
 
 			try
 			{
-				unitOfWork.Repository<Service>().Update((Service)emp);
+				unitOfWork.Repository<Technician>().Update((Technician)emp);
 				unitOfWork.Complete();
 				TempData["message"] = "Service Updated Successfully";
-				return RedirectToAction(nameof(GetServices));
+				return RedirectToAction(nameof(GetTechnical));
 			}
 			catch (Exception ex)
 			{
@@ -121,15 +130,15 @@ namespace PLProj.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult Delete(ServiceViewModel sev)
+		public IActionResult Delete(TechnicianViewModel sev)
 		{
 			try
 			{
 
-				unitOfWork.Repository<Service>().Delete((Service)sev);
+				unitOfWork.Repository<Technician>().Delete((Technician)sev);
 				unitOfWork.Complete();
 				TempData["message"] = "Service Deleted Successfully";
-				return RedirectToAction(nameof(GetServices));
+				return RedirectToAction(nameof(GetTechnical));
 			}
 			catch (Exception ex)
 			{
@@ -146,6 +155,5 @@ namespace PLProj.Controllers
 			}
 		}
 		#endregion
-
 	}
 }

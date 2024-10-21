@@ -7,9 +7,9 @@ namespace DALProject.Models
     public class TechnicianViewModel 
     {
         public int Id { get; set; }
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
         public string Name { get; set; }
-
         [EmailAddress]
         public string Email { get; set; }
         public string City { get; set; }
@@ -19,9 +19,11 @@ namespace DALProject.Models
         public long ContactNumber { get; set; }
         public string Availability { get; set; }
         public DateTime BirthDate { get; set; } // .net 5 not support date only
+		public virtual Category Category { get; set; } = null!;
 
-        #region Mapping
-        public static explicit operator TechnicianViewModel(Technician Model)
+
+		#region Mapping
+		public static explicit operator TechnicianViewModel(Technician Model)
         {
             return new TechnicianViewModel
             {
@@ -34,6 +36,7 @@ namespace DALProject.Models
                 ContactNumber = Model.ContactNumber,
                 Availability = Model.Availability,
                 BirthDate = Model.BirthDate,
+                Category = Model.Category,
             };
 
         }

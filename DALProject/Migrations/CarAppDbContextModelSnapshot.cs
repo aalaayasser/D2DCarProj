@@ -308,12 +308,12 @@ namespace DALProject.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<int>("EstimatedTime")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("EstimatedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(8,2)");

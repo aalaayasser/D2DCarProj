@@ -11,6 +11,7 @@ namespace DALProject.Models
     public class ServiceViewModel 
     {
         public int Id { get; set; }
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
         [Required]
         public string Name { get; set; }
@@ -18,8 +19,9 @@ namespace DALProject.Models
         [DataType(DataType.Currency)]
         [Required]
         public decimal Price{ get; set; }
-        public DataType EstimatedTime{ get; set; }
+        public DateTime /*DataType*/ EstimatedTime{ get; set; }
         public string Description{ get; set; }
+        public virtual Category Category { get; set; } = null!;
 
 
         #region Mapping
@@ -33,6 +35,7 @@ namespace DALProject.Models
                 Price = model.Price,
                 EstimatedTime = model.EstimatedTime,
                 Description = model.Description,
+                Category = model.Category,
             };
         }
 

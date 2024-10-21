@@ -1,0 +1,24 @@
+﻿@model ServiceViewModel
+@inject IUnitOfWork unitOfwork
+@{
+    var Categories = new SelectList(unitOfwork.Repository<Category>().GetAll(), "Id", "Name");
+}
+@{
+    ViewData["Title"] = "Edit";
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<h1>Edit Service</h1>
+<form asp-controller="Technicians" asp-action="Edit" method="post">
+
+    <partial name="Partialviews/CreateEditServicesPartial" />
+
+    <input type="submit" class="btn btn-dark" value="Edit" />
+    <a asp-controller="Services" asp-action="GetServices" class="btn btn-dark">Back To List</a>
+
+</form>
+

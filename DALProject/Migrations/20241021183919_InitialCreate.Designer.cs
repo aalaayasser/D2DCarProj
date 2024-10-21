@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DALProject.Migrations
 {
     [DbContext(typeof(CarAppDbContext))]
-    [Migration("20241020181941_InitialCreate")]
+    [Migration("20241021183919_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -310,12 +310,12 @@ namespace DALProject.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<int>("EstimatedTime")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("EstimatedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(8,2)");

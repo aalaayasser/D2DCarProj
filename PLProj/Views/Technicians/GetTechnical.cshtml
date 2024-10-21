@@ -1,0 +1,54 @@
+﻿@model IEnumerable<TechnicianViewModel>
+@{
+    ViewData["Title"] = "GetTechnical";
+}
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div class="d-flex justify-content-center align-items-center flex-column mt-4">
+
+    <h2>Technicians</h2>
+</div>
+@if (Model.Count() > 0)
+{
+    <table class="mt-4 table table-striped table-hover">
+        <thead>
+            <tr>
+
+                <th>@Html.DisplayNameFor(t => t.Name)</th>
+                <th>@Html.DisplayNameFor(t => t.Category)</th>
+                <th>Details</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tec in Model)
+            {
+                <tr>
+                    <td>@tec.Name</td>
+                    <td>@tec.Category.Name</td>
+
+                    <partial name="_ButtonPartial" model="@tec.Id" />
+                
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="mt-4 text-center">
+        <h3 class="text-muted">There are No Services!</h3>
+    </div>
+}
+<div class="d-flex justify-content-center align-items-center flex-column mt-4">
+    <a asp-controller="Technicians" asp-action="add" class="btn btn-dark mb-3">
+        Add New Technician
+    </a>
+
+</div>

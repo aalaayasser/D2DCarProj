@@ -1,0 +1,37 @@
+﻿@model ServiceViewModel
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<h1>Service Details</h1>
+<br />
+<br />
+<div>
+    <div class="mb-3">
+        <label asp-for="Name" class="form-label"></label>
+        <input class="form-control" asp-for="Name" readonly />
+    </div>
+    <div class="mb-3">
+        <label asp-for="CategoryId" class="form-label"></label>
+        <input class="form-control" asp-for="CategoryId" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label"></label>
+        <input class="form-control" asp-for="Price" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="EstimatedTime" class="form-label"></label>
+        <input class="form-control" asp-for="EstimatedTime" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <input class="form-control" asp-for="Description" readonly />
+    </div>
+    <a asp-controller="Services" asp-action="Edit" asp-route-Id="@Model.Id" class="btn btn-success">  Edit </a>
+    <a asp-controller="Services" asp-action="GetServices" class="btn btn-dark">  Back to list </a>
+</div>
+

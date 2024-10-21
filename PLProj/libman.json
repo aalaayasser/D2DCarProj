@@ -29,6 +29,13 @@
         "jquery-ui.min.js",
         "jquery-ui.js"
       ]
+    },
+    {
+      "library": "font-awesome@6.6.0",
+      "destination": "wwwroot/font-awesome/",
+      "files": [
+        "css/all.min.css"
+      ]
     }
   ]
 }
