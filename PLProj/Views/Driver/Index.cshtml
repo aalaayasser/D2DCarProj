@@ -1,0 +1,91 @@
+﻿@model IEnumerable<DriverViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@if (TempData["Message"] is not null)
+{
+    <div id="successMessage" class="alert alert-success mt-4">
+        <h3>@TempData["Message"]</h3>
+    </div>
+
+    <script>
+
+        setTimeout(function () {
+
+            var successMessage = document.getElementById("successMessage");
+            if (successMessage) {
+                successMessage.style.display = 'none';
+            }
+        }, 3000);
+    </script>
+}
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="d-flex justify-content-center align-items-center flex-column mt-4">
+
+    <h2>Drivers</h2>
+</div>
+@if (Model.Count() > 0)
+{
+    <table class="mt-4 table table-striped table-hover">
+        <thead>
+            <tr>
+
+                <th>@Html.DisplayNameFor(D => D.Name)</th>
+                <th>Details</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Ser in Model)
+            {
+                <tr>
+                    <td>@Ser.Name</td>
+
+                    @*  <partial name="_ButtonPartial" model="@ser.Id" /> *@
+                    <td>
+                        <a asp-controller="Driver" asp-action="Details" asp-route-Id="@Ser.Id" class="btn btn-dark">
+                            <i class="fas fa-eye"></i>
+                            Details
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Driver" asp-action="Edit" asp-route-Id="@Ser.Id" class="btn btn-dark">
+                            <i class="fas fa-edit"></i>
+                            Update
+                        </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Driver" asp-action="Delete" asp-route-Id="@Ser.Id" class="btn btn-dark">
+                            <i class="fas fa-trash"></i>
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="mt-4 text-center">
+        <h3 class="text-muted">There are No Drivers!</h3>
+    </div>
+}
+<div class="d-flex justify-content-center align-items-center flex-column mt-4">
+
+    <a asp-controller="Driver" asp-action="Register" class="btn btn-dark mb-3">
+        <i class="fas fa-plus"></i> Add New Driver
+    </a>
+
+</div>
+

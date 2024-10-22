@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DALProject.Models
 {
-    public class CustomerViewModel: IdentityUser
+    public class CustomerViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

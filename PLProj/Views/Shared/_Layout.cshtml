@@ -20,13 +20,14 @@
 				<a asp-action="GetServices" asp-controller="Services"> Services</a>
 				<a asp-action="CreateCar" asp-controller="Car"> Add Car </a>
 				<a id="Logout" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
+
 				@* <a href="#contact"> Contact </a> *@
 			}
 			else
 			{
-
+				<a asp-controller="Tech" asp-action="Index" >Techincians</a>
+				<a asp-controller="Driver" asp-action="Index" >Drivers</a>
 				<a  id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-
 				<a  id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
 			}
 		</nav>

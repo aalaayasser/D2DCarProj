@@ -4,14 +4,16 @@ using DALProject;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DALProject.Migrations
 {
     [DbContext(typeof(CarAppDbContext))]
-    partial class CarAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241021233703_aa")]
+    partial class aa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,9 +229,6 @@ namespace DALProject.Migrations
 
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PrefCommunication")
                         .IsRequired()
@@ -496,21 +495,21 @@ namespace DALProject.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5e8a98fa-209a-4ff4-82a4-ece1977e7844",
-                            ConcurrencyStamp = "aa71b700-148d-467d-bedd-af01c6ec9d0c",
+                            Id = "d3cde313-d46a-4658-8a39-56a949d3066d",
+                            ConcurrencyStamp = "2b0ab6c9-978b-483e-b29b-c18def602d20",
                             Name = "admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
-                            Id = "463e205e-4dbb-408d-976c-98fd49427bcb",
-                            ConcurrencyStamp = "5c46c72e-e391-41e9-9990-08ce8ccd4c85",
+                            Id = "f7f5635f-f094-46b2-aa47-af8cd1e4f981",
+                            ConcurrencyStamp = "e03ecf4b-7eed-41be-9104-0c3ea97bb967",
                             Name = "technincian"
                         },
                         new
                         {
-                            Id = "bab5116c-5295-427e-86ed-609b59595cdd",
-                            ConcurrencyStamp = "f542ccd0-4726-41ec-830b-dde3e37a4b37",
+                            Id = "bb2b3cfb-c243-400b-a781-fc04f656930b",
+                            ConcurrencyStamp = "30f616e6-76ad-40a4-829a-9139e0550670",
                             Name = "csutomer",
                             NormalizedName = "technincian"
                         });

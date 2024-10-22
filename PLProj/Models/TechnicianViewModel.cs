@@ -8,6 +8,8 @@ namespace DALProject.Models
     {
         public int Id { get; set; }
         public int CategoryId { get; set; }
+        [Required]
+        [Display(Name = "Technician Name")]
         public string Name { get; set; }
 
         [EmailAddress]
@@ -25,8 +27,10 @@ namespace DALProject.Models
         public long ContactNumber { get; set; }
         public string Availability { get; set; }
         public DateTime BirthDate { get; set; } // .net 5 not support date only
-        
-        
+
+		public virtual Category Category { get; set; } = null!;
+        public string AppUserId { get; set; }
+
 
         #region Mapping
         public static explicit operator TechnicianViewModel(Technician Model)
@@ -35,13 +39,15 @@ namespace DALProject.Models
             {
                 Id = Model.Id,
                 CategoryId = Model.CategoryId,
-                //Name = Model.Name,
+                Name = Model.Name,
                 //Email = Model.Email,
                 //City = Model.City,
                 //Street = Model.Street,
                 //ContactNumber = Model.ContactNumber,
                 Availability = Model.Availability,
                 BirthDate = Model.BirthDate,
+                Category = Model.Category,
+                AppUserId = Model.AppUserId,
             };
 
         }
@@ -51,13 +57,14 @@ namespace DALProject.Models
             {
                 Id = ViewModel.Id,
                 CategoryId = ViewModel.CategoryId,
-                //Name = ViewModel.Name,
+                Name = ViewModel.Name,
                 //Email = ViewModel.Email,
                 //City = ViewModel.City,
                 //Street = ViewModel.Street,
                 //ContactNumber = ViewModel.ContactNumber,
                 Availability = ViewModel.Availability,
                 BirthDate = ViewModel.BirthDate,
+                AppUserId= ViewModel.AppUserId,
             };
 
         } 

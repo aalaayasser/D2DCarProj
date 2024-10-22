@@ -8,6 +8,8 @@ namespace DALProject.Models
     {
 
         public int Id { get; set; }
+        [Required]
+        [Display(Name = "Driver Name")]
         public string Name { get; set; }
 
         [EmailAddress]
@@ -21,13 +23,21 @@ namespace DALProject.Models
         public string Availability { get; set; }
 
         public DateTime BirthDate { get; set; } // .net 5 not support date only
+        [Required]
         public string License  { get; set; }
 
         [Display(Name = "License Date")]
+        [Required]
         public DateTime LicenseDate { get; set; }
 
         [Display(Name = "License Expiry Date")]
+
+        [Required]
         public DateTime LicenseExpDate { get; set; }
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        public string Password { get; internal set; }
+        public string AppUserId { get; set; }
 
         #region Mapping
 
@@ -35,8 +45,8 @@ namespace DALProject.Models
         {
             return new DriverViewModel
             {
-                //Id = model.Id,
-                //Name = model.Name,
+                Id = model.Id,
+                Name = model.Name,
                 //Street = model.Street,
                 //ContactNumber = model.ContactNumber,
                 //City = model.City,
@@ -46,6 +56,9 @@ namespace DALProject.Models
                 License = model.License,
                 LicenseDate = model.LicenseDate,
                 LicenseExpDate = model.LicenseExpDate,
+                AppUserId = model.AppUserId,
+                
+                
             };
         }
 
@@ -54,7 +67,7 @@ namespace DALProject.Models
             return new Driver
             {
                 Id = ViewModel.Id,
-                //Name = ViewModel.Name,
+                Name = ViewModel.Name,
                 //Street = ViewModel.Street,
                 //ContactNumber = ViewModel.ContactNumber,
                 //City = ViewModel.City,
@@ -64,6 +77,8 @@ namespace DALProject.Models
                 License = ViewModel.License,
                 LicenseDate = ViewModel.LicenseDate,
                 LicenseExpDate = ViewModel.LicenseExpDate,
+                    AppUserId = ViewModel.AppUserId,
+                
             };
         }
 

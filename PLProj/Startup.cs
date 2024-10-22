@@ -36,7 +36,7 @@ namespace PLProj
             services.AddDbContext<CarAppDbContext>(optionsBuilder =>
             {
                 
-                optionsBuilder.UseSqlServer(Configuration.GetConnectionString("CS"));
+                optionsBuilder.UseSqlServer(Configuration.GetConnectionString("CS")).EnableSensitiveDataLogging() ;
                 optionsBuilder.UseLazyLoadingProxies(true);
                 
             });

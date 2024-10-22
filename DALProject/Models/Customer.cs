@@ -5,7 +5,7 @@ namespace DALProject.Models
 {
     public class Customer :  ModelClass
     {
-        
+         public string Name { get; set; }
         public string PrefCommunication { get; set; }
 
         public virtual ICollection<Car> Cars { get; set; } = new HashSet<Car>();
