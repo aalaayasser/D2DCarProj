@@ -1,4 +1,11 @@
-﻿@model TechnicianViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@model TechnicianViewModel
+@inject UserManager<AppUser> UserManager
+@{
+    var currentUser = await UserManager.GetUserAsync(User);
+
+
+}
 @{
     ViewData["Title"] = "Details";
 }
@@ -15,32 +22,32 @@
 <h1> Techniacian Details</h1>
 
 <div class="form-group" >
-    <label class="form-label" asp-for="Name"></label>
-    <input asp-for="Name" class="form-control" readonly />
+    <label class="form-label" asp-for="@currentUser.Name"></label>
+    <input asp-for="@currentUser.Name" class="form-control" readonly />
 </div>
 <div class="form-group">
     <label class="form-label" asp-for="Category.Name"></label>
     <input asp-for="Category.Name" class="form-control" readonly />
 </div>
 <div class="form-group">
-    <label class="form-label" asp-for="Email"></label>
-    <input asp-for="Email" class="form-control" readonly />
+    <label class="form-label" asp-for="@currentUser.Email"></label>
+    <input asp-for="@currentUser.Email" class="form-control" readonly />
 </div>
-<div class="form-group">
+@* <div class="form-group">
     <label class="form-label" asp-for="Password"></label>
     <input asp-for="Password" class="form-control" readonly />
+</div> *@
+<div class="form-group">
+    <label class="form-label" asp-for="@currentUser.City"></label>
+    <input asp-for="@currentUser.City" class="form-control" readonly />
 </div>
 <div class="form-group">
-    <label class="form-label" asp-for="City"></label>
-    <input asp-for="City" class="form-control" readonly />
+    <label class="form-label" asp-for="@currentUser.Street"></label>
+    <input asp-for="@currentUser.Street" class="form-control" readonly />
 </div>
 <div class="form-group">
-    <label class="form-label" asp-for="Street"></label>
-    <input asp-for="Street" class="form-control" readonly />
-</div>
-<div class="form-group">
-    <label class="form-label" asp-for="ContactNumber"></label>
-    <input asp-for="ContactNumber" class="form-control" readonly />
+    <label class="form-label" asp-for="@currentUser.ContactNumber"></label>
+    <input asp-for="@currentUser.ContactNumber" class="form-control" readonly />
 </div>
 <div class="form-group">
     <label class="form-label" asp-for="Availability"></label>

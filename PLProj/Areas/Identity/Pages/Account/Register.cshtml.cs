@@ -97,10 +97,11 @@ namespace PLProj.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new AppUser { UserName = Input.Email, Email = Input.Email };
+                var user = new AppUser { UserName = Input.Email, Email = Input.Email, Name = Input.Name, ContactNumber = Input.ContactNumber, City = Input.City , Street=Input.Street};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+
                     var customer = new Customer { AppUserId = user.Id, PrefCommunication = Input.PrefCommunication };
                     unitOfWork.Repository<Customer>().Add(customer);
                     unitOfWork.Complete();

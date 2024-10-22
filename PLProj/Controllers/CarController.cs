@@ -72,10 +72,7 @@ namespace PLProj.Controllers
 			return new JsonResult(Models);
 		}
 
-		public IActionResult Book()
-		{
-			return View();
-		}
+		
 
 
 	

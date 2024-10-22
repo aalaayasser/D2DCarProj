@@ -1,7 +1,10 @@
-﻿@model TechnicianViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@model TechnicianViewModel
 @inject IUnitOfWork unitOfWork
+@inject UserManager<AppUser> UserManager
 @{
     var categories = new SelectList(unitOfWork.Repository<Category>().GetAll(), "Id", "Name");
+    var currentUser = await UserManager.GetUserAsync(User);
 }
 
 
@@ -24,9 +27,9 @@
                 <div asp-validation-summary="All" class="text-danger mb-3"></div>
 
                 <div class="form-group">
-                    <label asp-for="Name" class="font-weight-bold"></label>
+                    <label asp-for="@currentUser.Name" class="font-weight-bold"></label>
                     <input asp-for="Name" class="form-control" placeholder="Enter your Name" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <span asp-validation-for="@currentUser.Name" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
@@ -39,9 +42,9 @@
         
 
                 <div class="form-group">
-                    <label asp-for="Email" class="font-weight-bold"></label>
-                    <input asp-for="Email" class="form-control" placeholder="Enter your email" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <label asp-for="@currentUser.Email" class="font-weight-bold"></label>
+                    <input asp-for="@currentUser.Email" class="form-control" placeholder="Enter your email" />
+                    <span asp-validation-for="@currentUser.Email" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
@@ -51,21 +54,21 @@
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="ContactNumber" class="font-weight-bold"></label>
-                    <input asp-for="ContactNumber" class="form-control" placeholder="Enter your Contact Number" />
-                    <span asp-validation-for="ContactNumber" class="text-danger"></span>
+                    <label asp-for="@currentUser.ContactNumber" class="font-weight-bold"></label>
+                    <input asp-for="@currentUser.ContactNumber" class="form-control" placeholder="Enter your Contact Number" />
+                    <span asp-validation-for="@currentUser.ContactNumber" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="City" class="font-weight-bold"></label>
-                    <input asp-for="City" class="form-control" placeholder="Enter your City" />
-                    <span asp-validation-for="City" class="text-danger"></span>
+                    <label asp-for="@currentUser.City" class="font-weight-bold"></label>
+                    <input asp-for="@currentUser.City" class="form-control" placeholder="Enter your City" />
+                    <span asp-validation-for="@currentUser.City" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">
-                    <label asp-for="Street" class="font-weight-bold"></label>
-                    <input asp-for="Street" class="form-control" placeholder="Enter your Street" />
-                    <span asp-validation-for="Street" class="text-danger"></span>
+                    <label asp-for="@currentUser.Street" class="font-weight-bold"></label>
+                    <input asp-for="@currentUser.Street" class="form-control" placeholder="Enter your Street" />
+                    <span asp-validation-for="@currentUser.Street" class="text-danger"></span>
                 </div>
 
                 <div class="form-group">

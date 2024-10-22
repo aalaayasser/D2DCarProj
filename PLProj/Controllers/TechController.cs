@@ -61,7 +61,7 @@ namespace PLProj.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new AppUser { UserName = model.Email, Email = model.Email };
+                var user = new AppUser { UserName = model.Email, Email = model.Email, Name = model.Name, ContactNumber = model.ContactNumber ,City = model.City, Street = model.Street};
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
@@ -69,6 +69,7 @@ namespace PLProj.Controllers
                     var technician = new TechnicianViewModel
                     {
                         AppUserId = user.Id,
+                
                         Availability = model.Availability,
                         BirthDate = model.BirthDate,
                         CategoryId = model.CategoryId,    
@@ -76,7 +77,8 @@ namespace PLProj.Controllers
                         ContactNumber = model.ContactNumber,
                         Email = model.Email,
                         City = model.City,
-                        Street = model.Street
+                        Street = model.Street,
+                        
 
                         
                         
