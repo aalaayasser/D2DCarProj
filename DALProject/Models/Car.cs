@@ -13,22 +13,15 @@ namespace DALProject.Models
         
         public int ModelId { get; set; }
 
-        
-        
         public int? CustomerId { get; set; }
-
         
         public int ColorId { get; set; }
 
-
-
         public int Year { get; set; }
-
 
         public string? Description { get; set; }
 
         
-
         public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
         public virtual ICollection<KiloMetres> KiloMetres { get; set; } = new HashSet<KiloMetres>();
 

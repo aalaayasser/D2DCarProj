@@ -362,12 +362,12 @@ namespace DALProject.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<int>("EstimatedTime")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("EstimatedTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(8,2)");
@@ -496,21 +496,21 @@ namespace DALProject.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5e8a98fa-209a-4ff4-82a4-ece1977e7844",
-                            ConcurrencyStamp = "aa71b700-148d-467d-bedd-af01c6ec9d0c",
+                            Id = "0fda8832-725d-4b1f-a05a-b489f56f1b0b",
+                            ConcurrencyStamp = "72081444-9250-450e-a271-a0b7272d53fb",
                             Name = "admin",
                             NormalizedName = "admin"
                         },
                         new
                         {
-                            Id = "463e205e-4dbb-408d-976c-98fd49427bcb",
-                            ConcurrencyStamp = "5c46c72e-e391-41e9-9990-08ce8ccd4c85",
+                            Id = "4a7aa294-083a-4fd9-8c59-763ec6158676",
+                            ConcurrencyStamp = "f342900f-6536-468a-bcf4-d3ce3957be5e",
                             Name = "technincian"
                         },
                         new
                         {
-                            Id = "bab5116c-5295-427e-86ed-609b59595cdd",
-                            ConcurrencyStamp = "f542ccd0-4726-41ec-830b-dde3e37a4b37",
+                            Id = "acc96683-4cb4-4059-8b79-09b53a10afca",
+                            ConcurrencyStamp = "58c58e2e-68d4-4746-9f68-9a8ea117f187",
                             Name = "csutomer",
                             NormalizedName = "technincian"
                         });

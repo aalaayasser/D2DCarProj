@@ -41,8 +41,6 @@ namespace PLProj.Controllers
         {
             
             var techs = _unitOfWork.Repository<Technician>().GetAll().Select(t => (TechnicianViewModel)t).ToList();
-
-
             return View(techs);
 
 

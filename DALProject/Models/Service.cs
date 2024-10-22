@@ -16,7 +16,7 @@ namespace DALProject.Models
 
 
         public decimal Price{ get; set; }
-        public DataType EstimatedTime{ get; set; }
+        public DateTime EstimatedTime{ get; set; }
         public string Description{ get; set; }
 
         public virtual Category Category { get; set; } = null!;

@@ -14,7 +14,7 @@ namespace DALProject.Data.Configartions
         public void Configure(EntityTypeBuilder<Service> builder)
         {
             builder.Property(s => s.Name)
-                .HasColumnType("varchar")
+                .HasColumnType("varchar(100)")
                 .IsRequired();
               builder.Property(s => s.Price)
                 .HasColumnType("decimal(8,2)")

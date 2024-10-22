@@ -1,8 +1,11 @@
 ﻿using BLLProject.Interfaces;
+using BLLProject.Specifications;
 using DALProject.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Linq;
 
 namespace PLProj.Controllers
@@ -11,14 +14,15 @@ namespace PLProj.Controllers
     {
         private readonly ILogger<ServicesController> logger;
         private readonly IUnitOfWork unitOfWork;
-        private readonly IWebHostEnvironment en;
+        private readonly IWebHostEnvironment env;
 
-        public ServicesController(ILogger<ServicesController> logger, IUnitOfWork unitOfWork, IWebHostEnvironment en)
+        public ServicesController(ILogger<ServicesController> logger, IUnitOfWork unitOfWork, IWebHostEnvironment env)
         {
             this.logger = logger;
             this.unitOfWork = unitOfWork;
-            this.en = en;
+            this.env = env;
         }
+
         #region Get
         public IActionResult GetServices()
         {
@@ -26,16 +30,16 @@ namespace PLProj.Controllers
             return View(Services);
         }
 
-        #endregion
+		#endregion
 
-        #region Create
-        public IActionResult CreateService()
+		#region CreateServic
+		public IActionResult Create()
         {
 
             return View();
         }
         [HttpPost]
-        public IActionResult CreateService(ServiceViewModel serv)
+        public IActionResult Create(ServiceViewModel serv)
         {
             if (ModelState.IsValid)
             {
@@ -52,8 +56,96 @@ namespace PLProj.Controllers
             return View(serv);
         }
 
-        #endregion
+		#endregion
 
+		#region Details
 
-    }
+		public IActionResult Details(int? Id , string viewName = "Details")
+		{
+			if (!Id.HasValue)
+				return BadRequest();
+									
+			var spec = new BaseSpecification<Service>
+			(e => e.Id == Id.Value);
+			spec.Includes.Add(e => e.Category);
+			var service = unitOfWork.Repository<Service>().GetEntityWithSpec(spec);
+
+			if (service is null)
+				return NotFound(); 
+								   
+			return View(viewName, (ServiceViewModel) service);
+		}
+
+		#endregion
+
+		#region Edit
+
+		public IActionResult Edit(int? Id)
+		{
+			return Details(Id, nameof(Edit));
+		}
+
+        [HttpPost]
+        public IActionResult Edit(ServiceViewModel emp)
+		{
+			if (!ModelState.IsValid)
+				return View(emp);
+
+			try
+			{
+				unitOfWork.Repository<Service>().Update((Service)emp);
+				unitOfWork.Complete();
+				TempData["message"] = "Service Updated Successfully";
+				return RedirectToAction(nameof(GetServices));
+			}
+			catch (Exception ex)
+			{
+				if (env.IsDevelopment())
+				{
+					ModelState.AddModelError(string.Empty, ex.Message);
+				}
+				else
+				{
+					ModelState.AddModelError(string.Empty, "An Error Has Occurred during Updating the Employee");
+				}
+				return View(emp);
+			}
+		}
+
+		#endregion
+
+		#region Delete
+		public IActionResult Delete(int? Id)
+		{
+			return Details(Id, nameof(Delete));
+		}
+
+		[HttpPost]
+		public IActionResult Delete(ServiceViewModel sev)
+		{
+			try
+			{
+
+				unitOfWork.Repository<Service>().Delete((Service)sev);
+				unitOfWork.Complete();
+				TempData["message"] = "Service Deleted Successfully";
+				return RedirectToAction(nameof(GetServices));
+			}
+			catch (Exception ex)
+			{
+
+				if (env.IsDevelopment())
+				{
+					ModelState.AddModelError(string.Empty, ex.Message);
+				}
+				else
+				{
+					ModelState.AddModelError(string.Empty, "An Error Has Occurred during Deleted the Service");
+				}
+				return View(sev);
+			}
+		}
+		#endregion
+
+	}
 }

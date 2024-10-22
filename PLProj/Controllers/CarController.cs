@@ -48,12 +48,7 @@ namespace PLProj.Controllers
 			var _user = await _userManager.GetUserAsync(User);
 			var spec = new BaseSpecification<Customer>(c => c.AppUserId == _user.Id);
 			var customer = unitOfWork.Repository<Customer>().GetEntityWithSpec(spec);
-			car.CustomerId = customer.Id;
 
-
-		
-
-			
             if (ModelState.IsValid)
 			{
 				unitOfWork.Repository<Car>().Add((Car)car);

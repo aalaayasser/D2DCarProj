@@ -18,10 +18,10 @@ namespace DALProject.Models
         [DataType(DataType.Currency)]
         [Required]
         public decimal Price{ get; set; }
-        public DataType EstimatedTime{ get; set; }
+        public DateTime EstimatedTime { get; set; }
         public string Description{ get; set; }
 
-
+        public virtual Category Category { get; set; } = null!;
         #region Mapping
         public static explicit operator ServiceViewModel(Service model)
         {
@@ -33,6 +33,7 @@ namespace DALProject.Models
                 Price = model.Price,
                 EstimatedTime = model.EstimatedTime,
                 Description = model.Description,
+                Category = model.Category
             };
         }
 
