@@ -15,7 +15,7 @@ namespace DALProject.Models
         public string Name { get; set; }
         [Display(Name = "Brand ID")]
         public int BrandId { get; set; }
-
+        public virtual Brand Brand { get; set; } = null!;
         #region Mapping
 
         public static explicit operator ModelViewModel(Model model)
@@ -25,6 +25,7 @@ namespace DALProject.Models
                 Id = model.Id,
                 Name = model.Name,
                 BrandId = model.BrandId,
+                Brand = model.Brand,
             };
         }
 

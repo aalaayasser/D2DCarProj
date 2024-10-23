@@ -1,7 +1,6 @@
 ﻿@model ServiceViewModel
-@inject IUnitOfWork unitOfwork
 @{
-    var Categories = new SelectList(unitOfwork.Repository<Category>().GetAll(), "Id", "Name");
+    ViewData["Title"] = "DeleteDetailsServicewsPartial";
 }
 <div class="mb-3">
     <label asp-for="Name" class="form-label"></label>
