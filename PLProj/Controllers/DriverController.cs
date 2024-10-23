@@ -18,20 +18,18 @@ namespace PLProj.Controllers
 {
     public class DriverController: Controller
     {
-        private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;        
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<DriverController> _logger;
         private readonly IWebHostEnvironment env;
 
         public DriverController(
-            UserManager<AppUser> userManager,
-            SignInManager<AppUser> signInManager,
+            UserManager<AppUser> userManager,            
             IUnitOfWork unitOfWork,
             ILogger<DriverController> logger, IWebHostEnvironment env)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
+            
             _unitOfWork = unitOfWork;
             _logger = logger;
             this.env = env;
@@ -40,10 +38,13 @@ namespace PLProj.Controllers
         public IActionResult Index()
         {
             
-            var Drivs = _unitOfWork.Repository<Driver>().GetAll().Select(t => (DriverViewModel)t).ToList();
+            var Drivs = _unitOfWork.Repository<Driver>().GetAll().Select(t => t).ToList();
+            var driverViewModelList = new List<DriverViewModel>();
+            Drivs.ForEach(t => driverViewModelList.Add(t.ToDriverViewModel(_userManager.Users.Where(e => e.Id == t.AppUserId).FirstOrDefault())));
+            return View(driverViewModelList);
 
 
-            return View(Drivs);
+
 
 
         }
@@ -63,28 +64,30 @@ namespace PLProj.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new AppUser { UserName = model.Email, Email = model.Email };
+                var user = (AppUser)model;
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 
                 {
-                    var Driver = new Driver
-                    {
-                        AppUserId = user.Id,
-                        Availability = model.Availability,                     
-                        BirthDate = model.BirthDate,
-                        License = model.License,
-                        LicenseDate = model.LicenseDate,
-                        LicenseExpDate = model.LicenseExpDate,
-                        Name = model.Name,
+                    await _userManager.AddToRoleAsync(user, "Driver");
+                    model.AppUserId  = user.Id;
+                    //var Driver = new Driver
+                    //{
+                    //    AppUserId = user.Id,
+                    //    Availability = model.Availability,                     
+                    //    BirthDate = model.BirthDate,
+                    //    License = model.License,
+                    //    LicenseDate = model.LicenseDate,
+                    //    LicenseExpDate = model.LicenseExpDate,
+                    //    //Name = model.Name,
                         
                         
 
 
-                    };
+                    //};
 
-                    _unitOfWork.Repository<Driver>().Add(Driver);
+                    _unitOfWork.Repository<Driver>().Add((Driver)model);
                     _unitOfWork.Complete();
 
                     _logger.LogInformation("Driver created a new account with password.");
@@ -110,31 +113,13 @@ namespace PLProj.Controllers
             var Driv = _unitOfWork.Repository<Driver>().Get(Id.Value);
             if (Driv is null)
                 return NotFound();
+            var appUser = _userManager.Users.Where(e => e.Id == Driv.AppUserId).FirstOrDefault();
 
-            return View(viewname, (DriverViewModel)Driv);
+
+            return View(viewname, Driv.ToDriverViewModel(appUser));
         }
 
-        //public async Task<IActionResult> Details(int? Id, string viewname = "Details")
-        //{
-        //    if (!Id.HasValue)
-        //        return BadRequest();
-
-        //    // جلب المستخدم الحالي
-        //    var _user = await _userManager.GetUserAsync(User);
-        //    if (_user == null)
-        //        return Unauthorized(); // أو أي معالجة مناسبة أخرى
-
-        //    // إنشاء specification لتصفية التقنية بناءً على Id والتأكد من أن AppUserId يتطابق مع المستخدم الحالي
-        //    var spec = new BaseSpecification<Driver>(e => e.Id == Id.Value && e.AppUserId == _user.Id);
-        //    spec.Includes.Add(e => e.Category);
-
-        //    // جلب التقنية باستخدام specification
-        //    var Tech = _unitOfWork.Repository<Driver>().GetEntityWithSpec(spec);
-        //    if (Tech is null)
-        //        return NotFound();
-
-        //    return View(viewname, (DriverViewModel)Tech);
-        //}
+        
         public IActionResult Edit(int? Id)
         {
 

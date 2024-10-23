@@ -37,10 +37,7 @@ namespace DALProject.Data.Configurations
             //    .HasColumnType("bigint")
             //    .IsRequired();
 
-            builder.Property(e => e.PrefCommunication)
-               .IsRequired()
-               .HasColumnType("varchar")
-               .HasMaxLength(100);
+            
 
             builder.HasOne<AppUser>().WithOne().HasForeignKey<Customer>(e => e.AppUserId);
         }

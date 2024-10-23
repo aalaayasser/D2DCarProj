@@ -1,6 +1,7 @@
 ﻿using BLLProject.Interfaces;
 using BLLProject.Specifications;
 using DALProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
@@ -10,6 +11,10 @@ using System.Linq;
 
 namespace PLProj.Controllers
 {
+	[Authorize(Roles ="Admin")]
+	//[Authorize] ==> login
+	//[AllowAnonymous]
+
     public class ServicesController : Controller
     {
         private readonly ILogger<ServicesController> logger;

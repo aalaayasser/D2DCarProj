@@ -16,8 +16,8 @@ namespace DALProject.Models
 
         [Display(Name = "Contact Number")]
         public long ContactNumber { get; set; }
-        [Display(Name = "Preferred Communication")]
-        public string PrefCommunication { get; set; }
+        public string AppUserId { get; set; }
+
 
         #region Mapping
 
@@ -25,13 +25,13 @@ namespace DALProject.Models
         {
             return new CustomerViewModel
             {
-            //    Id = model.Id,
-            //    Name = model.Name,
-            //    Street = model.Street,
-            //    ContactNumber = model.ContactNumber,
-            //    City = model.City,
-            //    Email = model.Email,
-                PrefCommunication = model.PrefCommunication
+                Id = model.Id,
+                //    Street = model.Street,
+                //    ContactNumber = model.ContactNumber,
+                //    City = model.City,
+                //    Email = model.Email,
+                AppUserId = model.AppUserId,
+
             };
         }
 
@@ -39,20 +39,61 @@ namespace DALProject.Models
         {
             return new Customer
             {
-            //    Id = ViewModel.Id,
-            //    Name = ViewModel.Name,
-            //    Street = ViewModel.Street,
-            //    ContactNumber = ViewModel.ContactNumber,
-            //    City = ViewModel.City,
-            //    Email = ViewModel.Email,
-                PrefCommunication = ViewModel.PrefCommunication
+               Id = ViewModel.Id,
+
+                //Street = ViewModel.Street,
+                //ContactNumber = ViewModel.ContactNumber,
+                //City = ViewModel.City,
+                //Email = ViewModel.Email,
+                AppUserId = ViewModel.AppUserId,
+
             };
         }
+
+        public static explicit operator AppUser(CustomerViewModel ViewModel)
+        {
+            return new AppUser
+            {
+                UserName = ViewModel.Email,
+                Email = ViewModel.Email,
+                Name = ViewModel.Name,
+                ContactNumber = ViewModel.ContactNumber,
+                City = ViewModel.City,
+                Street = ViewModel.Street
+            };
+
+        }
+
 
         #endregion
 
 
+
     }
-   
+
+    public static class CustomerViewModelConvertor
+    {
+        public static CustomerViewModel ToCustomerViewModel(this Customer customer, AppUser appUser)
+        {
+            return new CustomerViewModel
+            {
+                Id = customer.Id,
+
+
+
+                Email = appUser.Email,
+                Name = appUser.Name,
+                ContactNumber = appUser.ContactNumber,
+                City = appUser.City,
+                Street = appUser.Street
+
+
+            };
+
+
+        }
+
+
+    }
 
 }

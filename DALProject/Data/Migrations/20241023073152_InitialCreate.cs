@@ -1,10 +1,14 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DALProject.Migrations
+#nullable disable
+
+namespace DALProject.Data.Migrations
 {
+    /// <inheritdoc />
     public partial class InitialCreate : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -216,8 +220,6 @@ namespace DALProject.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PrefCommunication = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -227,8 +229,7 @@ namespace DALProject.Migrations
                         name: "FK_Customers_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -240,7 +241,6 @@ namespace DALProject.Migrations
                     License = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     LicenseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LicenseExpDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Availability = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
@@ -252,8 +252,7 @@ namespace DALProject.Migrations
                         name: "FK_Drivers_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -306,7 +305,6 @@ namespace DALProject.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Availability = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     AppUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
@@ -318,8 +316,7 @@ namespace DALProject.Migrations
                         name: "FK_Technicians_AspNetUsers_AppUserId",
                         column: x => x.AppUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Technicians_Categroies_CategoryId",
                         column: x => x.CategoryId,
@@ -353,8 +350,7 @@ namespace DALProject.Migrations
                         name: "FK_Cars_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Cars_Models_ModelId",
                         column: x => x.ModelId,
@@ -469,8 +465,7 @@ namespace DALProject.Migrations
                         name: "FK_Appointments_Technicians_TechniciansId",
                         column: x => x.TechniciansId,
                         principalTable: "Technicians",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Appointments_Tickets_TicketId",
                         column: x => x.TicketId,
@@ -478,21 +473,6 @@ namespace DALProject.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "0fda8832-725d-4b1f-a05a-b489f56f1b0b", "72081444-9250-450e-a271-a0b7272d53fb", "admin", "admin" });
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "4a7aa294-083a-4fd9-8c59-763ec6158676", "f342900f-6536-468a-bcf4-d3ce3957be5e", "technincian", null });
-
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "acc96683-4cb4-4059-8b79-09b53a10afca", "58c58e2e-68d4-4746-9f68-9a8ea117f187", "csutomer", "technincian" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_DriverId",
@@ -620,6 +600,7 @@ namespace DALProject.Migrations
                 column: "ServiceId");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

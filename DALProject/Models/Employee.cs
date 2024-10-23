@@ -5,7 +5,7 @@ namespace DALProject.Models
 {
     abstract public class Employee : ModelClass
     {
-		public string Name { get; set; }
+		
 
 		public string Availability { get; set; }
 

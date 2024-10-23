@@ -23,6 +23,13 @@ namespace DALProject.Models
         public string Availability { get; set; }
 
         public DateTime BirthDate { get; set; } // .net 5 not support date only
+        
+
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+        public string AppUserId { get; set; }
+
         [Required]
         public string License  { get; set; }
 
@@ -31,13 +38,10 @@ namespace DALProject.Models
         public DateTime LicenseDate { get; set; }
 
         [Display(Name = "License Expiry Date")]
-
-        [Required]
         public DateTime LicenseExpDate { get; set; }
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        public string Password { get; internal set; }
-        public string AppUserId { get; set; }
+
+
+
 
         #region Mapping
 
@@ -46,7 +50,7 @@ namespace DALProject.Models
             return new DriverViewModel
             {
                 Id = model.Id,
-                Name = model.Name,
+                //Name = model.Name,
                 //Street = model.Street,
                 //ContactNumber = model.ContactNumber,
                 //City = model.City,
@@ -67,7 +71,7 @@ namespace DALProject.Models
             return new Driver
             {
                 Id = ViewModel.Id,
-                Name = ViewModel.Name,
+                //Name = ViewModel.Name,
                 //Street = ViewModel.Street,
                 //ContactNumber = ViewModel.ContactNumber,
                 //City = ViewModel.City,
@@ -83,7 +87,51 @@ namespace DALProject.Models
         }
 
         #endregion
+        public static explicit operator AppUser(DriverViewModel ViewModel)
+        {
+            return new AppUser
+            {
+                UserName = ViewModel.Email,
+                Email = ViewModel.Email,
+                Name = ViewModel.Name,
+                ContactNumber = ViewModel.ContactNumber,
+                City = ViewModel.City,
+                Street = ViewModel.Street
+            };
+
+        }
+
+      
+
     }
 
+    public static class DriverViewModelConvertor
+    {
+        public static DriverViewModel ToDriverViewModel(this Driver driver, AppUser appUser)
+        {
+            return new DriverViewModel
+            {
+                Id = driver.Id,
+                Availability = driver.Availability,
+                BirthDate = driver.BirthDate,
+                AppUserId = driver.AppUserId,
+                License = driver.License,
+                LicenseDate = driver.LicenseDate,
+                LicenseExpDate = driver.LicenseExpDate,
 
+
+                Email = appUser.Email,
+                Name = appUser.Name,
+                ContactNumber = appUser.ContactNumber,
+                City = appUser.City,
+                Street = appUser.Street
+
+
+            };
+
+
+        }
+
+
+    }
 }

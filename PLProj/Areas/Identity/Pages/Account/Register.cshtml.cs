@@ -79,8 +79,7 @@ namespace PLProj.Areas.Identity.Pages.Account
             [Display(Name = "Contact Number")]
             public long ContactNumber { get; set; }
             //
-            [Display(Name = "Preferred Communication")]
-            public string PrefCommunication { get; set; }
+            
 
 			
         }
@@ -101,8 +100,9 @@ namespace PLProj.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user, "Customer");
 
-                    var customer = new Customer { AppUserId = user.Id, PrefCommunication = Input.PrefCommunication };
+                    var customer = new Customer { AppUserId = user.Id };
                     unitOfWork.Repository<Customer>().Add(customer);
                     unitOfWork.Complete();
                     _logger.LogInformation("User created a new account with password.");

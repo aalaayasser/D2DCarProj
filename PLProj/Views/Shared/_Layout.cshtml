@@ -17,7 +17,11 @@
 			@if (User.Identity.IsAuthenticated)
 			{
 				@* <a asp-action="Book" asp-controller="Home"> Appointment </a> *@
-				<a asp-action="GetServices" asp-controller="Services"> Services</a>
+				@if (User.IsInRole("Admin"))
+				{
+					<a asp-action="GetServices" asp-controller="Services"> Services</a>
+				}
+
 				<a asp-action="CreateCar" asp-controller="Car"> Add Car </a>
 				<a id="Logout" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
 
@@ -25,10 +29,13 @@
 			}
 			else
 			{
-				<a asp-controller="Tech" asp-action="Index" >Techincians</a>
-				<a asp-controller="Driver" asp-action="Index" >Drivers</a>
-				<a  id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-				<a  id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+				<a asp-controller="Tech" asp-action="Index">Techincians</a>
+				<a asp-controller="Driver" asp-action="Index">Drivers</a>
+				<a asp-controller="Customer" asp-action="Index">Customers</a>
+
+
+				<a id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+				<a id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
 			}
 		</nav>
 	</header>

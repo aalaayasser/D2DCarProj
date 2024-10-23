@@ -19,19 +19,19 @@ namespace PLProj.Controllers
     public class TechController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
+       
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILogger<TechController> _logger;
         private readonly IWebHostEnvironment env;
 
         public TechController(
             UserManager<AppUser> userManager,
-            SignInManager<AppUser> signInManager,
+          
             IUnitOfWork unitOfWork,
             ILogger<TechController> logger, IWebHostEnvironment env)
         {
             _userManager = userManager;
-            _signInManager = signInManager;
+          
             _unitOfWork = unitOfWork;
             _logger = logger;
             this.env = env;
@@ -39,9 +39,12 @@ namespace PLProj.Controllers
 
         public IActionResult Index()
         {
-            
-            var techs = _unitOfWork.Repository<Technician>().GetAll().Select(t => (TechnicianViewModel)t).ToList();
-            return View(techs);
+            var spec = new BaseSpecification<Technician>();
+            spec.Includes.Add(e => e.Category);
+            var techs = _unitOfWork.Repository<Technician>().GetAllWithSpec(spec).Select(t => t).ToList();
+            var techViewModelList = new List<TechnicianViewModel>();
+            techs.ForEach(t => techViewModelList.Add(t.ToTechnicianViewModel(_userManager.Users.Where(e => e.Id == t.AppUserId).FirstOrDefault())));
+            return View(techViewModelList);
 
 
         }
@@ -61,32 +64,35 @@ namespace PLProj.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new AppUser { UserName = model.Email, Email = model.Email, Name = model.Name, ContactNumber = model.ContactNumber ,City = model.City, Street = model.Street};
+                var user = (AppUser)model;
+                    /*new AppUser { *//*UserName = model.Email, Email = model.Email*//*, Name = model.Name, ContactNumber = model.ContactNumber ,City = model.City, Street = model.Street*/
                 var result = await _userManager.CreateAsync(user, model.Password);
 
                 if (result.Succeeded)
                 {
-                    var technician = new TechnicianViewModel
-                    {
-                        AppUserId = user.Id,
-                
-                        Availability = model.Availability,
-                        BirthDate = model.BirthDate,
-                        CategoryId = model.CategoryId,    
-                        Name = model.Name,
-                        ContactNumber = model.ContactNumber,
-                        Email = model.Email,
-                        City = model.City,
-                        Street = model.Street,
-                        
+                    await _userManager.AddToRoleAsync(user, "Technician");
+                    model.AppUserId = user.Id;
+                    //var technician = new TechnicianViewModel
+                    //{
+                    //    AppUserId = user.Id,
 
-                        
-                        
+                    //    //Availability = model.Availability,
+                    //    //BirthDate = model.BirthDate,
+                    //    //CategoryId = model.CategoryId,    
+                    //    //Name = model.Name,
+                    //    //ContactNumber = model.ContactNumber,
+                    //    //Email = model.Email,
+                    //    //City = model.City,
+                    //    //Street = model.Street,
 
 
-                    };
 
-                    _unitOfWork.Repository<Technician>().Add((Technician)technician);
+
+
+
+                    //};
+
+                    _unitOfWork.Repository<Technician>().Add((Technician)model);
                     _unitOfWork.Complete();
 
                     _logger.LogInformation("Technician created a new account with password.");
@@ -104,40 +110,23 @@ namespace PLProj.Controllers
 
             return View(model);
         }
+
         public IActionResult Details(int? Id, string viewname = "Details")
         {
             if (!Id.HasValue)
                 return BadRequest();
+            
             var spec = new BaseSpecification<Technician>(e => e.Id == Id.Value);
             spec.Includes.Add(e => e.Category);
             var Tech = _unitOfWork.Repository<Technician>().GetEntityWithSpec(spec);
             if (Tech is null)
                 return NotFound();
+            var appUser = _userManager.Users.Where( e => e.Id == Tech.AppUserId).FirstOrDefault();
 
-            return View(viewname, (TechnicianViewModel)Tech);
+            return View(viewname, Tech.ToTechnicianViewModel(appUser));
         }
 
-        //public async Task<IActionResult> Details(int? Id, string viewname = "Details")
-        //{
-        //    if (!Id.HasValue)
-        //        return BadRequest();
-
-        //    // جلب المستخدم الحالي
-        //    var _user = await _userManager.GetUserAsync(User);
-        //    if (_user == null)
-        //        return Unauthorized(); // أو أي معالجة مناسبة أخرى
-
-        //    // إنشاء specification لتصفية التقنية بناءً على Id والتأكد من أن AppUserId يتطابق مع المستخدم الحالي
-        //    var spec = new BaseSpecification<Technician>(e => e.Id == Id.Value && e.AppUserId == _user.Id);
-        //    spec.Includes.Add(e => e.Category);
-
-        //    // جلب التقنية باستخدام specification
-        //    var Tech = _unitOfWork.Repository<Technician>().GetEntityWithSpec(spec);
-        //    if (Tech is null)
-        //        return NotFound();
-
-        //    return View(viewname, (TechnicianViewModel)Tech);
-        //}
+      
         public IActionResult Edit(int? Id)
         {
 
