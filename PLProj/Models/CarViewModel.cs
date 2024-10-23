@@ -27,11 +27,11 @@ namespace DALProject.Models
 
 		[Display(Name = "Description")]
 		public string? Description { get; set; }
+        public virtual Model Model { get; set; } = null!;
+        public virtual Color Color { get; set; } = null!;
+        #region Mapping
 
-
-		#region Mapping
-
-		public static explicit operator CarViewModel(Car model)
+        public static explicit operator CarViewModel(Car model)
 		{
 			return new CarViewModel
 			{
@@ -41,7 +41,9 @@ namespace DALProject.Models
 				ColorId = model.ColorId,
 				Year = model.Year,
 				Description = model.Description,
-			};
+                Model = model.Model,
+                Color = model.Color,
+            };
 		}
 
 		public static explicit operator Car(CarViewModel viewModel)
@@ -54,7 +56,6 @@ namespace DALProject.Models
 				ColorId = viewModel.ColorId,
 				Year = viewModel.Year,
 				Description = viewModel.Description,
-
 			};
 		}
 

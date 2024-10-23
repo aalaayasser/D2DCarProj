@@ -1,0 +1,44 @@
+﻿@model CarViewModel
+@inject IUnitOfWork unitOfWork
+@{
+	var Colors = new SelectList(unitOfWork.Repository<Color>().GetAll(), "Id", "Name");
+	var Brands = new SelectList(unitOfWork.Repository<Brand>().GetAll(), "Id", "Name");
+}
+
+@{
+	ViewData["Title"] = "CreateEditCarPartial";
+}
+
+<div class="form-group">
+	<label class="form-label">Brand</label>
+	<select class="form-control" id="DrpBrand" asp-items="Brands" required>
+		<option value="">--Select Brand--</option>
+	</select>
+</div>
+<div class="form-group">
+	<label asp-for="Model" class="form-label"> </label>
+	<select class="form-control" asp-for="ModelId" id="DrpModel" required>
+		<option value="@null"> --Select Model-- </option>
+	</select>
+</div>
+<div class="form-group">
+	<label asp-for="ColorId" class="form-label"> </label>
+	<select class="form-control" asp-for="ColorId" asp-items="Colors" required>
+		<option value="@null"> --Select Color-- </option>
+	</select>
+	<span asp-validation-for="ColorId" class="text-danger"> </span>
+</div>
+
+<div class="form-group">
+	<label asp-for="Description"> </label>
+	<input class="form-control" asp-for="Description" required>
+	<span asp-asp-validation-for="Description" class="text-danger"> </span>
+</div>
+
+<div class="form-group">
+	<label asp-for="Year"> </label>
+	<input class="form-control" asp-for="Year" required>
+	<span asp-asp-validation-for="Year" class="text-danger"> </span>
+</div>
+
+

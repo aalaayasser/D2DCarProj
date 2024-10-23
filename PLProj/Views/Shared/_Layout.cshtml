@@ -19,9 +19,8 @@
 				@* <a asp-action="Book" asp-controller="Home"> Appointment </a> *@
 				@if (User.IsInRole("Admin"))
 				{
-					<a asp-action="GetServices" asp-controller="Services"> Services</a>
+				<a asp-action="GetServices" asp-controller="Services"> Services</a>
 				}
-
 				<a asp-action="CreateCar" asp-controller="Car"> Add Car </a>
 				<a id="Logout" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
 

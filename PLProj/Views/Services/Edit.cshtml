@@ -1,8 +1,4 @@
 ﻿@model ServiceViewModel
-@inject IUnitOfWork unitOfwork
-@{
-    var Categories = new SelectList(unitOfwork.Repository<Category>().GetAll(), "Id", "Name");
-}
 @{
     ViewData["Title"] = "Edit";
 }
