@@ -4,7 +4,7 @@ namespace PLProj.Controllers
 {
 	public class BookController : Controller
 	{
-		public IActionResult Index()
+		public IActionResult Appointment()
 		{
 			return View();
 		}
