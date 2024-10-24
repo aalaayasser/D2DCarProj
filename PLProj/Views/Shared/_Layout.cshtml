@@ -103,7 +103,7 @@
 								}
 								<a asp-action="GetServices" asp-controller="Services"> Services</a>
 								<a asp-action="Index" asp-controller="Car">  Cars </a>
-								<a id="Logout" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
+								<a id="Logout" asp-controller="Account" asp-action="Logout">Logout</a>
 
 								<a asp-action="CreateTicketbyCustomer" asp-controller="Ticket">Add Service</a>
 								<a href="#contact"> Contact </a>
@@ -116,8 +116,8 @@
 								<a asp-controller="Customer" asp-action="Index">Customers</a> *@
 
 
-								<li class="nav-link"><a id="register" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
-								<li class="nav-link"><a id="login" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+								<li class="nav-link"><a id="register"  asp-controller="Account" asp-action="Register">Register</a></li>
+								<li class="nav-link"><a id="login"  asp-controller="Account" asp-action="Login">Login</a></li>
 							}
 							
 							<li class="nav-item active">

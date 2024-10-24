@@ -59,6 +59,7 @@ namespace PLProj.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddTicketAsync(TicketViewModelCustomer ticket)
 		{
+			/*
 			//var _user = await _userManager.GetUserAsync(User);
 			//var spec = new BaseSpecification<Customer>(c => c.AppUserId == _user.Id);
 			//spec.Includes.Add(t => t.Cars);
@@ -85,15 +86,12 @@ namespace PLProj.Controllers
 			//{
 			//	// رسالة خطأ إذا لم يتم العثور على العميل
 			//	ModelState.AddModelError("", "Customer not found.");
-			//}
+			//}*/
 
 			if (ModelState.IsValid)
 			{
-				
-
 				try
 				{
-					
 					unitOfWork.Repository<Ticket>().Add((Ticket)ticket);
 					unitOfWork.Complete();
 					TempData["Message"] = "Ticket has been Added Successfully";
@@ -102,20 +100,14 @@ namespace PLProj.Controllers
 				}
 				catch (Exception ex)
 				{
-					
 					if (env.IsDevelopment())
 						ModelState.AddModelError(string.Empty, ex.Message);
 					else
 						ModelState.AddModelError(string.Empty, "An Error Has Occurred during Deleting the Employee");
-
-					
 				}
-				
 			}
-
 			return View(ticket);
 		}
-
 		#endregion
 
 

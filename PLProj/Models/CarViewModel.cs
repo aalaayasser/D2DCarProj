@@ -39,7 +39,7 @@ namespace DALProject.Models
 
 		public static explicit operator CarViewModel(Car model)
 		{
-			return new CarViewModel
+			var viewmodel = new CarViewModel()
 			{
 				Id = model.Id,
 				ModelId = model.ModelId,
@@ -52,9 +52,11 @@ namespace DALProject.Models
 				PlateNumber = model.PlateNumber,
 
 			};
-		 }
+			viewmodel.Model.Brand = model.Model.Brand;
+			return viewmodel;
+        }
 
-		public static explicit operator Car(CarViewModel viewModel)
+        public static explicit operator Car(CarViewModel viewModel)
 		{
 			return new Car
 			{

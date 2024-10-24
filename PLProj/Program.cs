@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using DALProject.Data.Seeding;
+using Microsoft.Extensions.Options;
 
 namespace PLProj
 {
@@ -36,19 +37,38 @@ namespace PLProj
 
             });
 
-            builder.Services.AddIdentity<AppUser, IdentityRole>(option => option.SignIn.RequireConfirmedAccount = false)
-            .AddEntityFrameworkStores<CarAppDbContext>().AddDefaultTokenProviders();
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredUniqueChars = 2;
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredLength = 5;
 
+                options.SignIn.RequireConfirmedAccount = false;
+                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+
+                //options.Lockout.AllowedForNewUsers = true;
+                //options.Lockout.MaxFailedAccessAttempts = 5;
+                //options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+
+            }).AddEntityFrameworkStores<CarAppDbContext>()
+            .AddDefaultTokenProviders();
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/LogIn";
+                options.LogoutPath = "/Account/LogOut";
+                //options.ExpireTimeSpan = TimeSpan.MaxValue;
+                options.AccessDeniedPath = "/Home/Index";
+                options.SlidingExpiration = false;
+            });
 
             #endregion
+
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddRazorPages(options =>
-            {
-                options.Conventions.AuthorizeAreaPage("Identity", "/Account/Register");
-                options.Conventions.AuthorizeAreaPage("Identity", "/Account/Login");
-
-
-            });
             #endregion
 
 
@@ -99,18 +119,10 @@ namespace PLProj
 
             app.UseAuthorization();
 
-			app.MapRazorPages();
-
 			app.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             
-
-            //app.MapControllerRoute(
-            //       name: "Technician",
-            //    pattern: "{controller=Tec}/{action=Register}/{id?}");
-          
-
             #endregion
 
             app.Run();

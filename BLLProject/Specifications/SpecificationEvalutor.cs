@@ -15,12 +15,9 @@ namespace BLLProject.Specifications
 
             query = spec.Includes.Aggregate(query, (Current, IncludeExpression) => Current.Include(IncludeExpression));
 
-			foreach (var thenInclude in spec.ThenIncludes)
-			{
-				query = query.Include(thenInclude); 
-			}
+            query = spec.AllIncludes.Aggregate(query, (current, include) => include(current));
 
-			return query;
+            return query;
 		}
 
     }

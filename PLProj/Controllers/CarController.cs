@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PLProj.Models;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,19 +32,17 @@ namespace PLProj.Controllers
 			this.unitOfWork = unitOfWork;
             this.env = env;
         }
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
-			var spec = new BaseSpecification<Car>();
-			spec.Includes.Add(e => e.Model);
-			spec.Includes.Add(e => e.Model.Brand);
-			spec.Includes.Add(e => e.Color);
+            var _user = await _userManager.GetUserAsync(User);
+            var spec = new BaseSpecification<Customer>(c => c.AppUserId == _user.Id);
+            spec.Includes.Add(c => c.Cars);
+            //spec.AllIncludes.Add(c => c.Include(e => e.Cars).ThenInclude(e => e.Model).ThenInclude(e => e.Brand));
+            //spec.AllIncludes.Add(c => c.Include(e => e.Cars).ThenInclude(e => e.Color));
+            var customer = unitOfWork.Repository<Customer>().GetEntityWithSpec(spec);
 
-			ViewData["Models"] = unitOfWork.Repository<Model>().GetAll();
-			ViewData["Brands"] = unitOfWork.Repository<Brand>().GetAll();
-
-            var models = unitOfWork.Repository<Car>().GetAllWithSpec(spec)
-				.Select(s => (CarViewModel)s).ToList();
-            return View(models);
+            var myCarList = customer.Cars.Select(s=>(CarViewModel)s).ToList();
+            return View(myCarList);
 		}
 
 		public IActionResult CreateCar()
@@ -93,9 +93,9 @@ namespace PLProj.Controllers
                 return BadRequest();
 
             var spec = new BaseSpecification<Car>(e => e.Id == Id.Value);
-            spec.Includes.Add(e => e.Model);
-            spec.Includes.Add(e => e.Model.Brand);
-            spec.Includes.Add(e => e.Color);
+            //spec.Includes.Add(e => e.Model);
+            //spec.Includes.Add(e => e.Model.Brand);
+            //spec.Includes.Add(e => e.Color);
             var service = unitOfWork.Repository<Car>().GetEntityWithSpec(spec);
 
             if (service is null)
