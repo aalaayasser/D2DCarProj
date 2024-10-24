@@ -17,11 +17,12 @@ namespace DALProject.Models
         [Display(Name = "Contact Number")]
         public long ContactNumber { get; set; }
         public string AppUserId { get; set; }
+		public virtual ICollection<Car> Cars { get; set; } = new HashSet<Car>();
 
 
-        #region Mapping
+		#region Mapping
 
-        public static explicit operator CustomerViewModel(Customer model)
+		public static explicit operator CustomerViewModel(Customer model)
         {
             return new CustomerViewModel
             {
@@ -31,6 +32,7 @@ namespace DALProject.Models
                 //    City = model.City,
                 //    Email = model.Email,
                 AppUserId = model.AppUserId,
+                Cars = model.Cars,
 
             };
         }

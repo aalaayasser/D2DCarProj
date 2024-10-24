@@ -12,12 +12,7 @@ namespace BLLProject.Interfaces
     {
         IGenericRepository<T> Repository<T>() where T : ModelClass;
 
-        int Complete();
-
-        
-        
-
-
-
-    }
+       abstract int Complete();
+		
+	}
 }

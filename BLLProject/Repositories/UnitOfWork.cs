@@ -1,6 +1,7 @@
 ﻿using BLLProject.Interfaces;
 using DALProject;
 using DALProject.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -50,5 +51,7 @@ namespace BLLProject.Repositories
 		{
 			return dbContext.SaveChanges();
 		}
+
+		
 	}
 }

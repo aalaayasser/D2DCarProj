@@ -1,6 +1,7 @@
 ﻿using BLLProject.Interfaces;
 using BLLProject.Specifications;
 using DALProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace PLProj.Controllers
 {
+    [Authorize(Roles = "Customer")]
 	public class CarController : Controller
 	{
         private readonly UserManager<AppUser> _userManager;
@@ -48,27 +50,31 @@ namespace PLProj.Controllers
 			return View();
 		}
 		[HttpPost]
-		public async Task<IActionResult> CreateCar(CarViewModel car)
-		{
+        public async Task<IActionResult> CreateCar(CarViewModel car)
+        {
 
-			var _user = await _userManager.GetUserAsync(User);
-			var spec = new BaseSpecification<Customer>(c => c.AppUserId == _user.Id);
+            var _user = await _userManager.GetUserAsync(User);
+            var spec = new BaseSpecification<Customer>(c => c.AppUserId == _user.Id);
+			
+
 			var customer = unitOfWork.Repository<Customer>().GetEntityWithSpec(spec);
 
             if (ModelState.IsValid)
-			{
-				unitOfWork.Repository<Car>().Add((Car)car);
-				var count = unitOfWork.Complete();
-				if (count > 0)
-				{
-					TempData["message"] = "vehicle has been Added Successfully";
-					return RedirectToAction("Get", "Car");
-				}
-			}
-			return View(car);
-		}
+            {
+                car.CustomerId = customer.Id;
+                unitOfWork.Repository<Car>().Add((Car)car);
+                var count = unitOfWork.Complete();
+                if (count > 0)
+                {
+                    TempData["message"] = "vehicle has been Added Successfully";
+                    return RedirectToAction("Get", "Car");
+                }
+            }
+            return View(car);
+        }
 
-		[HttpGet]
+
+        [HttpGet]
 		public IActionResult GetModelByBrands(int BrandId)
 		{
 			var spec = new BaseSpecification<Model>(e => e.BrandId == BrandId);

@@ -11,9 +11,9 @@ using System.Linq;
 
 namespace PLProj.Controllers
 {
-	[Authorize(Roles ="Admin")]
+	//[Authorize(Roles ="Admin")]
 	//[Authorize] ==> login
-	//[AllowAnonymous]
+	[AllowAnonymous]
 
     public class ServicesController : Controller
     {

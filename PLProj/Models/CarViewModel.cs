@@ -16,7 +16,7 @@ namespace DALProject.Models
 		public int ModelId { get; set; }
 
 		[Display(Name = "Customer")]
-		public int? CustomerId { get; set; }
+		public int CustomerId { get; set; }
 
 		[Display(Name = "Color")]
 		public int ColorId { get; set; }
@@ -29,9 +29,11 @@ namespace DALProject.Models
 		public string? Description { get; set; }
         public virtual Model Model { get; set; } = null!;
         public virtual Color Color { get; set; } = null!;
-        #region Mapping
 
-        public static explicit operator CarViewModel(Car model)
+
+		#region Mapping
+
+		public static explicit operator CarViewModel(Car model)
 		{
 			return new CarViewModel
 			{
@@ -41,10 +43,11 @@ namespace DALProject.Models
 				ColorId = model.ColorId,
 				Year = model.Year,
 				Description = model.Description,
-                Model = model.Model,
-                Color = model.Color,
-            };
-		}
+				Model = model.Model,
+				Color = model.Color,
+
+			};
+		 }
 
 		public static explicit operator Car(CarViewModel viewModel)
 		{

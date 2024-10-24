@@ -13,7 +13,7 @@ namespace DALProject.Models
         
         public int ModelId { get; set; }
 
-        public int? CustomerId { get; set; }
+        public int CustomerId { get; set; }
         
         public int ColorId { get; set; }
 

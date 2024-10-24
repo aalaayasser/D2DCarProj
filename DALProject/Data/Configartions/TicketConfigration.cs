@@ -18,27 +18,23 @@ namespace DALProject.Data.Configartions
 
             builder.Property(e => e.Location)
                .IsRequired()
-               .HasColumnType("varchar");
+               .HasColumnType("varchar(100)");
 
              builder.Property(e => e.State)
-               .IsRequired()
-               .HasColumnType("varchar");
+               
+               .HasColumnType("varchar(100)");
 
              
-             builder.Property(e => e.Location)
-               .IsRequired()
-               .HasColumnType("varchar");
+           
 
               builder.Property(e => e.FinalReport)
-               .IsRequired()
+               
                .HasColumnType("text");
 
              builder.Property(e => e.Feedback)
                .HasColumnType("text");
 
-            builder.Property(e => e.IsPayed)
-               .IsRequired()
-               .HasColumnType("varchar");
+            
 
              
 
