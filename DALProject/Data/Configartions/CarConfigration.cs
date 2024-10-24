@@ -15,7 +15,13 @@ namespace DALProject.Data.Configartions
         { 
 
             builder.Property(c => c.Description)
-            .HasColumnType("text"); 
+            .HasColumnType("nvarchar(max)");
+
+            builder.Property(c => c.PlateNumber)
+                .IsRequired()
+                .HasColumnType("nvarchar(max)"); 
+            
+
         }
     }
 

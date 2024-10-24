@@ -30,7 +30,7 @@ namespace PLProj.Controllers
 			this.unitOfWork = unitOfWork;
             this.env = env;
         }
-		public IActionResult Get()
+		public IActionResult Index()
 		{
 			var spec = new BaseSpecification<Car>();
 			spec.Includes.Add(e => e.Model);
@@ -124,7 +124,7 @@ namespace PLProj.Controllers
                 unitOfWork.Repository<Car>().Update((Car)emp);
                 unitOfWork.Complete();
                 TempData["message"] = "Service Updated Successfully";
-                return RedirectToAction(nameof(Get));
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
@@ -157,7 +157,7 @@ namespace PLProj.Controllers
                 unitOfWork.Repository<Car>().Delete((Car)sev);
                 unitOfWork.Complete();
                 TempData["message"] = "Service Deleted Successfully";
-                return RedirectToAction(nameof(Get));
+                return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {

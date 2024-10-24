@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DALProject.Migrations
+namespace DALProject.Data.Migrations
 {
     [DbContext(typeof(CarAppDbContext))]
-    [Migration("20241023174959_CarDriver")]
-    partial class CarDriver
+    [Migration("20241024170528_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -178,10 +178,14 @@ namespace DALProject.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ModelId")
                         .HasColumnType("int");
+
+                    b.Property<string>("PlateNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Year")
                         .HasColumnType("int");
@@ -429,42 +433,33 @@ namespace DALProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("ActiveDatePfPart")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("CarId")
                         .HasColumnType("int");
 
                     b.Property<long>("CurrentKilometres")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTime>("EndDateTime")
+                    b.Property<DateTime?>("EndDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Feedback")
                         .HasColumnType("text");
 
                     b.Property<string>("FinalReport")
-                        .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<string>("IsPayed")
-                        .IsRequired()
-                        .HasColumnType("varchar");
 
                     b.Property<string>("Location")
                         .IsRequired()
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar(100)");
 
                     b.Property<int>("ServiceId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("StartDateTime")
+                    b.Property<DateTime?>("StartDateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 

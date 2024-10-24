@@ -21,6 +21,7 @@ namespace DALProject
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
             //var admin = new IdentityRole("admin");
             //admin.NormalizedName = "admin";

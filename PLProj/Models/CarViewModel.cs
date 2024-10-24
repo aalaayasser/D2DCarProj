@@ -10,9 +10,13 @@ namespace DALProject.Models
 {
 	public class CarViewModel
 	{
-		public int Id { get; set; }
+        
+        public int Id { get; set; }
+		[Required]
+		[Display(Name = "Plate Number")]
+        public string PlateNumber { get; set; }
 
-		[Display(Name = "Model")]
+        [Display(Name = "Model")]
 		public int ModelId { get; set; }
 
 		[Display(Name = "Customer")]
@@ -45,6 +49,7 @@ namespace DALProject.Models
 				Description = model.Description,
 				Model = model.Model,
 				Color = model.Color,
+				PlateNumber = model.PlateNumber,
 
 			};
 		 }
@@ -59,6 +64,7 @@ namespace DALProject.Models
 				ColorId = viewModel.ColorId,
 				Year = viewModel.Year,
 				Description = viewModel.Description,
+				PlateNumber= viewModel.PlateNumber,
 			};
 		}
 

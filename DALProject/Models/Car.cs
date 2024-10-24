@@ -9,7 +9,8 @@ namespace DALProject.Models
 {
     public class Car : ModelClass
     {
-        
+
+        public string PlateNumber { get; set; }
         
         public int ModelId { get; set; }
 

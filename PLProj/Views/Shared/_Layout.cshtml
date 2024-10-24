@@ -8,114 +8,140 @@
 	<link rel="stylesheet" href="~/font-awesome/css/all.min.css" />
 	<link rel="stylesheet" href="~/css/style.css?v=1.1">
 	<link rel="icon" href="imgs/Logo.png" type="image/x-icon">
-    <!-- fonts style -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,600,700&display=swap" rel="stylesheet" />
+	<!-- fonts style -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,600,700&display=swap" rel="stylesheet" />
 </head>
 <body>
 
 	@* <header>
-		<a href="#" class="logo">D2D Auto</a>
-		<nav class="navigation">
-			<a asp-action="Index" asp-controller="Home"> Home </a>
-			@* <a asp-action="Book" asp-controller="Home"> Appointment </a> 
-			@if (User.Identity.IsAuthenticated)
-			{
-				@* <a asp-action="Book" asp-controller="Home"> Appointment </a> 
-				@*  @if (User.IsInRole("Admin"))
-				{ 
-				<a asp-action="GetServices" asp-controller="Services"> Services</a>
-				}  *@
-				@* <a asp-action="GetServices" asp-controller="Services"> Services</a> 
-				<a asp-action="CreateCar" asp-controller="Car"> Add Car </a>
-				<a id="Logout" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
+	<a href="#" class="logo">D2D Auto</a>
+	<nav class="navigation">
+	<a asp-action="Index" asp-controller="Home"> Home </a>
+	@* <a asp-action="Book" asp-controller="Home"> Appointment </a>
+	@if (User.Identity.IsAuthenticated)
+	{
+	@* <a asp-action="Book" asp-controller="Home"> Appointment </a>
+	@*  @if (User.IsInRole("Admin"))
+	{
+	<a asp-action="GetServices" asp-controller="Services"> Services</a>
+	}  *@
+	@* <a asp-action="GetServices" asp-controller="Services"> Services</a>
+	<a asp-action="CreateCar" asp-controller="Car"> Add Car </a>
+	<a id="Logout" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
 
-				<a asp-action="CreateTicketbyCustomer" asp-controller="Ticket">Add Service</a>
-				@* <a href="#contact"> Contact </a> 
-			}
-			else
-			{
-				<a asp-action="GetServices" asp-controller="Services"> Services</a>
-				<a asp-controller="Tech" asp-action="Index">Techincians</a>
-				<a asp-controller="Driver" asp-action="Index">Drivers</a>
-				<a asp-controller="Customer" asp-action="Index">Customers</a>
+	<a asp-action="CreateTicketbyCustomer" asp-controller="Ticket">Add Service</a>
+	@* <a href="#contact"> Contact </a>
+	}
+	else
+	{
+	<a asp-action="GetServices" asp-controller="Services"> Services</a>
+	<a asp-controller="Tech" asp-action="Index">Techincians</a>
+	<a asp-controller="Driver" asp-action="Index">Drivers</a>
+	<a asp-controller="Customer" asp-action="Index">Customers</a>
 
 
-				<a id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-				<a id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-			}
-		</nav>
+	<a id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+	<a id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+	}
+	</nav>
 	</header> *@
-    <!-- header section starts -->
+	<!-- header section starts -->
 
-    <div class="hero_bg_box">
-        <div class="img-box">
-            <img src="imgs/BGPhoto.jpg" alt="">
-        </div>
-    </div>
+	<div class="hero_bg_box">
+		<div class="img-box">
+			<img src="imgs/BGPhoto.jpg" alt="">
+		</div>
+	</div>
 
-    <header class="header_section">
-        <div class="header_top">
-            <div class="container-fluid">
-                <div class="contact_link-container">
-                    <a href="" class="contact_link1">
-                        <i class="fa fa-map-marker" aria-hidden="true"></i>
-                        <span>
-                            Egypt, Mans
-                        </span>
-                    </a>
-                    <a href="" class="contact_link2">
-                        <i class="fa fa-phone" aria-hidden="true"></i>
-                        <span>
-                            Call : +01 1234567890
-                        </span>
-                    </a>
-                    <a href="" class="contact_link3">
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                        <span>
-                            D2D@gmail.com
-                        </span>
-                    </a>
-                </div>
-            </div>
-        </div>
+	<header class="header_section">
+		<div class="header_top">
+			<div class="container-fluid">
+				<div class="contact_link-container">
+					<a href="" class="contact_link1">
+						<i class="fa fa-map-marker" aria-hidden="true"></i>
+						<span>
+							Egypt, Mans
+						</span>
+					</a>
+					<a href="" class="contact_link2">
+						<i class="fa fa-phone" aria-hidden="true"></i>
+						<span>
+							Call : +01 1234567890
+						</span>
+					</a>
+					<a href="" class="contact_link3">
+						<i class="fa fa-envelope" aria-hidden="true"></i>
+						<span>
+							D2D@gmail.com
+						</span>
+					</a>
+				</div>
+			</div>
+		</div>
 
 
-        <div class="header_bottom">
-            <div class="container-fluid">
-                <nav class="navbar navbar-expand-lg custom_nav-container">
-                    <a class="navbar-brand" href="index.html">
-                        <span>
-                            DoorToDoor
-                        </span>
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class=""></span>
-                    </button>
+		<div class="header_bottom">
+			<div class="container-fluid">
+				<nav class="navbar navbar-expand-lg custom_nav-container">
+					<a class="navbar-brand" href="index.html">
+						<span>
+							DoorToDoor
+						</span>
+					</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class=""></span>
+					</button>
 
-                    <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
-                        <ul class="navbar-nav  ">
-                            <li class="nav-item active">
-                                <a class="nav-link" asp-action="Index" asp-controller="Home">Home <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#about_section"> About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link"  asp-action="GetServices" asp-controller="Services"> Services </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#contact">Contact us</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </header>
+					<div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
+						<ul class="navbar-nav  ">
+							@if (User.Identity.IsAuthenticated)
+							{
+								<a asp-action="Book" asp-controller="Home"> Appointment </a>
+								@if (User.IsInRole("Admin"))
+								{
+									<a asp-action="GetServices" asp-controller="Services"> Services</a>
+								}
+								<a asp-action="GetServices" asp-controller="Services"> Services</a>
+								<a asp-action="Index" asp-controller="Car">  Cars </a>
+								<a id="Logout" asp-area="Identity" asp-page="/Account/Logout">Logout</a>
 
-    <!-- end header section -->
+								<a asp-action="CreateTicketbyCustomer" asp-controller="Ticket">Add Service</a>
+								<a href="#contact"> Contact </a>
+							}
+							else
+							{
+								@* <a asp-action="GetServices" asp-controller="Services"> Services</a>
+								<a asp-controller="Tech" asp-action="Index">Techincians</a>
+								<a asp-controller="Driver" asp-action="Index">Drivers</a>
+								<a asp-controller="Customer" asp-action="Index">Customers</a> *@
+
+
+								<li class="nav-link"><a id="register" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+								<li class="nav-link"><a id="login" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+							}
+							
+							<li class="nav-item active">
+								<a class="nav-link" asp-action="Index" asp-controller="Home">Home <span class="sr-only">(current)</span></a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#about_section"> About</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" asp-action="GetServices" asp-controller="Services"> Services </a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#contact">Contact us</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</header>
+
+	<!-- end header section -->
 	<div>
-			@RenderBody()
+		@RenderBody()
 	</div>
 	<script src="~/lib/jquery/jquery.min.js"></script>
 	<script src="~/lib/jquery/jqueryui/jquery-ui.min.js"></script>

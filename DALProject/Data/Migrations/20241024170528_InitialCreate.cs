@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DALProject.Migrations
+namespace DALProject.Data.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -331,11 +331,12 @@ namespace DALProject.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    PlateNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ModelId = table.Column<int>(type: "int", nullable: false),
-                    CustomerId = table.Column<int>(type: "int", nullable: true),
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
                     ColorId = table.Column<int>(type: "int", nullable: false),
                     Year = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: true)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -350,7 +351,8 @@ namespace DALProject.Migrations
                         name: "FK_Cars_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Cars_Models_ModelId",
                         column: x => x.ModelId,
@@ -410,16 +412,14 @@ namespace DALProject.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CurrentKilometres = table.Column<long>(type: "bigint", nullable: false),
-                    StartDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Location = table.Column<string>(type: "varchar", nullable: false),
-                    State = table.Column<string>(type: "varchar", nullable: false),
-                    FinalReport = table.Column<string>(type: "text", nullable: false),
-                    EndDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ActiveDatePfPart = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StartDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Location = table.Column<string>(type: "varchar(100)", nullable: false),
+                    State = table.Column<string>(type: "varchar(100)", nullable: true),
+                    FinalReport = table.Column<string>(type: "text", nullable: true),
+                    EndDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CarId = table.Column<int>(type: "int", nullable: false),
                     ServiceId = table.Column<int>(type: "int", nullable: false),
-                    Feedback = table.Column<string>(type: "text", nullable: true),
-                    IsPayed = table.Column<string>(type: "varchar", nullable: false)
+                    Feedback = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {

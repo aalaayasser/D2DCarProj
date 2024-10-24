@@ -31,8 +31,8 @@ namespace PLProj
             builder.Services.AddDbContext<CarAppDbContext>(optionsBuilder =>
             {
 
-                optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("CS")).EnableSensitiveDataLogging();
-               optionsBuilder.UseLazyLoadingProxies(true);
+                optionsBuilder.UseSqlServer(builder.Configuration.GetConnectionString("CS"));
+                optionsBuilder.UseLazyLoadingProxies(true);
 
             });
 
@@ -45,6 +45,7 @@ namespace PLProj
             builder.Services.AddRazorPages(options =>
             {
                 options.Conventions.AuthorizeAreaPage("Identity", "/Account/Register");
+                options.Conventions.AuthorizeAreaPage("Identity", "/Account/Login");
 
 
             });
@@ -98,14 +99,16 @@ namespace PLProj
 
             app.UseAuthorization();
 
-            app.MapControllerRoute(
+			app.MapRazorPages();
+
+			app.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-            app.MapRazorPages();
+            
 
-            app.MapControllerRoute(
-                   name: "Technician",
-                pattern: "{controller=Tec}/{action=Register}/{id?}");
+            //app.MapControllerRoute(
+            //       name: "Technician",
+            //    pattern: "{controller=Tec}/{action=Register}/{id?}");
           
 
             #endregion

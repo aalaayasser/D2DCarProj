@@ -17,13 +17,18 @@
 </div>
 <div class="form-group">
 	<label asp-for="Model" class="form-label"> </label>
-	<select class="form-control" asp-for="ModelId" id="DrpModel" required>
+	<select class="form-control" asp-for="ModelId" id="DrpModel" >
 		<option value="@null"> --Select Model-- </option>
 	</select>
 </div>
 <div class="form-group">
+	<label asp-for="PlateNumber"> </label>
+	<input class="form-control" asp-for="PlateNumber" >
+	<span asp-asp-validation-for="PlateNumber" class="text-danger"> </span>
+</div>
+<div class="form-group">
 	<label asp-for="ColorId" class="form-label"> </label>
-	<select class="form-control" asp-for="ColorId" asp-items="Colors" required>
+	<select class="form-control" asp-for="ColorId" asp-items="Colors" >
 		<option value="@null"> --Select Color-- </option>
 	</select>
 	<span asp-validation-for="ColorId" class="text-danger"> </span>
@@ -31,13 +36,13 @@
 
 <div class="form-group">
 	<label asp-for="Description"> </label>
-	<input class="form-control" asp-for="Description" required>
+	<input class="form-control" asp-for="Description" >
 	<span asp-asp-validation-for="Description" class="text-danger"> </span>
 </div>
 
 <div class="form-group">
 	<label asp-for="Year"> </label>
-	<input class="form-control" asp-for="Year" required>
+	<input class="form-control" asp-for="Year" >
 	<span asp-asp-validation-for="Year" class="text-danger"> </span>
 </div>
 

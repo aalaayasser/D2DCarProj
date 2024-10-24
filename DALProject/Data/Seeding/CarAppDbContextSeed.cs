@@ -57,6 +57,15 @@ namespace DALProject.Data.Seeding
                 }
             
             }
+            else if (userManager.Users.Any(e=>e.Email == "alaaayasser2022@gmail.com")) {
+                var admin = userManager.Users.Where(e => e.Email == "alaaayasser2022@gmail.com").FirstOrDefault();
+                if (admin != null)
+                {
+					var token = await userManager.GeneratePasswordResetTokenAsync(admin);
+					await userManager.ResetPasswordAsync(admin, token, "111AAAaaa##");
+				}
+            
+            }
 
         }
 
