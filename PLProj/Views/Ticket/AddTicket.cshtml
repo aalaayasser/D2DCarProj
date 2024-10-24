@@ -1,7 +1,7 @@
 ﻿@model TicketViewModelCustomer
 
 @{
-    var departments = new SelectList(ViewData["CarList"] as IEnumerable<Car>, "Id", "Name");
+    var CarList = new SelectList(ViewData["CarList"] as IEnumerable<Car>, "Id", "PlateNumber");
     ViewData["Title"] = "AddTicket";
 }
 
@@ -30,7 +30,7 @@ div class="row" style="margin-top: 130px;">
 
             <div class="form-group">
                 <label asp-for="CarId" class="control-label"></label>
-                <select asp-for="CarId" asp-items="@(ViewData["CarsList"] as List<SelectListItem>)" class="form-control">
+                <select asp-for="CarId" asp-items="CarList" class="form-control">
                     <option value="@null">--Select Car--</option>
                 </select>
                 <span asp-validation-for="CarId" class="text-danger"></span>
