@@ -31,7 +31,6 @@ namespace DALProject.Models
             {
                 Id = viewModel.Id,
                 Name = viewModel.BrandName,
-                
             };
         }
         #endregion

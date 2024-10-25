@@ -13,7 +13,7 @@ namespace DALProject.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        [Display(Name = "Brand ID")]
+        [Display(Name = "Brand")]
         public int BrandId { get; set; }
         public virtual Brand Brand { get; set; } = null!;
         #region Mapping
