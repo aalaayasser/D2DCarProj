@@ -1,0 +1,31 @@
+﻿@model FinishTicketViewModel
+
+@{
+    ViewData["Title"] = "Finish Ticket";
+}
+
+<div class="container mt-4">
+    <h2>Finish Ticket @Model.Id</h2>
+
+    <form asp-action="FinishTicket" method="post">
+        <input type="hidden" asp-for="Id" />
+
+      
+
+        <div class="mb-3">
+            <label asp-for="EndDateTime" class="form-label">End Date & Time</label>
+            <input asp-for="EndDateTime" class="form-control" type="datetime-local" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="FinalReport" class="form-label">Final Report</label>
+            <textarea asp-for="FinalReport" class="form-control" rows="4"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">Finish Ticket</button>
+        <a asp-action="MyTicket" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+
+

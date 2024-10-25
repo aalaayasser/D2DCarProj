@@ -3,11 +3,11 @@
 @{
     var CarList = new SelectList(ViewData["CarList"] as IEnumerable<Car>, "Id", "PlateNumber");
     var ServiceList = new SelectList(ViewData["Services"] as IEnumerable<Service>, "Id", "Name");
-    ViewData["Title"] = "AddTicket";
-
+    ViewData["Title"] = "Add Ticket";
 }
 
-<h1>Add Ticket</h1>
+<h1 class="text-center my-4">@ViewData["Title"]</h1>
+
 <div class="col-md-6 offset-md-3">
     <div class="hive-box" style="border: 1px solid #dee2e6; border-radius: 5px; padding: 20px; background-color: #f8f9fa;">
 
@@ -17,17 +17,18 @@
             <div class="form-group">
                 <label asp-for="CarId" class="control-label"></label>
                 <select asp-for="CarId" asp-items="CarList" class="form-control">
-                    <option value="@null">--Select Car--</option>
+                    <option value="">--Select Car--</option>
                 </select>
                 <span asp-validation-for="CarId" class="text-danger"></span>
             </div>
-             <div class="form-group">
-            <label asp-for="ServiceId" class="form-label"> </label>
-                <select class="form-control" asp-for="ServiceId" asp-items="ServiceList" required>
-            <option value="@null"> --Select Services-- </option>
-            </select>
-            <span asp-validation-for="ServiceId" class="text-danger"> </span>
-            </div> 
+
+            <div class="form-group">
+                <label asp-for="ServiceId" class="control-label"></label>
+                <select asp-for="ServiceId" asp-items="ServiceList" class="form-control" required>
+                    <option value="">--Select Service--</option>
+                </select>
+                <span asp-validation-for="ServiceId" class="text-danger"></span>
+            </div>
 
             <div class="form-group">
                 <label asp-for="CurrentKilometres" class="font-weight-bold"></label>
@@ -40,21 +41,12 @@
                 <input asp-for="Location" class="form-control" placeholder="Enter your Location" />
                 <span asp-validation-for="Location" class="text-danger"></span>
             </div>
-
-
-
-           
-
-          
-
             <br />
-            <div class="form-group text-center mb-2">
-                <input type="submit" style="margin-left: 5px; margin-top: 110px;" class="main-btn" value="Sign Up" />
-
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-dark" style="width: 150px;">Add Ticket</button>
             </div>
-
-
         </form>
     </div>
 </div>
+
 

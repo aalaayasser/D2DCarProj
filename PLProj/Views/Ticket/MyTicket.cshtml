@@ -1,7 +1,42 @@
-﻿@model IEnumerable<Ticket> 
+﻿@model IEnumerable<Ticket>
 @{
-    ViewData["Title"] = "MyTicket";
+    ViewData["Title"] = "My Tickets";
 }
 
-<h1>MyTicket</h1>
+<h1 class="text-center my-4">@ViewData["Title"]</h1>
 
+@if (Model?.Any() == true)
+{
+    <table class="table table-striped table-hover mt-4">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(m => m.First().Cars.PlateNumber)</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Service</th>
+                <th>Location</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ticket in Model)
+            {
+                <tr>
+                    <td>@ticket.Cars.PlateNumber</td>
+                    <td>@ticket.Cars.Model.Brand.Name</td>
+                    <td>@ticket.Cars.Model.Name</td>
+                    <td>@ticket.Service.Name</td>
+                    <td>@ticket.Location</td>
+                    <td>@ticket.stateType</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="text-center mt-4">
+        <h3 class="text-muted">You don't have any tickets yet.</h3>
+        <p><a href="@Url.Action("Create", "Tickets")" class="btn btn-primary">Create a Ticket</a></p>
+    </div>
+}

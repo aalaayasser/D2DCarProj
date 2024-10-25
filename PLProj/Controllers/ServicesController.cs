@@ -11,9 +11,8 @@ using System.Linq;
 
 namespace PLProj.Controllers
 {
-	//[Authorize(Roles ="Admin")]
-	//[Authorize] ==> login
-	[AllowAnonymous]
+	[Authorize(Roles ="Admin")]
+	
 
     public class ServicesController : Controller
     {
@@ -29,7 +28,7 @@ namespace PLProj.Controllers
         }
 
         #region Get
-        public IActionResult GetServices()
+        public IActionResult Index()
         {
             var Services = unitOfWork.Repository<Service>().GetAll().Select(s => (ServiceViewModel)s).ToList();
             return View(Services);
@@ -53,7 +52,7 @@ namespace PLProj.Controllers
                 if (count > 0)
                 {
                     TempData["Message"] = "Service has been Added Successfully";
-                    return RedirectToAction(nameof(GetServices));
+                    return RedirectToAction(nameof(Index));
                 }
 
             }
@@ -101,7 +100,7 @@ namespace PLProj.Controllers
 				unitOfWork.Repository<Service>().Update((Service)emp);
 				unitOfWork.Complete();
 				TempData["message"] = "Service Updated Successfully";
-				return RedirectToAction(nameof(GetServices));
+				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception ex)
 			{
@@ -134,7 +133,7 @@ namespace PLProj.Controllers
 				unitOfWork.Repository<Service>().Delete((Service)sev);
 				unitOfWork.Complete();
 				TempData["message"] = "Service Deleted Successfully";
-				return RedirectToAction(nameof(GetServices));
+				return RedirectToAction(nameof(Index));
 			}
 			catch (Exception ex)
 			{

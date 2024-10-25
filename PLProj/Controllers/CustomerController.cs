@@ -1,6 +1,7 @@
 ﻿using BLLProject.Interfaces;
 using BLLProject.Repositories;
 using DALProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,8 @@ using System.Threading.Tasks;
 
 namespace PLProj.Controllers
 {
-    public class CustomerController : Controller
+	[Authorize(Roles = "Admin")]
+	public class CustomerController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly IUnitOfWork _unitOfWork;

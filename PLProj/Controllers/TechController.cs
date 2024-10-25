@@ -2,6 +2,7 @@
 using BLLProject.Repositories;
 using BLLProject.Specifications;
 using DALProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,8 @@ using System.Threading.Tasks;
 
 namespace PLProj.Controllers
 {
-    public class TechController : Controller
+	[Authorize(Roles = "Admin")]
+	public class TechController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
        

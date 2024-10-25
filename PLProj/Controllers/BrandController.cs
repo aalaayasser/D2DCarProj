@@ -2,6 +2,7 @@
 using BLLProject.Repositories;
 using BLLProject.Specifications;
 using DALProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ using System.Linq;
 
 namespace PLProj.Controllers
 {
+	[Authorize(Roles = "Admin")]
 	public class BrandController : Controller
 	{
 		private readonly UserManager<AppUser> _userManager;

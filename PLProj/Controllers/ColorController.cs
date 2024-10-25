@@ -1,6 +1,7 @@
 ﻿using BLLProject.Interfaces;
 using BLLProject.Specifications;
 using DALProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,8 @@ using System.Linq;
 
 namespace PLProj.Controllers
 {
-    public class ColorController : Controller
+	[Authorize(Roles = "Admin")]
+	public class ColorController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly ILogger<HomeController> _logger;
