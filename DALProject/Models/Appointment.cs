@@ -11,12 +11,12 @@ namespace DALProject.Models
     public class Appointment : ModelClass
     {
         
-        public string PartialReport { get; set; } = null!;
+        public string? PartialReport { get; set; } = null!;
         
         public DateTime StartDateTime { get; set; }
         
         public DateTime EndtDateTime { get; set; }
-        public int TechnicalId { get; set; }
+        public int TechnicianId { get; set; }
         public int DriverId { get; set; }
         public int TicketId { get; set; }
 

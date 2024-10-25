@@ -9,48 +9,64 @@ using System.Threading.Tasks;
 
 namespace DALProject.Models
 {
-    public class AppointmentViewModel
+    public class AddAppointmentViewModel
     {
-        public int Id { get; set; }
+        
 
 
-        [Display(Name = "Partial Report")]
-        [Required]
-        public string PartialReport { get; set; } = null!;
+        
         [Display(Name = "Start Date & Time")]
         [Required]
         public DateTime StartDateTime { get; set; }
-        [Display(Name = "End Date & Time")]
+
         [Required]
-        public DateTime EndtDateTime { get; set; }
-        public int TechnicalId { get; set; }
+        public int TechnicianId { get; set; }
+        [Required]
         public int DriverId { get; set; }
+        [Required]
         public int TicketId { get; set; }
+        public Car car { get; set; }
+        public Service service { get; set; }
 
         #region Mapping
-        public static explicit operator AppointmentViewModel(Appointment model)
+        public static explicit operator AddAppointmentViewModel(Ticket model)
         {
-            return new AppointmentViewModel
+            var viewmodel = new AddAppointmentViewModel
+            {                               
+               TicketId = model.Id,
+               car = model.Cars,
+               service = model.Service,
+                
+            };
+            viewmodel.car.Model = model.Cars.Model;
+            viewmodel.car.Model.Brand = model.Cars.Model.Brand;
+            viewmodel.car.Color = model.Cars.Color;
+            return viewmodel;
+        }
+         public static explicit operator AddAppointmentViewModel(Appointment model)
+        {
+            return new AddAppointmentViewModel
             {
-                Id = model.Id,
-                PartialReport = model.PartialReport,
+                
+                
                 StartDateTime = model.StartDateTime,
-                EndtDateTime = model.EndtDateTime,
-                TechnicalId = model.TechnicalId,
+               
+                TechnicianId = model.TechnicianId,
                 DriverId = model.DriverId,
                 TicketId = model.TicketId,
+                
             };
         }
 
-        public static explicit operator Appointment(AppointmentViewModel viewModel)
+        public static explicit operator Appointment(AddAppointmentViewModel viewModel)
         {
             return new Appointment
             {
-                Id = viewModel.Id,
-                PartialReport = viewModel.PartialReport,
+                
+               
                 StartDateTime = viewModel.StartDateTime,
-                EndtDateTime = viewModel.EndtDateTime,
-                TechnicalId = viewModel.TechnicalId , 
+               
+                TechnicianId = viewModel.TechnicianId,
                 DriverId = viewModel.DriverId ,
                 TicketId = viewModel.TicketId
             };

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace DALProject.Models
 {
+   
     public class Service : ModelClass
     {
         //public int Id { get; set; }
@@ -16,11 +17,12 @@ namespace DALProject.Models
 
 
         public decimal Price{ get; set; }
-        public DateTime EstimatedTime{ get; set; }
+        //public DateTime EstimatedTime{ get; set; }
         public string Description{ get; set; }
 
         public virtual Category Category { get; set; } = null!;
         public virtual ICollection<Ticket> Tickets { get; set; } = new HashSet<Ticket>();
+        
     }
 
 

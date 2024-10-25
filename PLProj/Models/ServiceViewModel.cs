@@ -18,7 +18,7 @@ namespace DALProject.Models
         [DataType(DataType.Currency)]
         [Required]
         public decimal Price{ get; set; }
-        public DateTime EstimatedTime { get; set; }
+        //public DateTime EstimatedTime { get; set; }
         public string Description{ get; set; }
 
         public virtual Category Category { get; set; } = null!;
@@ -31,7 +31,7 @@ namespace DALProject.Models
                 CategoryId = model.CategoryId,
                 Name = model.Name,
                 Price = model.Price,
-                EstimatedTime = model.EstimatedTime,
+                //EstimatedTime = model.EstimatedTime,
                 Description = model.Description,
                 Category = model.Category
             };
@@ -45,7 +45,7 @@ namespace DALProject.Models
                 CategoryId = viewModel.CategoryId,
                 Name = viewModel.Name,
                 Price = viewModel.Price,
-                EstimatedTime = viewModel.EstimatedTime,
+                //EstimatedTime = viewModel.EstimatedTime,
                 Description = viewModel.Description,
                 
             };

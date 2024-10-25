@@ -19,7 +19,8 @@
 </div>
 <div class="form-group">
     <label asp-for="Model" class="form-label"> </label>
-    @if (Model.Model is not null && Model.Model.Brand is not null)
+
+    @if (Model is not null && Model.Model is not null && Model.Model.Brand is not null )
     {
         var spec = new BaseSpecification<Model>(e => e.BrandId == Model.Model.BrandId);
         var Models = new SelectList(unitOfWork.Repository<Model>().GetAllWithSpec(spec), "Id", "Name");

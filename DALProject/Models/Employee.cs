@@ -12,5 +12,7 @@ namespace DALProject.Models
         public DateTime BirthDate  { get; set; } // .net 5 not support date only
 
         public string AppUserId { get; set; }
+
+        public virtual AppUser user { get; set; }
     }
 }

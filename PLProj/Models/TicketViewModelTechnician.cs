@@ -18,8 +18,8 @@ namespace DALProject.Models
         [Display(Name = "Start Date & Time")]
         public DateTime? StartDateTime { get; set; }
 
-        [Required]
-        public string State { get; set; }
+       
+        
 
         [Display(Name = "Final Report")]
         public string FinalReport { get; set; } = null!;
@@ -49,7 +49,7 @@ namespace DALProject.Models
                
                 StartDateTime = model.StartDateTime,
                
-                State = model.State,
+                
                 FinalReport = model.FinalReport,
                 EndDateTime = model.EndDateTime,
                
@@ -69,7 +69,7 @@ namespace DALProject.Models
                 
                 StartDateTime = viewModel.StartDateTime,
                 
-                State = viewModel.State,
+                
                 FinalReport = viewModel.FinalReport,
                 EndDateTime = viewModel.EndDateTime,
                

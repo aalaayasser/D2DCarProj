@@ -24,10 +24,13 @@ namespace DALProject.Models
 		public int CarId { get; set; }
 		public int ServiceId { get; set; }
 
+        
 
-		#region Mapping
+		public StateType stateType { get; set; }
 
-		public static explicit operator TicketViewModelCustomer(Ticket model)
+        #region Mapping
+
+        public static explicit operator TicketViewModelCustomer(Ticket model)
 		{
 			return new TicketViewModelCustomer
 			{
@@ -39,6 +42,7 @@ namespace DALProject.Models
 				CarId = model.CarId,
 				ServiceId = model.ServiceId,
 				//Feedback = model.Feedback
+				stateType = model.stateType
 				
 
 
@@ -58,7 +62,7 @@ namespace DALProject.Models
 				CarId = viewModel.CarId,
 				ServiceId = viewModel.ServiceId,
 				//Feedback = viewModel.Feedback,
-
+				stateType=viewModel.stateType
 
 			};
 		}

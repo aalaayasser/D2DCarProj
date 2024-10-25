@@ -41,7 +41,7 @@ namespace DALProject.Data.Configurations
             builder.Property(e => e.BirthDate)
                .IsRequired();
 
-            builder.HasOne<AppUser>().WithOne().HasForeignKey<Technician>(e => e.AppUserId);
+            builder.HasOne(e=>e.user).WithOne().HasForeignKey<Technician>(e => e.AppUserId);
 
         }
     }

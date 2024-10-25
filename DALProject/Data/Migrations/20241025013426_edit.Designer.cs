@@ -4,6 +4,7 @@ using DALProject;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DALProject.Data.Migrations
 {
     [DbContext(typeof(CarAppDbContext))]
-    partial class CarAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241025013426_edit")]
+    partial class edit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,6 +120,7 @@ namespace DALProject.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PartialReport")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("StartDateTime")
@@ -672,11 +676,9 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.Models.Driver", b =>
                 {
-                    b.HasOne("DALProject.Models.AppUser", "user")
+                    b.HasOne("DALProject.Models.AppUser", null)
                         .WithOne()
                         .HasForeignKey("DALProject.Models.Driver", "AppUserId");
-
-                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("DALProject.Models.KiloMetres", b =>
@@ -714,7 +716,7 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.Models.Technician", b =>
                 {
-                    b.HasOne("DALProject.Models.AppUser", "user")
+                    b.HasOne("DALProject.Models.AppUser", null)
                         .WithOne()
                         .HasForeignKey("DALProject.Models.Technician", "AppUserId");
 
@@ -725,8 +727,6 @@ namespace DALProject.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-
-                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("DALProject.Models.Ticket", b =>

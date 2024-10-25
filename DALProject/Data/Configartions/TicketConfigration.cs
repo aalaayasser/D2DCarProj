@@ -20,9 +20,7 @@ namespace DALProject.Data.Configartions
                .IsRequired()
                .HasColumnType("varchar(100)");
 
-             builder.Property(e => e.State)
-               
-               .HasColumnType("varchar(100)");
+            
 
              
            
@@ -34,9 +32,14 @@ namespace DALProject.Data.Configartions
              builder.Property(e => e.Feedback)
                .HasColumnType("text");
 
-            
 
-             
+            builder.Property(e => e.stateType)
+             .HasConversion(
+             (ST) => ST.ToString(),
+             (STAsString) => (StateType)Enum.Parse(typeof(StateType), STAsString, true)
+             );
+
+
 
         }
     }

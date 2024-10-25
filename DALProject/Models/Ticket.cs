@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace DALProject.Models
 {
+    public enum StateType
+    {
+        New = 1,
+        Assigned = 2,
+        Finished = 3
+    }
     public class Ticket : ModelClass
     {
         //public int Id { get; set; }
@@ -21,7 +27,7 @@ namespace DALProject.Models
         public string Location { get; set; }
 
         
-        public string? State { get; set; }
+        public virtual StateType stateType { get; set; }
 
         
         public string? FinalReport { get; set; } = null!;
@@ -38,10 +44,10 @@ namespace DALProject.Models
         
         
 
-        [InverseProperty(nameof(Appointment.Tickets))]
+        //[InverseProperty(nameof(Appointment.Tickets))]
         public virtual ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
 
-        [InverseProperty(nameof(Car.Tickets))]
+        //[InverseProperty(nameof(Car.Tickets))]
         public virtual Car Cars { get; set; }
 
         public virtual Service Service { get; set; }

@@ -67,7 +67,7 @@ namespace PLProj.Controllers
                 if (count > 0)
                 {
                     TempData["message"] = "vehicle has been Added Successfully";
-                    return RedirectToAction("Get", "Car");
+                    return RedirectToAction(nameof(Index));
                 }
             }
             return View(car);

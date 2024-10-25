@@ -6,10 +6,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 
 namespace PLProj.Controllers
@@ -31,19 +34,32 @@ namespace PLProj.Controllers
 
 		#region User
 		[Authorize(Roles = "Customer")]
-		public async Task<IActionResult> MyTicketAsync()
+		public async Task<IActionResult> MyTicket()
 		{
 			var _user = await _userManager.GetUserAsync(User);
 			var spec = new BaseSpecification<Customer>(c => c.AppUserId == _user.Id);
 			spec.Includes.Add(t => t.Cars);
+			//spec.AllIncludes.Add(t => t.Include(c => c.Cars).ThenInclude(c => c.Tickets));
 			var customer = unitOfWork.Repository<Customer>().GetEntityWithSpec(spec);
-			var myTicketList = customer.Cars.SelectMany(s => s.Tickets).ToList();
+
+            var myTicketList = new List<Ticket>();
+
+			foreach (var item in customer?.Cars)
+			{
+				foreach (var tic in item.Tickets)
+				{
+                    myTicketList.Add(tic);
+                }
+            }
+
+			//var myTicketList = customer?.Cars?.SelectMany(s => s.Tickets.SelectMany(t=>t)).ToList();
 
 			//ViewData["Services"] = unitOfWork.Repository<Service>().GetAll();
 
 			return View(myTicketList);
 		}
-		public async Task<IActionResult> AddTicketAsync()
+        [Authorize(Roles = "Customer")]
+        public async Task<IActionResult> AddTicket()
 		{
 
 			var _user = await _userManager.GetUserAsync(User);
@@ -57,46 +73,21 @@ namespace PLProj.Controllers
 			return View();
 		}
 		[HttpPost]
-		public async Task<IActionResult> AddTicketAsync(TicketViewModelCustomer ticket)
+		public async Task<IActionResult> AddTicket(TicketViewModelCustomer ticket)
 		{
-			/*
-			//var _user = await _userManager.GetUserAsync(User);
-			//var spec = new BaseSpecification<Customer>(c => c.AppUserId == _user.Id);
-			//spec.Includes.Add(t => t.Cars);
-			//var customer = unitOfWork.Repository<Customer>().GetEntityWithSpec(spec);
-			//ViewData["Services"] = unitOfWork.Repository<Service>().GetAll();
+			
 
-			//if (customer != null)
-			//{
-			//	if (customer.Cars.Any())
-			//	{
-			//		ViewData["CarsList"] = customer.Cars.Select(c => new SelectListItem
-			//		{
-			//			Value = c.Id.ToString(),
-			//			Text = c.Model.Name
-			//		}).ToList();
-			//	}
-			//	else
-			//	{
-			//		// رسالة خطأ إذا لم يكن هناك سيارات
-			//		ModelState.AddModelError("", "No cars found for this customer.");
-			//	}
-			//}
-			//else
-			//{
-			//	// رسالة خطأ إذا لم يتم العثور على العميل
-			//	ModelState.AddModelError("", "Customer not found.");
-			//}*/
-
+			
 			if (ModelState.IsValid)
 			{
 				try
 				{
+					ticket.stateType = StateType.New;
 					unitOfWork.Repository<Ticket>().Add((Ticket)ticket);
 					unitOfWork.Complete();
 					TempData["Message"] = "Ticket has been Added Successfully";
 
-					return RedirectToAction(nameof(Index));
+					return RedirectToAction(nameof(MyTicket));
 				}
 				catch (Exception ex)
 				{
@@ -116,67 +107,115 @@ namespace PLProj.Controllers
 		[Authorize(Roles = "Admin")]
 		public IActionResult AllTicket()
 		{
+			var spec = new BaseSpecification<Ticket>( e => e.stateType == StateType.New);
+			var ticketList = unitOfWork.Repository<Ticket>().GetAllWithSpec(spec);
 
 
-			return View();
-		}
-		#endregion
-
-		#region Technician
-		[Authorize(Roles = "Technician")]
-		public IActionResult AssignedTicket()
-		{
-
-
-			return View();
-		}
-		#endregion
-
-		public IActionResult Index()
-		{
-
-
-
-			var tickets = unitOfWork.Repository<Ticket>().GetAll().Select(c => new
-			{
-				CustomerViewModel = (TicketViewModelCustomer)c,
-				TechnicianViewModel = (TicketViewModelTechnician)c
-			}).ToList();
-
-			return View(tickets);
+			return View(ticketList);
 		}
 
-
-		public IActionResult CreateTechnician()
+		public IActionResult AddAppointment( int? Id)
 		{
-			return View();
+            if (!Id.HasValue)
+                return BadRequest();
+
+            var spec = new BaseSpecification<Ticket>(e => e.Id == Id.Value);
+            
+            var ticket = unitOfWork.Repository<Ticket>().GetEntityWithSpec(spec);
+
+            if (ticket is null)
+                return NotFound();
+            ViewData["Technicain"] = new SelectList(unitOfWork.Repository<Technician>().GetAll().Select(e=> new{ Id = e.Id , Name = e.user.Name }), "Id", "Name");
+            ViewData["Driver"] = new SelectList(unitOfWork.Repository<Driver>().GetAll().Select(e=> new{ Id = e.Id , Name = e.user.Name }), "Id", "Name");
+            
+
+            return View((AddAppointmentViewModel)ticket);
+            
 		}
 		[HttpPost]
-		public async Task<IActionResult> CreateTechnician(TicketViewModelTechnician ticket)
+        public IActionResult AddAppointment([FromRoute]int? Id, AddAppointmentViewModel model )
 		{
-			var _user = await _userManager.GetUserAsync(User);
-			var spec = new BaseSpecification<Technician>(c => c.AppUserId == _user.Id);
+			if(!Id.HasValue)
+				return BadRequest();
 
-			var tech = unitOfWork.Repository<Technician>().GetEntityWithSpec(spec);
-			ViewData["Services"] = unitOfWork.Repository<Service>().GetAll();
-
-			if (ModelState.IsValid)
-			{
-				ticket.Id = tech.Id;
-				if (tech != null)
-				{
-					unitOfWork.Repository<Ticket>().Add((Ticket)ticket);
-					var count = unitOfWork.Complete();
-					if (count > 0)
+            if (ModelState.IsValid)
+            {
+                try
+                {
+					model.TicketId = Id.Value;
+					unitOfWork.Repository<Appointment>().Add((Appointment)model);
+					var spec = new BaseSpecification<Ticket>(e => e.Id == Id);
+					var ticket = unitOfWork.Repository<Ticket>().GetEntityWithSpec(spec);
+					if (ticket is not null)
 					{
-						TempData["message"] = "Ticket has been Added Successfully";
-						return RedirectToAction("Index", "Ticket");
-					}
-				}
+						ticket.StartDateTime = model.StartDateTime;
+						ticket.stateType = StateType.Assigned;
 
-			}
-			return View(ticket);
-		}
+					}	
+					unitOfWork.Repository<Ticket>().Update(ticket);
+				
+					unitOfWork.Complete();
 
-	}
+                    
+                    TempData["Message"] = "Appointment has been Added Successfully";
+
+                    return RedirectToAction(nameof(AllTicket));
+                }
+                catch (Exception ex)
+                {
+                    if (env.IsDevelopment())
+                        ModelState.AddModelError(string.Empty, ex.Message);
+                    else
+                        ModelState.AddModelError(string.Empty, "An Error Has Occurred during At Appointment ");
+					
+                }
+            }
+            return View(model);
+
+        }
+
+        #endregion
+
+        #region Technician
+        [Authorize(Roles = "Technician")]
+		
+        public async Task<IActionResult> AssignedTicket()
+        {
+            
+            var user = await _userManager.GetUserAsync(User);
+			var techspec = new BaseSpecification<Technician>(e => e.AppUserId == user.Id);
+			var tech = unitOfWork.Repository<Technician>().GetEntityWithSpec(techspec);
+            var spec = new BaseSpecification<Ticket>(e => e.stateType == StateType.Assigned && e.Appointments.Any(ap=>ap.TechnicianId == tech.Id));
+            var ticketList = unitOfWork.Repository<Ticket>().GetAllWithSpec(spec);
+            return View(ticketList);
+        }
+
+
+		//Action get
+		// action saveview update 
+
+
+        #endregion
+
+        #region Driver
+        [Authorize(Roles = "Driver")]
+
+        public async Task<IActionResult> AssignedDriverTicket()
+        {
+			//justview  show for him ( ticket appointment)
+            var user = await _userManager.GetUserAsync(User);
+            var Driverspec = new BaseSpecification<Driver>(e => e.AppUserId == user.Id);
+            var driver = unitOfWork.Repository<Driver>().GetEntityWithSpec(Driverspec);
+            var spec = new BaseSpecification<Ticket>(e => e.stateType == StateType.Assigned && e.Appointments.Any(ap => ap.DriverId == driver.Id));
+            var ticketList = unitOfWork.Repository<Ticket>().GetAllWithSpec(spec);
+            return View(ticketList);
+        }
+        #endregion
+
+		
+
+
+
+
+    }
 }

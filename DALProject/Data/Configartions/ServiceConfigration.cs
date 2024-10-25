@@ -23,6 +23,8 @@ namespace DALProject.Data.Configartions
             builder.Property(s =>s.Description)
                 .HasColumnType("text");
 
+            
+
         }
     }
 }

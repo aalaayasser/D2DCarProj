@@ -16,8 +16,12 @@ namespace DALProject.Data.Configartions
         public void Configure(EntityTypeBuilder<Appointment> builder)
         {
             builder.Property(e => e.PartialReport)
-                .IsRequired()
+                .IsRequired(false)
                 .HasColumnType("text");
+            builder.HasOne(e => e.Technicians)
+                .WithMany(s => s.Appointments)
+                .HasForeignKey(e => e.TechnicianId)
+                .OnDelete( DeleteBehavior.NoAction);
 
 
         }

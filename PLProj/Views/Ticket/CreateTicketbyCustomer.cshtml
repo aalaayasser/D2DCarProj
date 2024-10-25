@@ -2,15 +2,15 @@
 @inject IUnitOfWork unitOfWork
 @{
     var Services = new SelectList(unitOfWork.Repository<Service>().GetAll(), "Id", "Name");
-    
+   
 }
 @{
-    ViewData["Title"] = "CreateCustomer";
+    ViewData["Title"] = "CreateTicket";
 }
 
 <h1>Create a Ticket as a Customer</h1>
 
-div class="row" style="margin-top: 130px;">
+
 <div class="col-md-6 offset-md-3">
     <div class="hive-box" style="border: 1px solid #dee2e6; border-radius: 5px; padding: 20px; background-color: #f8f9fa;">
         
@@ -46,7 +46,7 @@ div class="row" style="margin-top: 130px;">
                 </select>
                 <span asp-validation-for="ServiceId" class="text-danger"> </span>
             </div>
-
+            
             <br />
             <div class="form-group text-center mb-2">
                 <input type="submit" style="margin-left: 5px; margin-top: 110px;" class="main-btn" value="Sign Up" />

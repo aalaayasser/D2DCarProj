@@ -47,7 +47,7 @@ namespace DALProject.Data.Configurations
 
             builder.Property(e => e.LicenseExpDate)
               .IsRequired();
-            builder.HasOne<AppUser>().WithOne().HasForeignKey<Driver>(e => e.AppUserId);
+            builder.HasOne(e=>e.user).WithOne().HasForeignKey<Driver>(e => e.AppUserId);
         }
     }
 }
