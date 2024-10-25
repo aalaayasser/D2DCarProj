@@ -101,6 +101,11 @@
 								{
 									<a asp-action="GetServices" asp-controller="Services"> Services</a>
 								}
+
+								@* @if (User.IsInRole("Technician")) *@
+								@* { *@
+									<a asp-action="AssignedDriverTicket" asp-controller="Ticket"> Tickets</a>
+								@* } *@
 								<a asp-action="GetServices" asp-controller="Services"> Services</a>
 								<a asp-action="Index" asp-controller="Car">  Cars </a>
 								<a id="Logout" asp-controller="Account" asp-action="Logout">Logout</a>

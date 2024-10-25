@@ -56,7 +56,7 @@ namespace PLProj.Controllers
 
 			//ViewData["Services"] = unitOfWork.Repository<Service>().GetAll();
 
-			return View(myTicketList);
+			return View(myTicketList); 
 		}
         [Authorize(Roles = "Customer")]
         public async Task<IActionResult> AddTicket()
@@ -208,6 +208,8 @@ namespace PLProj.Controllers
             var ticketList = unitOfWork.Repository<Ticket>().GetAllWithSpec(spec);
             return View(ticketList);
         }
+
+
         #endregion
 
 

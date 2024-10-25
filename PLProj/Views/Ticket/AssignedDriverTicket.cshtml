@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Ticket>
+@{
+    ViewData["Title"] = "Assigned Tickets for Driver";
+}
+
+<h1>Assigned Tickets</h1>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+@if (Model?.Count() > 0)
+{
+    <table class="mt-4 table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(D => D.Cars.PlateNumber)</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Service</th>
+                <th>Appointment Date</th>
+                <th>Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ticket in Model)
+            {
+                <tr>
+                    <td>@ticket.Cars.PlateNumber</td>
+                    <td>@ticket.Cars.Model.Brand.Name</td>
+                    <td>@ticket.Cars.Model.Name</td>
+                    <td>@ticket.Service.Name</td>
+                    <td>@ticket.Appointments.FirstOrDefault()?.StartDateTime.ToString("g")</td>
+                    <td>@ticket.Location</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="mt-4 text-center">
+        <h3 class="text-muted">There are No Tickets Assigned to You!</h3>
+    </div>
+}
