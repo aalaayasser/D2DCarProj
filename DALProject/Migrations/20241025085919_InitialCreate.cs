@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DALProject.Data.Migrations
+namespace DALProject.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
@@ -284,7 +284,6 @@ namespace DALProject.Data.Migrations
                     Name = table.Column<string>(type: "varchar(100)", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(8,2)", nullable: false),
-                    EstimatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -414,7 +413,7 @@ namespace DALProject.Data.Migrations
                     CurrentKilometres = table.Column<long>(type: "bigint", nullable: false),
                     StartDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Location = table.Column<string>(type: "varchar(100)", nullable: false),
-                    State = table.Column<string>(type: "varchar(100)", nullable: true),
+                    stateType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FinalReport = table.Column<string>(type: "text", nullable: true),
                     EndDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CarId = table.Column<int>(type: "int", nullable: false),
@@ -444,13 +443,12 @@ namespace DALProject.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PartialReport = table.Column<string>(type: "text", nullable: false),
+                    PartialReport = table.Column<string>(type: "text", nullable: true),
                     StartDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndtDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TechnicalId = table.Column<int>(type: "int", nullable: false),
+                    TechnicianId = table.Column<int>(type: "int", nullable: false),
                     DriverId = table.Column<int>(type: "int", nullable: false),
-                    TicketId = table.Column<int>(type: "int", nullable: false),
-                    TechniciansId = table.Column<int>(type: "int", nullable: true)
+                    TicketId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -462,8 +460,8 @@ namespace DALProject.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Appointments_Technicians_TechniciansId",
-                        column: x => x.TechniciansId,
+                        name: "FK_Appointments_Technicians_TechnicianId",
+                        column: x => x.TechnicianId,
                         principalTable: "Technicians",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -480,9 +478,9 @@ namespace DALProject.Data.Migrations
                 column: "DriverId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Appointments_TechniciansId",
+                name: "IX_Appointments_TechnicianId",
                 table: "Appointments",
-                column: "TechniciansId");
+                column: "TechnicianId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Appointments_TicketId",

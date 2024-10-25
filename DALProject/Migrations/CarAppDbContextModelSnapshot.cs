@@ -4,19 +4,16 @@ using DALProject;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DALProject.Data.Migrations
+namespace DALProject.Migrations
 {
     [DbContext(typeof(CarAppDbContext))]
-    [Migration("20241024235841_State")]
-    partial class State
+    partial class CarAppDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -120,16 +117,12 @@ namespace DALProject.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("PartialReport")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTime>("StartDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("TechnicalId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TechniciansId")
+                    b.Property<int>("TechnicianId")
                         .HasColumnType("int");
 
                     b.Property<int>("TicketId")
@@ -139,7 +132,7 @@ namespace DALProject.Data.Migrations
 
                     b.HasIndex("DriverId");
 
-                    b.HasIndex("TechniciansId");
+                    b.HasIndex("TechnicianId");
 
                     b.HasIndex("TicketId");
 
@@ -626,7 +619,9 @@ namespace DALProject.Data.Migrations
 
                     b.HasOne("DALProject.Models.Technician", "Technicians")
                         .WithMany("Appointments")
-                        .HasForeignKey("TechniciansId");
+                        .HasForeignKey("TechnicianId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("DALProject.Models.Ticket", "Tickets")
                         .WithMany("Appointments")
@@ -677,9 +672,11 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.Models.Driver", b =>
                 {
-                    b.HasOne("DALProject.Models.AppUser", null)
+                    b.HasOne("DALProject.Models.AppUser", "user")
                         .WithOne()
                         .HasForeignKey("DALProject.Models.Driver", "AppUserId");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("DALProject.Models.KiloMetres", b =>
@@ -717,7 +714,7 @@ namespace DALProject.Data.Migrations
 
             modelBuilder.Entity("DALProject.Models.Technician", b =>
                 {
-                    b.HasOne("DALProject.Models.AppUser", null)
+                    b.HasOne("DALProject.Models.AppUser", "user")
                         .WithOne()
                         .HasForeignKey("DALProject.Models.Technician", "AppUserId");
 
@@ -728,6 +725,8 @@ namespace DALProject.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("DALProject.Models.Ticket", b =>

@@ -96,7 +96,7 @@
 						<ul class="navbar-nav  ">
 							@if (User.Identity.IsAuthenticated)
 							{
-								<a asp-action="Book" asp-controller="Home"> Appointment </a>
+								<a asp-action="Appointment" asp-controller="Book"> Appointment </a>
 								@if (User.IsInRole("Admin"))
 								{
 									<a asp-action="GetServices" asp-controller="Services"> Services</a>

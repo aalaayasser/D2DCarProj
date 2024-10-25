@@ -14,9 +14,11 @@
 <div class="form-group">
 	<label asp-for="Color" class="form-label"> </label>
 	<input class="form-control" asp-for="Color.Name" readonly/>
-	<span asp-validation-for="ColorId" class="text-danger"> </span>
 </div>
-
+<div class="form-group">
+	<label asp-for="PlateNumber"> </label>
+	<input class="form-control" asp-for="PlateNumber" readonly>
+</div>
 <div class="form-group">
 	<label asp-for="Description"> </label>
 	<input class="form-control" asp-for="Description" readonly>

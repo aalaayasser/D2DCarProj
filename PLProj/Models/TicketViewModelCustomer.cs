@@ -20,8 +20,9 @@ namespace DALProject.Models
 		[Required]
 		public string Location { get; set; }
 		//public string Feedback { get; set; }
-
+		[Display(Name = "Plate Number Of Car ")]
 		public int CarId { get; set; }
+		[Display(Name = "Serviced Name")]
 		public int ServiceId { get; set; }
 
         

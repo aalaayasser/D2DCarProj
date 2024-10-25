@@ -101,8 +101,6 @@ namespace PLProj.Controllers
 		}
 		#endregion
 
-
-
 		#region Admin => to manage opreations
 		[Authorize(Roles = "Admin")]
 		public IActionResult AllTicket()
@@ -211,10 +209,6 @@ namespace PLProj.Controllers
             return View(ticketList);
         }
         #endregion
-
-		
-
-
 
 
     }
