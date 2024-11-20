@@ -10,9 +10,11 @@ namespace DALProject.Models
     public class AppUser : IdentityUser
     {
         //public int Id { get; set; }
+      
         public string Name { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
         public long ContactNumber { get; set; }
+        //coment
     }
 }
