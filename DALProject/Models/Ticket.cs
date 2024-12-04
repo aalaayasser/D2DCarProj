@@ -51,6 +51,10 @@ namespace DALProject.Models
         public virtual Car Cars { get; set; }
 
         public virtual Service Service { get; set; }
+
+        //public int InvoiceId { get; set; }
+        //public virtual Invoice Invoice { get; set; }
+        
     }
 
 }

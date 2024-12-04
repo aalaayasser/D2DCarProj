@@ -1,0 +1,73 @@
+﻿@model IEnumerable<PartViewModel>
+
+@{
+    ViewData["Title"] = "Parts";
+}
+<br />
+<br />
+@if (TempData["Message"] is not null)
+{
+    <div id="successMessage" class="alert alert-success mt-4">
+        <h3>@TempData["Message"]</h3>
+    </div>
+
+    <script>
+
+        setTimeout(function () {
+
+            var successMessage = document.getElementById("successMessage");
+            if (successMessage) {
+                successMessage.style.display = 'none';
+            }
+        }, 3000);
+    </script>
+}
+<div class="d-flex justify-content-center align-items-center flex-column mt-4">
+
+    <h2>Parts</h2>
+</div>
+@if (Model.Count() > 0)
+{
+    <table class="mt-4 table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(D => D.Model.Name)</th>
+                <th>@Html.DisplayNameFor(D => D.PartName)</th>
+                <th>@Html.DisplayNameFor(D => D.Price)</th>
+                
+                <th>Details</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Ser in Model)
+            {
+                <tr>
+                    <td>@Ser.Model.Name</td>
+                    <td>@Ser.PartName</td>
+                    <td>@Ser.Price</td>
+                    
+
+
+                    <partial name="_ButtonPartial" model="@Ser.Id" />
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="mt-4 text-center">
+        <h3 class="text-muted">There are No Parts!</h3>
+    </div>
+}
+<div class="d-flex justify-content-center align-items-center flex-column mt-4">
+    <!-- زر إضافة خدمة جديدة -->
+    <a asp-controller="Parts" asp-action="Create" class="btn btn-dark mb-3">
+        @* <i class="fas fa-thin fa-square-plus"><i/> *@
+        Add New part
+    </a>
+
+</div>

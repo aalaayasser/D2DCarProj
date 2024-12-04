@@ -16,6 +16,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using DALProject.Data.Seeding;
 using Microsoft.Extensions.Options;
+using DALProject.Models.sss;
+using Stripe;
 
 namespace PLProj
 {
@@ -24,6 +26,10 @@ namespace PLProj
         public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            #region Stripe
+            builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+            StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
+    #endregion;
 
             #region ConfigureServices
             builder.Services.AddControllersWithViews();

@@ -33,8 +33,37 @@ namespace PLProj.Controllers
             this.env = env;
         }
 
-        #region User
-        [Authorize(Roles = "Customer")]
+		#region User
+		[Authorize(Roles = "Customer")]
+		public class YourController : Controller
+		{
+			
+			public IActionResult ChooseAddOption()
+			{
+				return View();
+			}
+
+			
+			[HttpPost]
+			public IActionResult ChooseAddOption(string option)
+			{
+				var options = new Dictionary<string, string>
+		{
+			{ "Service", "AddService" },
+			{ "Part", "AddPart" }
+		};
+
+				if (options.ContainsKey(option))
+				{
+					return RedirectToAction(options[option]);
+				}
+
+				return RedirectToAction("MyTicket");
+			}
+		}
+
+
+		[Authorize(Roles = "Customer")]
         public async Task<IActionResult> MyTicket()
         {
             var _user = await _userManager.GetUserAsync(User);
@@ -60,7 +89,7 @@ namespace PLProj.Controllers
             return View(myTicketList);
         }
         [Authorize(Roles = "Customer")]
-        public async Task<IActionResult> AddTicket()
+        public async Task<IActionResult> AddService()
         {
 
             var _user = await _userManager.GetUserAsync(User);
@@ -75,7 +104,7 @@ namespace PLProj.Controllers
         }
         [HttpPost]
 		[Authorize(Roles = "Customer")]
-		public async Task<IActionResult> AddTicket(TicketViewModelCustomer ticket)
+		public async Task<IActionResult> AddService(TicketViewModelCustomer ticket)
         {
 
 

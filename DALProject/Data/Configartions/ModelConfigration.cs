@@ -17,8 +17,7 @@ namespace DALProject.Data.Configartions
            .IsRequired()
            .HasColumnType("text");
 
-            builder.HasMany(e => e.Parts)
-              .WithMany(e => e.Models);
+            
         }
     }
 }

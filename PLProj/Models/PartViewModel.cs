@@ -24,6 +24,10 @@ namespace DALProject.Models
         [Display(Name = "Kilometres to Change Part")]
         public long PartKilometresToChange { get; set; }
 
+        public int ModelId { get; set; }
+        public virtual Model Model { get; set; }
+
+
         #region Mapping
         public static explicit operator PartViewModel(Part model)
         {
@@ -33,6 +37,9 @@ namespace DALProject.Models
                 PartName = model.PartName,
                 Price = model.Price,
                 PartKilometresToChange = model.PartKilometresToChange,
+                Model = model.Model,
+               ModelId = model.ModelId
+
             };
         }
 
@@ -44,6 +51,8 @@ namespace DALProject.Models
                 PartName = viewModel.PartName,
                 Price = viewModel.Price,
                 PartKilometresToChange = viewModel.PartKilometresToChange,
+                ModelId = viewModel.ModelId
+                
                 
             };
         }

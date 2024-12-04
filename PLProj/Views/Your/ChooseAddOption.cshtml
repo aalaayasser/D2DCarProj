@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Choose  Option";
+}
+
+<h1>Choose What You Want to Add</h1>
+
+<form asp-controller="Ticket" asp-action="ChooseAddOption" method="post">
+    <div class="form-group">
+        <label for="option" class="form-label">What would you like to add?</label>
+        <select id="option" name="option" class="form-control">
+            <option value="Service">Add Service</option>
+            <option value="Part">Buy Part</option>
+        </select>
+    </div>
+
+    <input type="submit" class="btn btn-dark" value="Next" />
+</form>
+
+

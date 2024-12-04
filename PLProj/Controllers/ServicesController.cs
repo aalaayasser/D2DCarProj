@@ -39,6 +39,7 @@ namespace PLProj.Controllers
 		#region CreateServic
 		public IActionResult Create()
         {
+            
 
             return View();
         }
