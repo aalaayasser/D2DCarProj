@@ -18,39 +18,29 @@ namespace DALProject.Models
     {
         //public int Id { get; set; }
         
-        public long  CurrentKilometres { get; set; }
-
-        
-        public DateTime? StartDateTime { get; set; }
-
-        
-        public string Location { get; set; }
-
-        
-        public virtual StateType stateType { get; set; }
-
-        
+        public long  CurrentKilometres { get; set; }    
+        public DateTime? StartDateTime { get; set; }    
+        public string Location { get; set; }    
+        public virtual StateType stateType { get; set; }     
         public string? FinalReport { get; set; } = null!;
-
         public DateTime? EndDateTime { get; set; }
-
-        
-
-        public int CarId { get; set; }
-        public int ServiceId { get; set; }
-
         public string Feedback { get; set; }
 
-        
-        
+
+        public int ServiceId { get; set; }
+        public virtual Service Service { get; set; }
+
+        //public virtual ICollection<Service> Services { get; set; } = new HashSet<Service>();
+        //public virtual ICollection<Part> Parts { get; set; } = new HashSet<Part>();
+
 
         //[InverseProperty(nameof(Appointment.Tickets))]
         public virtual ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
 
         //[InverseProperty(nameof(Car.Tickets))]
+        public int CarId { get; set; }
         public virtual Car Cars { get; set; }
 
-        public virtual Service Service { get; set; }
 
         //public int InvoiceId { get; set; }
         //public virtual Invoice Invoice { get; set; }

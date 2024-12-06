@@ -1,9 +1,18 @@
 ﻿@model TicketViewModelCustomer
 
 @{
-    var CarList = new SelectList(ViewData["CarList"] as IEnumerable<Car>, "Id", "PlateNumber");
-    var ServiceList = new SelectList(ViewData["Services"] as IEnumerable<Service>, "Id", "Name");
-    ViewData["Title"] = "Add Ticket";
+    SelectList CarList = null; // تعريف المتغير خارج أي كتلة
+    if (ViewData["CarList"] != null)
+    {
+        CarList = new SelectList(ViewData["CarList"] as IEnumerable<Car>, "Id", "PlateNumber");
+    }
+    SelectList ServiceList = null;
+    if (ViewData["Services"] != null)
+    {
+        ServiceList = new SelectList(ViewData["Services"] as IEnumerable<Service>, "Id", "Name");
+    }
+
+    ViewData["Title"] = "Add Service";
 }
 
 <h1 class="text-center my-4">@ViewData["Title"]</h1>
@@ -24,12 +33,12 @@
 
             <div class="form-group">
                 <label asp-for="ServiceId" class="control-label"></label>
-                <select asp-for="ServiceId" asp-items="ServiceList" class="form-control" required>
-                    <option value="">--Select Service--</option>
+                <select asp-for="ServiceId" class="form-control" asp-items="ServiceList">
+                    <option value="">-- Select Part --</option>
                 </select>
                 <span asp-validation-for="ServiceId" class="text-danger"></span>
-            </div>
-
+				</di
+				v>
             <div class="form-group">
                 <label asp-for="CurrentKilometres" class="font-weight-bold"></label>
                 <input asp-for="CurrentKilometres" class="form-control" placeholder="Enter your Current Kilometres" />
@@ -43,7 +52,7 @@
             </div>
             <br />
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-dark" style="width: 150px;">Add Ticket</button>
+                <button type="submit" class="btn btn-dark" style="width: 150px;">Add Service</button>
             </div>
         </form>
     </div>

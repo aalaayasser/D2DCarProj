@@ -28,6 +28,9 @@ namespace DALProject.Data.Configartions
             builder.Property(p => p.PartKilometresToChange)
                 .IsRequired()
                 .HasColumnType("bigint");
+
+            builder.Property(s => s.Description)
+                .HasColumnType("text");
         }
     }
 }

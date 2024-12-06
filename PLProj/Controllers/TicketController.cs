@@ -34,35 +34,8 @@ namespace PLProj.Controllers
         }
 
 		#region User
-		[Authorize(Roles = "Customer")]
-		public class YourController : Controller
-		{
-			
-			public IActionResult ChooseAddOption()
-			{
-				return View();
-			}
-
-			
-			[HttpPost]
-			public IActionResult ChooseAddOption(string option)
-			{
-				var options = new Dictionary<string, string>
-		{
-			{ "Service", "AddService" },
-			{ "Part", "AddPart" }
-		};
-
-				if (options.ContainsKey(option))
-				{
-					return RedirectToAction(options[option]);
-				}
-
-				return RedirectToAction("MyTicket");
-			}
-		}
-
-
+		
+		
 		[Authorize(Roles = "Customer")]
         public async Task<IActionResult> MyTicket()
         {
@@ -89,7 +62,7 @@ namespace PLProj.Controllers
             return View(myTicketList);
         }
         [Authorize(Roles = "Customer")]
-        public async Task<IActionResult> AddService()
+        public async Task<IActionResult> AddTicket()
         {
 
             var _user = await _userManager.GetUserAsync(User);
@@ -99,16 +72,14 @@ namespace PLProj.Controllers
             var myCarList = customer.Cars;
             ViewData["CarList"] = myCarList;
             ViewData["Services"] = unitOfWork.Repository<Service>().GetAll();
+            
 
             return View();
         }
         [HttpPost]
 		[Authorize(Roles = "Customer")]
-		public async Task<IActionResult> AddService(TicketViewModelCustomer ticket)
+		public async Task<IActionResult> AddTicket(TicketViewModelCustomer ticket)
         {
-
-
-
             if (ModelState.IsValid)
             {
                 try

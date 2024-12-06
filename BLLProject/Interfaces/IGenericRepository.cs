@@ -26,6 +26,6 @@ namespace BLLProject.Interfaces
         public T GetEntityWithSpec(ISpecification<T> spec);
 
         public IEnumerable<T> GetAllWithSpec(ISpecification<T> spec);
-
+        
     }
 }

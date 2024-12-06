@@ -1,4 +1,5 @@
 ﻿using DALProject.Models;
+using DALProject.Models.sss;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -50,7 +51,7 @@ namespace DALProject
          public DbSet<Service> Services { get; set; }
         public DbSet<Color> Colors{ get; set; }
         public DbSet<Part> Parts { get; set; }
-
+        public DbSet<CartItem> CartItems { get; set; }
 
         #region TPC
         public DbSet<Customer> Customers { get; set; }

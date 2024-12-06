@@ -22,6 +22,6 @@ namespace DALProject.Models
         public virtual ICollection<Car> Cars { get; set; } = new HashSet<Car>();
         public virtual Brand Brand { get; set; } = null!;
 
-        public virtual ICollection<Part> Parts { get; set; } = new HashSet<Part>();
+        
     }
 }

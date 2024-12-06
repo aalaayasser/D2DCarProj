@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="~/font-awesome/css/all.min.css" />
 	<link rel="stylesheet" href="~/css/style.css?v=1.1">
 	<link rel="icon" href="imgs/Logo.png" type="image/x-icon">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 	<!-- fonts style -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,600,700&display=swap" rel="stylesheet" />
 </head>
@@ -170,11 +171,25 @@
 										<a class="nav-link" asp-action="MyTicket" asp-controller="Ticket">My Tickets</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" asp-action="AddService" asp-controller="Ticket">Add Ticket</a>
+										<a class="nav-link" asp-action="AddTicket" asp-controller="Ticket">Add Ticket</a>
 									</li>
 									<li class="nav-item">
-										<a class="nav-link" asp-action="ChooseAddOption" asp-controller="Ticket">Add Order</a>
+										<a class="nav-link" asp-action="Parts" asp-controller="Parts">Parts</a>
 									</li>
+									<li class="nav-item">
+										<a class="nav-link" asp-action="Index" asp-controller="Cart">
+											<!-- الزر الدائري مع الأيقونة -->
+											<button class="btn btn-dark rounded-circle"
+													style="border: none; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center;">
+												<i class="fas fa-shopping-cart" style="font-size: 20px;"></i>
+											</button>
+											<!-- عرض العدد داخل السلة (تحديث العدد حسب القيمة الحقيقية) -->
+											
+										</a>
+									</li>
+
+
+									
 
 								}
 

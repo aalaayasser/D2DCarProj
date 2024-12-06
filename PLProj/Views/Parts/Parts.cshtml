@@ -1,7 +1,7 @@
-﻿@model IEnumerable<ColorViewModel>
+﻿@model IEnumerable<PartViewModel>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Available Parts";
 }
 <br />
 @if (TempData["Message"] is not null)
@@ -22,32 +22,37 @@
 
 <!-- مربع يحتوي على كل العناصر -->
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-    <div class="shadow-lg rounded p-4" style="background-color: #fff; max-width: 700px; width: 100%;">
+    <div class="shadow-lg rounded p-4" style="background-color: #fff; max-width: 900px; width: 100%;">
 
-        <!-- عنوان Colors -->
+        <!-- عنوان Available Parts -->
         <div class="text-center mb-4">
-            <h2 style="font-weight: bold; font-size: 2rem; color: #333;">Colors</h2>
+            <h2 style="font-weight: bold; font-size: 2rem; color: #333;">Available Parts</h2>
         </div>
 
         <!-- رسالة الخطأ أو الجدول -->
-        @if (Model.Count() > 0)
+        @if (Model.Any())
         {
             <div class="table-responsive mt-4">
                 <table class="table table-bordered table-hover text-center shadow-sm rounded">
                     <thead class="table-dark">
                         <tr>
-                            <th>@Html.DisplayNameFor(D => D.Name)</th>
+                            <th>@Html.DisplayNameFor(D => D.PartName)</th>
+                            <th>@Html.DisplayNameFor(D => D.Description)</th>
+                            <th>@Html.DisplayNameFor(D => D.Price)</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var Ser in Model)
+                        @foreach (var part in Model)
                         {
                             <tr>
-                                <td>@Ser.Name</td>
+                                <td>@part.PartName</td>
+                                <td>@part.Description</td>
+                                <td>@part.Price.ToString("C")</td>
                                 <td>
-                                    <a asp-action="Delete" asp-route-Id="@Ser.Id" class="btn btn-dark btn-sm shadow-sm">
-                                        <i class="fas fa-trash"></i> Delete
+                                    <a asp-action="AddToCart" asp-controller="Cart" asp-route-partId="@part.Id"
+                                       class="btn btn-dark btn-sm shadow-sm">
+                                        <i class="fas fa-shopping-cart"></i> Add to Cart
                                     </a>
                                 </td>
                             </tr>
@@ -59,14 +64,14 @@
         else
         {
             <div class="mt-4 text-center">
-                <h3 class="text-muted">There are No Colors!</h3>
+                <h3 class="text-muted">No parts available!</h3>
             </div>
         }
 
-        <!-- زر إضافة لون جديد -->
+        <!-- زر إضافة جزء جديد -->
         <div class="d-flex justify-content-center align-items-center mt-4">
-            <a asp-controller="Color" asp-action="AddColor" class="btn btn-dark shadow-sm px-4 py-2">
-                <i class="fas fa-plus-circle"></i> Add New Color
+            <a asp-controller="Part" asp-action="AddPart" class="btn btn-dark shadow-sm px-4 py-2">
+                <i class="fas fa-plus-circle"></i> Add New Part
             </a>
         </div>
     </div>
@@ -124,3 +129,4 @@
         padding: 30px;
     }
 </style>
+

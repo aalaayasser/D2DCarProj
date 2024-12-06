@@ -53,5 +53,7 @@ namespace BLLProject.Repositories
 
         public IEnumerable<T> GetAllWithSpec(ISpecification<T> spec) =>
              SpecificationEvalutor<T>.GetQuery(dbContect.Set<T>(), spec).AsNoTracking().ToList();
+
+       
     }
 }

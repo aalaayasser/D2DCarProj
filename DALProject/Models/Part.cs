@@ -14,14 +14,12 @@ namespace DALProject.Models
 
 
         public string PartName { get; set; }
-
-
-
         public int Price { get; set; }
-
-
         public long PartKilometresToChange { get; set; }
-        public int ModelId { get; set; }
-        public virtual Model Model { get; set; } 
+        public string Description { get; set; }
+
+
+       
+        
     }
 }

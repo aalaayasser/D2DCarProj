@@ -4,6 +4,7 @@ using DALProject;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DALProject.Migrations
 {
     [DbContext(typeof(CarAppDbContext))]
-    partial class CarAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241205205546_c")]
+    partial class c
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -466,14 +469,11 @@ namespace DALProject.Migrations
 
             modelBuilder.Entity("DALProject.Models.sss.CartItem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CartItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartItemId"));
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -481,12 +481,13 @@ namespace DALProject.Migrations
                     b.Property<int>("PartId")
                         .HasColumnType("int");
 
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
+                    b.HasKey("CartItemId");
 
                     b.HasIndex("PartId");
 
@@ -767,19 +768,11 @@ namespace DALProject.Migrations
 
             modelBuilder.Entity("DALProject.Models.sss.CartItem", b =>
                 {
-                    b.HasOne("DALProject.Models.Customer", "Customer")
-                        .WithMany("CartItems")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DALProject.Models.Part", "Part")
                         .WithMany()
                         .HasForeignKey("PartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Customer");
 
                     b.Navigation("Part");
                 });
@@ -862,8 +855,6 @@ namespace DALProject.Migrations
             modelBuilder.Entity("DALProject.Models.Customer", b =>
                 {
                     b.Navigation("Cars");
-
-                    b.Navigation("CartItems");
                 });
 
             modelBuilder.Entity("DALProject.Models.Driver", b =>

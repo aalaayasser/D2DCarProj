@@ -9,6 +9,8 @@ using Microsoft.Extensions.Logging;
 using System.Linq;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using System.Threading.Tasks;
+using BLLProject.Repositories;
 
 namespace PLProj.Controllers
 {
@@ -28,6 +30,7 @@ namespace PLProj.Controllers
 		}
         #region Admin
         [Authorize(Roles = "Admin")]
+        
         public IActionResult Index()
 		{
 			var Parts = unitOfWork.Repository<Part>().GetAll().Select(p => (PartViewModel)p).ToList();
@@ -40,7 +43,7 @@ namespace PLProj.Controllers
         #region Create
         public IActionResult Create()
 		{
-			ViewData["Models"] = unitOfWork.Repository<Model>().GetAll();
+			//ViewData["Models"] = unitOfWork.Repository<Model>().GetAll();
 
 			return View();
 		}
@@ -72,9 +75,8 @@ namespace PLProj.Controllers
 			if (!Id.HasValue)
 				return BadRequest();
 
-			var spec = new BaseSpecification<Part>
-			(e => e.Id == Id.Value);
-			spec.Includes.Add(e => e.Model);
+			var spec = new BaseSpecification<Part>(e => e.Id == Id.Value);
+			
 			var part = unitOfWork.Repository<Part>().GetEntityWithSpec(spec);
 
 			if (part is null)
@@ -159,6 +161,29 @@ namespace PLProj.Controllers
         #endregion
         #endregion
 
+        #region Customer
+
+        public async Task<IActionResult> Parts()
+        {
+            var _user = await _userManager.GetUserAsync(User);
+            var spec = new BaseSpecification<Customer>(c => c.AppUserId == _user.Id);           
+            var customer = unitOfWork.Repository<Customer>().GetEntityWithSpec(spec);
+            var parts = unitOfWork.Repository<Part>().GetAll()
+                    .Select(p => new PartViewModel
+                    {
+                        Id = p.Id,
+                        PartName = p.PartName,
+                        Price = p.Price,
+                        Description = p.Description
+                    }).ToList();
+
+            return View(parts);
+        }
+
+   
+	
+
+        #endregion
 
     }
 

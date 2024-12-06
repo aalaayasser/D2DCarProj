@@ -4,6 +4,7 @@ using DALProject;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DALProject.Migrations
 {
     [DbContext(typeof(CarAppDbContext))]
-    partial class CarAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241204160113_223")]
+    partial class _223
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -464,7 +467,7 @@ namespace DALProject.Migrations
                     b.ToTable("Tickets");
                 });
 
-            modelBuilder.Entity("DALProject.Models.sss.CartItem", b =>
+            modelBuilder.Entity("DALProject.Models.sss.Cart", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -472,25 +475,17 @@ namespace DALProject.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("PartId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int>("count")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
-
                     b.HasIndex("PartId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("Cart");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -765,21 +760,13 @@ namespace DALProject.Migrations
                     b.Navigation("Service");
                 });
 
-            modelBuilder.Entity("DALProject.Models.sss.CartItem", b =>
+            modelBuilder.Entity("DALProject.Models.sss.Cart", b =>
                 {
-                    b.HasOne("DALProject.Models.Customer", "Customer")
-                        .WithMany("CartItems")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("DALProject.Models.Part", "Part")
                         .WithMany()
                         .HasForeignKey("PartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Customer");
 
                     b.Navigation("Part");
                 });
@@ -862,8 +849,6 @@ namespace DALProject.Migrations
             modelBuilder.Entity("DALProject.Models.Customer", b =>
                 {
                     b.Navigation("Cars");
-
-                    b.Navigation("CartItems");
                 });
 
             modelBuilder.Entity("DALProject.Models.Driver", b =>

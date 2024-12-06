@@ -11,7 +11,7 @@ namespace DALProject.Models
 {
 	public class TicketViewModelCustomer 
 	{
-		public int Id { get; set; }
+		//public int Id { get; set; }
 
 		[Required]
 		[Display(Name = "Current Kilometres")]
@@ -35,7 +35,6 @@ namespace DALProject.Models
 		{
 			return new TicketViewModelCustomer
 			{
-				Id = model.Id,
 				CurrentKilometres = model.CurrentKilometres,
 
 				Location = model.Location,
@@ -54,7 +53,6 @@ namespace DALProject.Models
 		{
 			return new Ticket
 			{
-				Id = viewModel.Id,
 				CurrentKilometres = viewModel.CurrentKilometres,
 
 				Location = viewModel.Location,

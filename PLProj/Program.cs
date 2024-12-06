@@ -1,4 +1,4 @@
-using BLLProject.Interfaces;
+﻿using BLLProject.Interfaces;
 using BLLProject.Repositories;
 using DALProject.Models;
 using DALProject;
@@ -18,6 +18,8 @@ using DALProject.Data.Seeding;
 using Microsoft.Extensions.Options;
 using DALProject.Models.sss;
 using Stripe;
+using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
 
 namespace PLProj
 {
@@ -27,13 +29,18 @@ namespace PLProj
         {
             var builder = WebApplication.CreateBuilder(args);
             #region Stripe
-            builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
-            StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
+            //builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
+            //StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
     #endregion;
 
             #region ConfigureServices
             builder.Services.AddControllersWithViews();
-
+            //builder.Services.AddSession(options =>
+            //{
+            //    options.IdleTimeout = TimeSpan.FromMinutes(30); // تعيين وقت انتهاء الجلسة
+            //});
+            //builder.Services.AddHttpContextAccessor();
+            
             #region Dbcontext
             builder.Services.AddDbContext<CarAppDbContext>(optionsBuilder =>
             {
@@ -79,10 +86,10 @@ namespace PLProj
 
 
             var app = builder.Build();
-
+            //app.UseSession();
             #region Update DataBase
 
-             using (var scope = app.Services.CreateScope())
+            using (var scope = app.Services.CreateScope())
              {
                 var services = scope.ServiceProvider;
                 var loggerFactory = services.GetRequiredService<ILoggerFactory>();
@@ -138,5 +145,18 @@ namespace PLProj
 
       
     }
+    //public static class SessionExtensions
+    //{
+    //    public static void SetObject(this ISession session, string key, object value)
+    //    {
+    //        session.SetString(key, JsonConvert.SerializeObject(value));
+    //    }
+
+    //    public static T GetObject<T>(this ISession session, string key)
+    //    {
+    //        var value = session.GetString(key);
+    //        return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
+    //    }
+    //}
 }
 

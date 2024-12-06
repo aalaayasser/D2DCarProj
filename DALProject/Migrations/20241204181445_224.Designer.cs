@@ -4,6 +4,7 @@ using DALProject;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DALProject.Migrations
 {
     [DbContext(typeof(CarAppDbContext))]
-    partial class CarAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241204181445_224")]
+    partial class _224
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -464,7 +467,7 @@ namespace DALProject.Migrations
                     b.ToTable("Tickets");
                 });
 
-            modelBuilder.Entity("DALProject.Models.sss.CartItem", b =>
+            modelBuilder.Entity("DALProject.Models.sss.Cart", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -475,13 +478,10 @@ namespace DALProject.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("PartId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Quantity")
+                    b.Property<int>("count")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -490,7 +490,7 @@ namespace DALProject.Migrations
 
                     b.HasIndex("PartId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("Cart");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -765,10 +765,10 @@ namespace DALProject.Migrations
                     b.Navigation("Service");
                 });
 
-            modelBuilder.Entity("DALProject.Models.sss.CartItem", b =>
+            modelBuilder.Entity("DALProject.Models.sss.Cart", b =>
                 {
                     b.HasOne("DALProject.Models.Customer", "Customer")
-                        .WithMany("CartItems")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -862,8 +862,6 @@ namespace DALProject.Migrations
             modelBuilder.Entity("DALProject.Models.Customer", b =>
                 {
                     b.Navigation("Cars");
-
-                    b.Navigation("CartItems");
                 });
 
             modelBuilder.Entity("DALProject.Models.Driver", b =>

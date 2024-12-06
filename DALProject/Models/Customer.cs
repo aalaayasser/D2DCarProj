@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using DALProject.Models.sss;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DALProject.Models
@@ -7,5 +8,6 @@ namespace DALProject.Models
     {
         public virtual ICollection<Car> Cars { get; set; } = new HashSet<Car>();
         public string AppUserId { get; set; }
+        public virtual ICollection<CartItem> CartItems { get; set; } = new HashSet<CartItem>();
     }
 }

@@ -1,7 +1,7 @@
 ﻿@model PartViewModel
 @{
     ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+   
 }
 
 <h1> Part Details</h1>
@@ -9,11 +9,7 @@
 <br />
 <br />
 <div>
-    <div class="mb-3">
-        <label asp-for="Model" class="form-label"></label>
-        <input class="form-control" asp-for="Model.Name" readonly />
-    </div>
-
+   
     <div class="mb-3">
         <label asp-for="PartName" class="form-label"></label>
         <input class="form-control" asp-for="PartName" readonly />
@@ -25,10 +21,10 @@
         <input class="form-control" asp-for="Price" readonly />
     </div>
 
-    @* <div class="mb-3">
-    <label asp-for="EstimatedTime" class="form-label"></label>
-    <input class="form-control" asp-for="EstimatedTime" readonly />
-    </div> *@
+    <div class="mb-3">
+    <label asp-for="Description" class="form-label"></label>
+    <input class="form-control" asp-for="Description" readonly />
+    </div>
 
     <div class="mb-3">
         <label asp-for="PartKilometresToChange" class="form-label"></label>
