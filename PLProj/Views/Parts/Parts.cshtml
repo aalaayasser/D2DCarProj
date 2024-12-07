@@ -24,6 +24,7 @@
 <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
     <div class="shadow-lg rounded p-4" style="background-color: #fff; max-width: 900px; width: 100%;">
 
+
         <!-- عنوان Available Parts -->
         <div class="text-center mb-4">
             <h2 style="font-weight: bold; font-size: 2rem; color: #333;">Available Parts</h2>
@@ -32,33 +33,25 @@
         <!-- رسالة الخطأ أو الجدول -->
         @if (Model.Any())
         {
-            <div class="table-responsive mt-4">
-                <table class="table table-bordered table-hover text-center shadow-sm rounded">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>@Html.DisplayNameFor(D => D.PartName)</th>
-                            <th>@Html.DisplayNameFor(D => D.Description)</th>
-                            <th>@Html.DisplayNameFor(D => D.Price)</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var part in Model)
-                        {
-                            <tr>
-                                <td>@part.PartName</td>
-                                <td>@part.Description</td>
-                                <td>@part.Price.ToString("C")</td>
-                                <td>
-                                    <a asp-action="AddToCart" asp-controller="Cart" asp-route-partId="@part.Id"
-                                       class="btn btn-dark btn-sm shadow-sm">
+            <div class="row row-cols-1 row-cols-md-3 g-4 mt-4">
+                @foreach (var part in Model)
+                {
+                    <div class="col">
+                        <div class="card shadow-sm rounded border-light">
+                            <div class="card-body">
+                                <!-- إضافة مربع داخلي حول المحتوى -->
+                                <div class="part-container" style="border: 2px solid #343a40; padding: 15px; border-radius: 8px;">
+                                    <h5 class="card-title">@part.PartName</h5>
+                                    <p class="card-text">@part.Description</p>
+                                    <p class="card-text"><strong>@part.Price.ToString("C")</strong></p>
+                                    <a asp-action="AddToCart" asp-controller="Cart" asp-route-partId="@part.Id" class="btn btn-dark btn-sm shadow-sm">
                                         <i class="fas fa-shopping-cart"></i> Add to Cart
                                     </a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         }
         else
@@ -128,5 +121,30 @@
     .shadow-lg {
         padding: 30px;
     }
-</style>
 
+    /* تصميم الكارد */
+    .card {
+        transition: transform 0.2s ease-in-out;
+    }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+    .card-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .card-text {
+        font-size: 1rem;
+        color: #555;
+    }
+
+    /* تصميم المربع الداخلي حول كل part */
+    .part-container {
+        border: 2px solid #343a40;
+        padding: 15px;
+        border-radius: 8px;
+    }
+</style>

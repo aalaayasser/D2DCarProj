@@ -10,8 +10,7 @@ namespace DALProject.Models
     public class Part : ModelClass
     {
 
-        //public int Id { get; set; }
-
+       
 
         public string PartName { get; set; }
         public int Price { get; set; }
